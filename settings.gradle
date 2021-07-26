@@ -1,0 +1,2 @@
+rootProject.name = "TFT_Jeu"
+include ':app'

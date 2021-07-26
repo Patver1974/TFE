@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">TFT_Jeu</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nom_de_l_artiste">nom_de_l_artiste</string>
+    <string name="nom_de_l_oeuvre">nom de l\'oeuvre</string>
+    <string name="adresse_oeuvre">adresse_oeuvre</string>
+    <string name="coordonnee_de_l_oeuvre">coordonnee de l\'oeuvre</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">longitude</string>
+
+</resources>

@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_listeart"
+        android:enabled="true"
+        android:title="Infor"/>
+    <item
+        android:id="@+id/menu_jeu"
+        android:enabled="true"
+        android:title="Jeu"/>
+</menu>
