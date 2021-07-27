@@ -1,21 +1,28 @@
 package com.example.tft_jeu;
 
 import android.content.Intent;
+import android.location.LocationListener;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.tft_jeu.Adapter.ActiviteAdapters;
+import com.example.tft_jeu.Adapter.StreetArtAdapater;
+import com.example.tft_jeu.jsonStreetArt.StreetArtApi;
 import com.example.tft_jeu.models.StreetArt;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
-public class AfficherListeStreet extends AppCompatActivity implements View.OnClickListener {
+public class AfficherListeStreet extends AppCompatActivity implements View.OnClickListener  {
 
     private Button btnListe, btnPositionNow, btGoback;
     private ArrayList<StreetArt> datatache = new ArrayList<>();
@@ -25,6 +32,19 @@ public class AfficherListeStreet extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_afficher_liste_street);
+
+        rvActivite = findViewById(R.id.rv_AfficherlisteStreet_item);
+
+        try {
+            List<StreetArt> streetArts = StreetArtApi.getStreetArts(this.getResources().openRawResource(R.raw.data));
+            StreetArtAdapater adapater = new StreetArtAdapater(streetArts, this::onStreetArtClickListener);
+            rvActivite.setAdapter(adapater);
+            LinearLayoutManager llm = new LinearLayoutManager(this);
+            llm.setOrientation(RecyclerView.VERTICAL);
+            rvActivite.setLayoutManager(llm);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         btnListe = findViewById(R.id.bt_AfficherlisteStreet_afficherliste);
         btnPositionNow = findViewById(R.id.bt_AfficherlisteStreet_position);
@@ -44,7 +64,7 @@ public class AfficherListeStreet extends AppCompatActivity implements View.OnCli
                 goExit();
                 break;
             case R.id.bt_AfficherlisteStreet_position:
-                //afficherPosition();
+                afficherPosition();
                 break;
 
 
@@ -52,9 +72,9 @@ public class AfficherListeStreet extends AppCompatActivity implements View.OnCli
                 throw new RuntimeException("Bouton non implementé !");
         }
     }
-    //a faire
-   // private afficherPosition(){
-    //}
+    private void afficherPosition() {
+
+    }
     private void goExit() {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
@@ -73,22 +93,21 @@ public class AfficherListeStreet extends AppCompatActivity implements View.OnCli
 
         }
 
-        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(
-                3, StaggeredGridLayoutManager.VERTICAL
-        );
-        rvActivite.setLayoutManager(layoutManager);
+//        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(
+//                3, StaggeredGridLayoutManager.VERTICAL
+//        );
+//        rvActivite.setLayoutManager(layoutManager);
 
         rvActivite.setAdapter(activiteAdapters);
         rvActivite.setHasFixedSize(true);
 
-       // rvActivite.addOnItemTouchListener(
-         //       new EventRecyclerItemClickListener(getApplicationContext(), (view, position) -> {
-
-           //         StreetArt mystreetart = datatache.get(position);
-             //       onEventClick(mystreetart);
-               // }));
-  //  }
 
 
-}
+
+    }
+    private void onStreetArtClickListener(View v) {
+        String lat = ((TextView)v.findViewById(R.id.item_activite_coordonnee_lat)).getText().toString();
+        String lon = ((TextView)v.findViewById(R.id.item_activite_coordonnee_long)).getText().toString();
+        Log.d("ITEM_CLICKED", "Lat: "+ lat+ "; Lon: "+ lon);
+    }
 }

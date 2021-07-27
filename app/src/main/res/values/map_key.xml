@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <string name="google_mapskey" templateMergeStrategy="preserve" translatable="false">AIzaSyCaJzaA-Q7yZ_6LUPVzDKR9YHyyaQcEP8</string>
 </resources>
