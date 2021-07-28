@@ -86,7 +86,8 @@ public class MainActivity extends AppCompatActivity {
         btgo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
+                //'Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AfficherListeStreet.class);
                 startActivity(intent);
             }
         });
