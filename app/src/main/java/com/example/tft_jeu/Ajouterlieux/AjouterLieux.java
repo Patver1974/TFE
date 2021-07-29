@@ -3,30 +3,93 @@ package com.example.tft_jeu.Ajouterlieux;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tft_jeu.R;
+import com.example.tft_jeu.db.dao.StreetDao;
+import com.example.tft_jeu.models.Geocoordinates;
+import com.example.tft_jeu.models.StreetArt;
 
+import android.database.DataSetObserver;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
-public class AjouterLieux extends AppCompatActivity {
+import android.widget.SpinnerAdapter;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class AjouterLieux extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ajouter_lieux);
         Spinner spListeDatabase;
-        TextView tvNomLieux, tvLatitude, tvLongitude;
-        EditText etNomLieux, etLatitude, etLongitude;
+
+        EditText etNomLieux, etLatitude, etLongitude, etAdresse;
         Button btClear, btAjouter;
 
-        spListeDatabase = findViewById(R.id.sp_afficherliste_liste);
-        tvNomLieux = findViewById(R.id.tv_ajouterlieux_nomlieux);
-        tvLatitude = findViewById(R.id.tv_ajouterlieux_latitude);
-        tvLongitude = findViewById(R.id.tv_ajouterlieux_longitude);
+        spListeDatabase = (Spinner) findViewById(R.id.sp_test);
+
+        StreetDao dao = new StreetDao(this);
+        dao.openReadable();
+        List<String> categories = dao.getAllCategories();
+        dao.close();
         btAjouter = findViewById(R.id.bt_ajouterlieux_ajouteritem);
         btClear = findViewById(R.id.bt_ajouterlieux_effaceedonnee);
+        etNomLieux =  findViewById(R.id.et_ajouterlieux_nomlieux);
+        etLatitude = findViewById(R.id.et_ajouterlieux_coordLatitude);
+        etLongitude =  findViewById(R.id.et_ajouterlieux_coordLongitude);
+        etAdresse =  findViewById(R.id.et_ajouterlieux_adresselieux);
+        String categorie="";
+
+        List<String> choixListe = new ArrayList<>();
+        choixListe.add(getString(R.string.choix_liste_StreetArt));
+        choixListe.add(getString(R.string.choix_liste_Bd));
+        choixListe.add(getString(R.string.choix_liste_Resto));
+
+//        SpinnerAdapter adapter =
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(
+                getApplicationContext(),
+                android.R.layout.simple_spinner_item,
+                android.R.id.text1,
+                choixListe
+        );
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spListeDatabase.setAdapter(spinnerAdapter);
+        spListeDatabase.setSelection();
+
+
+        btAjouter.setOnClickListener(v -> {
+            Object nom = etNomLieux.getText().toString();
+            String adresse = etAdresse.getText().toString();
+            Double latitude = Double.parseDouble(etLatitude.getText().toString());
+            Double longitude = Double.parseDouble(etLongitude.getText().toString());
+            Geocoordinates coodonnee = new Geocoordinates(latitude,longitude);
+
+            StreetArt streetart= new StreetArt(nom,"",adresse,coodonnee, categorie);
+            StreetDao streetDao = new StreetDao(getApplicationContext());
+            streetDao.openWritable();
+            streetDao.insert(streetart);
+            streetDao.close();
+        });
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String selectedCategorie=parent.getItemAtPosition(position).toString();
+        Toast.makeText(this, selectedCategorie,Toast.LENGTH_SHORT);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 }

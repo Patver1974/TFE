@@ -8,6 +8,12 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tft_jeu.Ajouterlieux.AjouterLieux;
+import com.example.tft_jeu.db.dao.StreetDao;
+import com.example.tft_jeu.jsonStreetArt.StreetArtApi;
+import com.example.tft_jeu.models.StreetArt;
+
+import java.io.IOException;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -26,6 +32,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         BtAffichageListe.setOnClickListener(this);
         BtJeu.setOnClickListener(this);
         BtAjouterItem.setOnClickListener(this);
+
+        StreetDao dao = new StreetDao(this);
+
+        StreetArt art = dao.get(0);
+        if (art != null) { return; }
+        try {
+            List<StreetArt> streetArts = StreetArtApi.getStreetArts(getResources().openRawResource(R.raw.data));
+            dao.openWritable();
+            for(StreetArt sa: streetArts) {
+                dao.insert(sa);
+            }
+            dao.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     @Override
     public void onClick(View v){

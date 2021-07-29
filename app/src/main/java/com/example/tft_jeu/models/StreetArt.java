@@ -17,6 +17,7 @@ public class StreetArt {
     private Object precision;
     private Object verduidelijking;
     private String location;
+    private String categorie;
     private String lieu;
     private String nomDeLArtiste;
     private Object annee;
@@ -24,11 +25,21 @@ public class StreetArt {
     private String plaats;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    public StreetArt(long id, Object nameOfTheWork, String nameOfTheArtist, Geocoordinates geocoordinates) {
+    public StreetArt(long id, Object nameOfTheWork, String nameOfTheArtist, String adresse, Geocoordinates geocoordinates,String categorie) {
         this.id = id;
         this.nameOfTheWork = nameOfTheWork;
         this.nameOfTheArtist = nameOfTheArtist;
+        this.adresse = adresse;
         this.geocoordinates = geocoordinates;
+        this.categorie = categorie;
+    }
+    public StreetArt( Object nameOfTheWork, String nameOfTheArtist, String adresse, Geocoordinates geocoordinates,String categorie ) {
+        this.id = 0;
+        this.nameOfTheWork = nameOfTheWork;
+        this.nameOfTheArtist = nameOfTheArtist;
+        this.adresse = adresse;
+        this.geocoordinates = geocoordinates;
+        this.categorie = categorie;
     }
 
     public Object getNameOfTheWork() {

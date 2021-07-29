@@ -15,23 +15,23 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-//        // Création des bases de donnes
-//        db.execSQL(DbInfo.CategoryTable.REQUEST_CREATE);
-//        db.execSQL(DbInfo.TodoTaskTable.REQUEST_CREATE);
-//
+        // Création des bases de donnes
+        db.execSQL(DbInfo.ArtStreetTable.REQUEST_CREATE);
+
+
 //        // Ajout des données initial
-//        db.execSQL(DbInfo.CategoryTable.REQUEST_ADD_INITIAL_DATA, new String[] {context.getString(R.string.initial_category_general)});
-//        db.execSQL(DbInfo.CategoryTable.REQUEST_ADD_INITIAL_DATA, new String[] {context.getString(R.string.initial_category_pro)});
+        db.execSQL(DbInfo.ArtStreetTable.REQUEST_ADD_INITIAL_DATA, new String[] {context.getString(R.string.initial_category_general)});
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Migration d'une version d'une base de donnée vers une autre
         // - Suppression de l'ancienne version
-//        db.execSQL(DbInfo.CategoryTable.REQUEST_DROP);
-//        db.execSQL(DbInfo.TodoTaskTable.REQUEST_DROP);
+       db.execSQL(DbInfo.ArtStreetTable.REQUEST_DROP);
+
         // - Appel de la méthode de création
-//        onCreate(db);
+        onCreate(db);
 
         // Note : Cette solution implique la perde des données !
     }

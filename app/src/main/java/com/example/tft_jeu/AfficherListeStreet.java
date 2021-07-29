@@ -121,11 +121,14 @@ public class AfficherListeStreet extends AppCompatActivity implements View.OnCli
     private void onStreetArtClickListener(View v) {
         String lat = ((TextView)v.findViewById(R.id.item_activite_coordonnee_lat)).getText().toString();
         String lon = ((TextView)v.findViewById(R.id.item_activite_coordonnee_long)).getText().toString();
+        String name = ((TextView)v.findViewById(R.id.tv_ajouterlieux_nomlieux)).getText().toString();
+        if (name=="Pas de nom"){name="Destination";};
         Log.d("ITEM_CLICKED", "Lat: "+ lat+ "; Lon: "+ lon);
 
         Intent intent = new Intent(this, MapsActivity.class);
         intent.putExtra("Lat",lat);
         intent.putExtra("Long",lon);
+        intent.putExtra("Name",lon);
         startActivity(intent);
     }
 }

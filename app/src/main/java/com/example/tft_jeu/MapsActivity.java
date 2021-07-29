@@ -40,7 +40,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             Bundle extra = fromList.getExtras();
             String latStr = extra.getString("Lat");
             String lonStr = extra.getString("Long");
-
+            String name = extra.getString("Name");
             if (latStr == null || lonStr == null) {
 
             } else {
@@ -77,15 +77,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+
         // Add a marker in Sydney and move the camera
         Intent intent =getIntent();
         String latitude = intent.getStringExtra("Lat");
         String longitude = intent.getStringExtra("Long");
+        String name = intent.getStringExtra("Name");
         LatLng PositionObject = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
+
         mMap.addMarker(new MarkerOptions()
                 .position(PositionObject)
-                .title("Marker in Sydney"));
+                .title(name));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(PositionObject));
+
     }
 
     @Override

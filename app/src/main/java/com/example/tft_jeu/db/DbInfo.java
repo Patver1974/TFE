@@ -17,6 +17,8 @@ public class DbInfo {
         public static final String COLUMN_ADRESSE = "adresse";
         public static final String COLUMN_LATITUDE = "latitude";
         public static final String COLUMN_LONGITUDE = "longitude";
+        public static final String COLUMN_CATEGORIE = "categorie";
+
 
 
         // Les requetes SQL (DDL)
@@ -27,6 +29,7 @@ public class DbInfo {
                         + COLUMN_ADRESSE + " TEXT NOT NULL "
                         + COLUMN_LATITUDE + " TEXT NOT NULL "
                         + COLUMN_LONGITUDE + " TEXT NOT NULL "
+                        + COLUMN_CATEGORIE + " TEXT NOT NULL "
                         + ");" ;
 
         public static final String REQUEST_DROP =

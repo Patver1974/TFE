@@ -21,6 +21,7 @@ public class StreetDao extends DaoBase<StreetArt> {
     private ContentValues generateContentValues(StreetArt streetArt) {
         ContentValues cv = new ContentValues();
         cv.put(DbInfo.ArtStreetTable.COLUMN_NAME,streetArt.getNameOfTheWork().toString());
+        cv.put(DbInfo.ArtStreetTable.COLUMN_LATITUDE, streetArt.getGeocoordinates().getLat());
 //        ContentValues contentValues = new ContentValues();
 //        contentValues.put(DbInfo.ArtStreetTable.COLUMN_NAME, (byte[]) streetArt.getNameOfTheWork());
 
@@ -33,19 +34,8 @@ public class StreetDao extends DaoBase<StreetArt> {
         String name = cursor.getString(cursor.getColumnIndex(DbInfo.ArtStreetTable.COLUMN_NAME));
         String nameauthor = cursor.getString(cursor.getColumnIndex(DbInfo.ArtStreetTable.COLUMN_NAMEAUTHOR));
         Geocoordinates coodonnee = new Geocoordinates(cursor.getDouble(cursor.getColumnIndex(DbInfo.ArtStreetTable.COLUMN_LATITUDE)),cursor.getDouble(cursor.getColumnIndex(DbInfo.ArtStreetTable.COLUMN_LONGITUDE)));
-
-        return new StreetArt(id, name,nameauthor,coodonnee);
-
-        //public static final String COLUMN_ID = "_id";
-        //public static final String COLUMN_NAME = "name";
-        //public static final String COLUMN_NAMEAUTHOR = "nameAuthor";
-        //public static final String COLUMN_ADRESSE = "adresse";
-        //public static final String COLUMN_LATITUDE = "latitude";
-        //public static final String COLUMN_LONGITUDE = "longitude";
-
-
-
-
+        String categorie = cursor.getString(cursor.getColumnIndex(DbInfo.ArtStreetTable.COLUMN_CATEGORIE));
+        return new StreetArt(id, name,nameauthor,coodonnee, categorie);
 
     }
 
