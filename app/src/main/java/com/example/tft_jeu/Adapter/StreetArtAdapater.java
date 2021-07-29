@@ -1,8 +1,6 @@
 package com.example.tft_jeu.Adapter;
 
 import android.content.Context;
-import android.location.Location;
-import android.location.LocationManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +17,6 @@ import java.util.List;
 public class StreetArtAdapater extends RecyclerView.Adapter<StreetArtAdapater.StreetArtViewHolder> {
 
     private final List<StreetArt> streetArts;
-    private LocationManager locationManager;
     private final View.OnClickListener onClickListener;
     public StreetArtAdapater(List<StreetArt> streetArts, View.OnClickListener onClickListener) {
         this.streetArts = streetArts;
@@ -64,27 +61,15 @@ public class StreetArtAdapater extends RecyclerView.Adapter<StreetArtAdapater.St
             tvLat = itemView.findViewById(R.id.item_activite_coordonnee_lat);
             tvLong = itemView.findViewById(R.id.item_activite_coordonnee_long);
             tvAdresse = itemView.findViewById(R.id.item_activite_adresse);
-
         }
 
         public void bindData(StreetArt streetArt) {
             this.tvNameArtist.setText(streetArt.getNomDeLArtiste());
             this.tvNameOeuvre.setText(streetArt.getNameOfTheWork() != null ? streetArt.getNameOfTheWork().toString() : "Pas de nom");
-            String latitude = streetArt.getGeocoordinates().getLat().toString();
-            String longitude = streetArt.getGeocoordinates().getLon().toString();
-            this.tvLat.setText(latitude);
-            this.tvLong.setText(longitude);
+            this.tvLat.setText(streetArt.getGeocoordinates().getLat().toString());
+            this.tvLong.setText(streetArt.getGeocoordinates().getLon().toString());
             this.tvAdresse.setText(streetArt.getAdresse());
-            Calculkm(latitude,longitude);
-
-            }
-
-        private void Calculkm(String latitude, String longitude) {
-
-          //  Location.distanceBetween(sydney.latitude, sydney.longitude, location.getLatitude(), location.getLongitude(), result);
-
         }
-
 
         public TextView getTvNameOeuvre() {
             return tvNameOeuvre;

@@ -12,86 +12,55 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+    private Button BtAffichageListe,BtJeu,BtAjouterItem;
 
-
-
-    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        BtAffichageListe = findViewById(R.id.Bt_Main_ListeAvecMap);
+        BtJeu = findViewById(R.id.Bt_Main_Jeu);
+        BtAjouterItem = findViewById(R.id.Bt_Main_Ajouter_item);
 
+        BtAffichageListe.setOnClickListener(this);
+        BtJeu.setOnClickListener(this);
+        BtAjouterItem.setOnClickListener(this);
+    }
+    @Override
+    public void onClick(View v){
+        switch(v.getId()) {
+            case R.id.Bt_Main_ListeAvecMap:
+                RunPageListeAvecMap();
+                break;
 
+            case R.id.Bt_Main_Jeu:
+                RunPageJeu();
+                break;
 
-        // Récupère les fragments
-        MainListeFrag mainListeFrag = MainListeFrag.newInstance();
-        FragJeuStreetArt fragJeuStreetArt= FragJeuStreetArt.newInstance();
+            case R.id.Bt_Main_Ajouter_item:
+                RunAjouterItem();
+                break;
+        }
+    }
 
-        // Affiche le fragment initial (station)
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction initialTransaction = fm.beginTransaction();
-        initialTransaction.replace(R.id.fl_main_fragment_container, mainListeFrag);
-        initialTransaction.commit();
+    private void RunAjouterItem() {
+        Intent intentList = new Intent(getApplicationContext(), AfficherListeStreet.class);
+        startActivity(intentList);
+        finish();
+    }
 
-        // Setup la bottom navigation view pour lancer les différents fragments
-        bottomNavigationView = findViewById(R.id.bottom_nav_main);
+    private void RunPageJeu() {
+        Intent intentList = new Intent(getApplicationContext(), AfficherListeStreet.class);
+        startActivity(intentList);
+        finish();
+    }
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-
-            if (item.getItemId() == R.id.menu_listeart) {
-
-                FragmentTransaction transactionToListeFragment = fm.beginTransaction();
-
-                transactionToListeFragment.setCustomAnimations(
-                        android.R.anim.fade_in,
-                        android.R.anim.fade_out,
-                        android.R.anim.fade_in,
-                        android.R.anim.fade_out
-                );
-
-                transactionToListeFragment.replace(R.id.fl_main_fragment_container, mainListeFrag);
-
-                transactionToListeFragment.commit();
-
-                return true;
-            }
-            else if (item.getItemId() == R.id.menu_jeu){
-
-                FragmentTransaction transactionToJeuFragment = fm.beginTransaction();
-
-                transactionToJeuFragment.setCustomAnimations(
-                        android.R.anim.fade_in,
-                        android.R.anim.fade_out,
-                        android.R.anim.fade_in,
-                        android.R.anim.fade_out
-                );
-
-                transactionToJeuFragment.replace(R.id.fl_main_fragment_container, fragJeuStreetArt);
-
-
-                transactionToJeuFragment.commit();
-
-                return true;
-            }
-            else {
-                return false;
-            }
-
-        });
-        Button btgo;
-        btgo = findViewById(R.id.bt_main_go);
-        btgo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //'Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
-                Intent intent = new Intent(getApplicationContext(), AfficherListeStreet.class);
-                startActivity(intent);
-            }
-        });
-
-
+    private void RunPageListeAvecMap() {
+        Intent intentList = new Intent(getApplicationContext(), AfficherListeStreet.class);
+        startActivity(intentList);
+        finish();
     }
 }

@@ -37,7 +37,6 @@ public class StreetArtApi {
         for (int i = 0; i < array.size(); i++) {
             String json = array.get(i).getAsJsonObject().toString();
             StreetArt streetArt = gson.fromJson(json, StreetArt.class);
-
             streetArts.add(streetArt);
         }
 
