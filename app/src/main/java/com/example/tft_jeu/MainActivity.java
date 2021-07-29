@@ -6,10 +6,8 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.tft_jeu.Ajouterlieux.AjouterLieux;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -59,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void RunPageListeAvecMap() {
-        Intent intentList = new Intent(getApplicationContext(), AfficherListeStreet.class);
+        Intent intentList = new Intent(getApplicationContext(), AjouterLieux.class);
         startActivity(intentList);
         finish();
     }

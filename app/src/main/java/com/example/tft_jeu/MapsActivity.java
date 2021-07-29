@@ -6,6 +6,7 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Geocoder;
 import android.location.GnssAntennaInfo;
@@ -32,10 +33,28 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        Intent fromList = getIntent();
+        if (fromList != null) {
+            Log.d("LON_LAT", "Test");
+            Bundle extra = fromList.getExtras();
+            String latStr = extra.getString("Lat");
+            String lonStr = extra.getString("Long");
+
+            if (latStr == null || lonStr == null) {
+
+            } else {
+                Double lat = Double.parseDouble(latStr);
+                Double lon = Double.parseDouble(lonStr);
+
+                Log.d("LON-LAT", lonStr+ "-"+ latStr);
+            }
+        }
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -49,7 +68,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             this.requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 101);
         }
 
-        this.locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 10, this);
+//        this.locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 10, this);
 
     }
 
@@ -59,11 +78,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
+        Intent intent =getIntent();
+        String latitude = intent.getStringExtra("Lat");
+        String longitude = intent.getStringExtra("Long");
+        LatLng PositionObject = new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude));
         mMap.addMarker(new MarkerOptions()
-                .position(sydney)
+                .position(PositionObject)
                 .title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(PositionObject));
     }
 
     @Override

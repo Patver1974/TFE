@@ -5,6 +5,8 @@ import java.util.Map;
 
 public class StreetArt {
 
+
+    private  long id;
     private Object nameOfTheWork;
     private Photo photo;
     private String adres;
@@ -21,6 +23,13 @@ public class StreetArt {
     private Geocoordinates geocoordinates;
     private String plaats;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    public StreetArt(long id, Object nameOfTheWork, String nameOfTheArtist, Geocoordinates geocoordinates) {
+        this.id = id;
+        this.nameOfTheWork = nameOfTheWork;
+        this.nameOfTheArtist = nameOfTheArtist;
+        this.geocoordinates = geocoordinates;
+    }
 
     public Object getNameOfTheWork() {
         return nameOfTheWork;

@@ -5,6 +5,7 @@ import android.location.LocationListener;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -39,6 +40,22 @@ public class AfficherListeStreet extends AppCompatActivity implements View.OnCli
 
         btGoback = findViewById(R.id.bt_afficherliste_exit);
         btnListe = findViewById(R.id.bt_afficherliste_AfficherListe);
+
+        List<String> choixListe = new ArrayList<>();
+        choixListe.add(getString(R.string.choix_liste_StreetArt));
+        choixListe.add(getString(R.string.choix_liste_Bd));
+        choixListe.add(getString(R.string.choix_liste_Resto));
+
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(
+                getApplicationContext(),
+                android.R.layout.simple_spinner_item,
+                android.R.id.text1,
+                choixListe
+        );
+
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        spAfficherListe.setAdapter(spinnerAdapter);
 
         try {
             List<StreetArt> streetArts = StreetArtApi.getStreetArts(this.getResources().openRawResource(R.raw.data));
@@ -86,15 +103,12 @@ public class AfficherListeStreet extends AppCompatActivity implements View.OnCli
                 datatache
         );
         if (datatache.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Pas d'evenement aujourd'hui", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Pas de lieux dans cette liste", Toast.LENGTH_LONG).show();
 
 
         }
 
-//        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(
-//                3, StaggeredGridLayoutManager.VERTICAL
-//        );
-//        rvActivite.setLayoutManager(layoutManager);
+
 
         rvActivite.setAdapter(activiteAdapters);
         rvActivite.setHasFixedSize(true);
@@ -110,5 +124,8 @@ public class AfficherListeStreet extends AppCompatActivity implements View.OnCli
         Log.d("ITEM_CLICKED", "Lat: "+ lat+ "; Lon: "+ lon);
 
         Intent intent = new Intent(this, MapsActivity.class);
+        intent.putExtra("Lat",lat);
+        intent.putExtra("Long",lon);
+        startActivity(intent);
     }
 }

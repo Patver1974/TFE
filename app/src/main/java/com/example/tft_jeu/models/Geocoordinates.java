@@ -4,6 +4,11 @@ public class Geocoordinates {
     private Double lat;
     private Double lon;
 
+    public Geocoordinates(Double lat, Double lon) {
+        this.lat = lat;
+        this.lon = lon;
+    }
+
     public Double getLat() {
         return lat;
     }
