@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void RunAjouterItem() {
-        Intent intentList = new Intent(getApplicationContext(), AfficherListeStreet.class);
+        Intent intentList = new Intent(getApplicationContext(), AjouterLieux.class);
         startActivity(intentList);
         finish();
     }
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void RunPageListeAvecMap() {
-        Intent intentList = new Intent(getApplicationContext(), AjouterLieux.class);
+        Intent intentList = new Intent(getApplicationContext(), AfficherListeStreet.class);
         startActivity(intentList);
         finish();
     }
