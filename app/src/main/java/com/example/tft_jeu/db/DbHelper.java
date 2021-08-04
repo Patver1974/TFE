@@ -20,7 +20,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
 //        // Ajout des données initial
-        db.execSQL(DbInfo.ArtStreetTable.REQUEST_ADD_INITIAL_DATA, new String[] {context.getString(R.string.initial_category_general)});
+//        db.execSQL(DbInfo.ArtStreetTable.REQUEST_ADD_INITIAL_DATA, new String[] {context.getString(R.string.initial_category_general)});
 
     }
 

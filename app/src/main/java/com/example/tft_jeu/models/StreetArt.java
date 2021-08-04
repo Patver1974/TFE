@@ -280,4 +280,11 @@ public class StreetArt {
         return (((((((((((((((((this.verduidelijking == rhs.verduidelijking)||((this.verduidelijking!= null)&&this.verduidelijking.equals(rhs.verduidelijking)))&&((this.nameOfTheArtist == rhs.nameOfTheArtist)||((this.nameOfTheArtist!= null)&&this.nameOfTheArtist.equals(rhs.nameOfTheArtist))))&&((this.plaats == rhs.plaats)||((this.plaats!= null)&&this.plaats.equals(rhs.plaats))))&&((this.precision == rhs.precision)||((this.precision!= null)&&this.precision.equals(rhs.precision))))&&((this.nameOfTheWork == rhs.nameOfTheWork)||((this.nameOfTheWork!= null)&&this.nameOfTheWork.equals(rhs.nameOfTheWork))))&&((this.photo == rhs.photo)||((this.photo!= null)&&this.photo.equals(rhs.photo))))&&((this.annee == rhs.annee)||((this.annee!= null)&&this.annee.equals(rhs.annee))))&&((this.explanation == rhs.explanation)||((this.explanation!= null)&&this.explanation.equals(rhs.explanation))))&&((this.geocoordinates == rhs.geocoordinates)||((this.geocoordinates!= null)&&this.geocoordinates.equals(rhs.geocoordinates))))&&((this.naamVanDeKunstenaar == rhs.naamVanDeKunstenaar)||((this.naamVanDeKunstenaar!= null)&&this.naamVanDeKunstenaar.equals(rhs.naamVanDeKunstenaar))))&&((this.adresse == rhs.adresse)||((this.adresse!= null)&&this.adresse.equals(rhs.adresse))))&&((this.location == rhs.location)||((this.location!= null)&&this.location.equals(rhs.location))))&&((this.adres == rhs.adres)||((this.adres!= null)&&this.adres.equals(rhs.adres))))&&((this.additionalProperties == rhs.additionalProperties)||((this.additionalProperties!= null)&&this.additionalProperties.equals(rhs.additionalProperties))))&&((this.lieu == rhs.lieu)||((this.lieu!= null)&&this.lieu.equals(rhs.lieu))))&&((this.nomDeLArtiste == rhs.nomDeLArtiste)||((this.nomDeLArtiste!= null)&&this.nomDeLArtiste.equals(rhs.nomDeLArtiste))));
     }
 
+    public String getCategorie() {
+        return categorie;
+    }
+
+    public void setCategorie(String categorie) {
+        this.categorie = categorie;
+    }
 }

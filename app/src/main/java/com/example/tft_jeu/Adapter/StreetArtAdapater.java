@@ -1,6 +1,10 @@
 package com.example.tft_jeu.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.location.Location;
+import android.location.LocationManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +22,12 @@ public class StreetArtAdapater extends RecyclerView.Adapter<StreetArtAdapater.St
 
     private final List<StreetArt> streetArts;
     private final View.OnClickListener onClickListener;
-    public StreetArtAdapater(List<StreetArt> streetArts, View.OnClickListener onClickListener) {
+    private LocationManager lManager;
+
+    public StreetArtAdapater(List<StreetArt> streetArts, View.OnClickListener onClickListener,LocationManager locationManager) {
         this.streetArts = streetArts;
         this.onClickListener = onClickListener;
+        this.lManager = locationManager;
     }
 
     @NonNull
@@ -33,12 +40,29 @@ public class StreetArtAdapater extends RecyclerView.Adapter<StreetArtAdapater.St
 
         return new StreetArtViewHolder(view);
     }
-
+    @SuppressLint("MissingPermission")
     @Override
     public void onBindViewHolder(@NonNull StreetArtAdapater.StreetArtViewHolder holder, int position) {
         StreetArt streetArt = streetArts.get(position);
 
         holder.bindData(streetArt);
+
+       // holder.getTvNameOeuvre().setText(streetArt.getNameOfTheWork().toString());
+        //holder.getTvNameArtist().setText(streetArt.getNomDeLArtiste());
+        //holder.getTvLat().setText(streetArt.getGeocoordinates().getLat().toString());
+        //holder.getTvLong().setText(streetArt.getGeocoordinates().getLon().toString());
+       // holder.getTvAdresse().setText(streetArt.getAdresse());
+
+        Location l = new Location(LocationManager.GPS_PROVIDER);
+        l.setLatitude(streetArt.getGeocoordinates().getLat());
+        l.setLongitude(streetArt.getGeocoordinates().getLon());
+
+        float dist = lManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).distanceTo(l);
+        Log.d("DISTANCE", streetArt.getNameOfTheWork()+ ": distance= "+ dist);
+        holder.getTvDistance().setText(String.valueOf(dist));
+
+
+
     }
 
     @Override
@@ -52,6 +76,7 @@ public class StreetArtAdapater extends RecyclerView.Adapter<StreetArtAdapater.St
         private TextView tvLat;
         private TextView tvLong;
         private TextView tvAdresse;
+        private TextView tvDistance;
 
         public StreetArtViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -61,6 +86,7 @@ public class StreetArtAdapater extends RecyclerView.Adapter<StreetArtAdapater.St
             tvLat = itemView.findViewById(R.id.item_activite_coordonnee_lat);
             tvLong = itemView.findViewById(R.id.item_activite_coordonnee_long);
             tvAdresse = itemView.findViewById(R.id.item_activite_adresse);
+            tvDistance= itemView.findViewById(R.id.item_activite_distance);
         }
 
         public void bindData(StreetArt streetArt) {
@@ -109,6 +135,12 @@ public class StreetArtAdapater extends RecyclerView.Adapter<StreetArtAdapater.St
 
         public void setTvAdresse(TextView tvAdresse) {
             this.tvAdresse = tvAdresse;
+        }
+
+        public TextView getTvDistance() { return tvDistance; }
+
+        public void setTvDistance(TextView tvDistance) {
+            this.tvDistance = tvDistance;
         }
     }
 }

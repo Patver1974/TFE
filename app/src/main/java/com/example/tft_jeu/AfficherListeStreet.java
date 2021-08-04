@@ -1,7 +1,9 @@
 package com.example.tft_jeu;
 
+import android.content.Context;
 import android.content.Intent;
 import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tft_jeu.Adapter.ActiviteAdapters;
 import com.example.tft_jeu.Adapter.StreetArtAdapater;
+import com.example.tft_jeu.db.dao.StreetDao;
 import com.example.tft_jeu.jsonStreetArt.StreetArtApi;
 import com.example.tft_jeu.models.StreetArt;
 
@@ -41,25 +44,29 @@ public class AfficherListeStreet extends AppCompatActivity implements View.OnCli
         btGoback = findViewById(R.id.bt_afficherliste_exit);
         btnListe = findViewById(R.id.bt_afficherliste_AfficherListe);
 
-        List<String> choixListe = new ArrayList<>();
-        choixListe.add(getString(R.string.choix_liste_StreetArt));
-        choixListe.add(getString(R.string.choix_liste_Bd));
-        choixListe.add(getString(R.string.choix_liste_Resto));
+        StreetDao dao = new StreetDao(this);
+        dao.openReadable();
+        List<String> categories = dao.getAllCategories();
+        Log.d("CATEGORIES", categories.size()+ "");
+        dao.close();
 
+//spinner
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(
                 getApplicationContext(),
                 android.R.layout.simple_spinner_item,
                 android.R.id.text1,
-                choixListe
+                categories
         );
 
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spAfficherListe.setAdapter(spinnerAdapter);
+        spAfficherListe.setSelection(0);
 
         try {
             List<StreetArt> streetArts = StreetArtApi.getStreetArts(this.getResources().openRawResource(R.raw.data));
-            StreetArtAdapater adapater = new StreetArtAdapater(streetArts, this::onStreetArtClickListener);
+            LocationManager lManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+            StreetArtAdapater adapater = new StreetArtAdapater(streetArts, this::onStreetArtClickListener,lManager);
             rvActivite.setAdapter(adapater);
             LinearLayoutManager llm = new LinearLayoutManager(this);
             llm.setOrientation(RecyclerView.VERTICAL);
@@ -78,6 +85,7 @@ public class AfficherListeStreet extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_afficherliste_AfficherListe:
+
                 afficherrecyclerview();
                 break;
             case R.id.bt_afficherliste_exit:
@@ -97,10 +105,26 @@ public class AfficherListeStreet extends AppCompatActivity implements View.OnCli
     }
     private void afficherrecyclerview() {
 
+        LocationManager lManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        //recupere value spinnner
+        String ListeAAfficher = spAfficherListe.getSelectedItem().toString();
+        //cree datache avec la liste souhaitée
+
+        StreetDao dao = new StreetDao(this);
+        dao.openReadable();
+        List<String> categories = dao.getAllCategories();
+        Log.d("CATEGORIES", categories.size()+ "");
+        dao.close();
+
+
+
+
+
 
         ActiviteAdapters activiteAdapters = new ActiviteAdapters(
                 getApplicationContext(),
-                datatache
+                datatache,
+                lManager
         );
         if (datatache.isEmpty()) {
             Toast.makeText(getApplicationContext(), "Pas de lieux dans cette liste", Toast.LENGTH_LONG).show();

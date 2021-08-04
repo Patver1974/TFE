@@ -25,10 +25,10 @@ public class DbInfo {
         public static final String REQUEST_CREATE =
                 "CREATE TABLE " + TABLE_NAME + " ( "
                         + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                        + COLUMN_NAME + " TEXT NOT NULL "
-                        + COLUMN_ADRESSE + " TEXT NOT NULL "
-                        + COLUMN_LATITUDE + " TEXT NOT NULL "
-                        + COLUMN_LONGITUDE + " TEXT NOT NULL "
+                        + COLUMN_NAME + " TEXT NOT NULL, "
+                        + COLUMN_ADRESSE + " TEXT NOT NULL, "
+                        + COLUMN_LATITUDE + " TEXT NOT NULL, "
+                        + COLUMN_LONGITUDE + " TEXT NOT NULL, "
                         + COLUMN_CATEGORIE + " TEXT NOT NULL "
                         + ");" ;
 

@@ -2,6 +2,7 @@ package com.example.tft_jeu;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -35,12 +36,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         StreetDao dao = new StreetDao(this);
 
+        dao.openReadable();
         StreetArt art = dao.get(0);
+        dao.close();
         if (art != null) { return; }
         try {
             List<StreetArt> streetArts = StreetArtApi.getStreetArts(getResources().openRawResource(R.raw.data));
             dao.openWritable();
             for(StreetArt sa: streetArts) {
+                sa.setCategorie("Street-Art");
+                Log.d("STREET_ART", sa.toString());
                 dao.insert(sa);
             }
             dao.close();
@@ -64,22 +69,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
-
+    private void RunPageListeAvecMap() {
+        Intent intentList = new Intent(getApplicationContext(), AfficherListeStreet.class);
+        startActivity(intentList);
+        finish();
+    }
+    private void RunPageJeu() {
+        Intent intentList = new Intent(getApplicationContext(), PageJeuParametre.class);
+        startActivity(intentList);
+        finish();
+    }
     private void RunAjouterItem() {
         Intent intentList = new Intent(getApplicationContext(), AjouterLieux.class);
         startActivity(intentList);
         finish();
     }
 
-    private void RunPageJeu() {
-        Intent intentList = new Intent(getApplicationContext(), AfficherListeStreet.class);
-        startActivity(intentList);
-        finish();
-    }
 
-    private void RunPageListeAvecMap() {
-        Intent intentList = new Intent(getApplicationContext(), AfficherListeStreet.class);
-        startActivity(intentList);
-        finish();
-    }
+
+
 }

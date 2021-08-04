@@ -6,8 +6,8 @@
     <string name="nom_de_l_oeuvre">nom de l\'oeuvre</string>
     <string name="adresse_oeuvre">adresse_oeuvre</string>
     <string name="coordonnee_de_l_oeuvre">coordonnee de l\'oeuvre</string>
-    <string name="latitude">Latitude</string>
-    <string name="longitude">longitude</string>
+    <string name="latitude">Latitude : </string>
+    <string name="longitude">longitude : </string>
     <string name="title_activity_afficher_position_gps">Leanback Title</string>
     <string name="browse_title">Videos by Your Company</string>
     <string name="related_movies">Related Videos</string>

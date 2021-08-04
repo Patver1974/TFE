@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:minWidth="400dp"
     android:maxWidth="400dp"
+    android:minWidth="400dp"
+    android:orientation="vertical"
     android:padding="20dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        app:cardCornerRadius="10dp"
-        app:cardBackgroundColor="#EAEAEA">
+        android:layout_height="150dp"
+        app:cardBackgroundColor="#EAEAEA"
+        app:cardCornerRadius="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,58 +22,102 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/item_cv_color"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                app:cardCornerRadius="10dp"
-                app:cardBackgroundColor="#E8C723">
+                android:layout_height="15dp"
+                app:cardBackgroundColor="#E8C723"
+                app:cardCornerRadius="10dp">
+
                 <TextView
                     android:id="@+id/item_art_name_oeuvre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/nom_de_l_oeuvre"
-                    android:textSize="10sp"
-
                     android:ellipsize="end"
                     android:maxLines="1"
-                    />
+
+                    android:text="@string/nom_de_l_oeuvre"
+                    android:textSize="10sp" />
             </androidx.cardview.widget.CardView>
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="5dp">
+                android:layout_margin="5dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/item_art_name_artist"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/nom_de_l_artiste"
-                    android:textSize="15sp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    />
+                    android:text="@string/nom_de_l_artiste"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/item_activite_adresse"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/adresse_oeuvre"
-                    android:textSize="10sp"
-                    />
-                <TextView
-                    android:id="@+id/item_activite_coordonnee_lat"
+                    android:textSize="10sp" />
+
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/latitude"
-                    android:textSize="10sp"
-                    />
-                <TextView
-                    android:id="@+id/item_activite_coordonnee_long"
+
+                    android:orientation="horizontal">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/latitude"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/item_activite_coordonnee_lat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/latitude"
+                        android:textSize="10sp" />
+
+                    <View
+                        android:layout_width="15dp"
+                        android:layout_height="0dp" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/longitude"
+                        android:textSize="10sp" />
+
+                    <TextView
+                        android:id="@+id/item_activite_coordonnee_long"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/longitude"
+                        android:textSize="10sp" />
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/longitude"
-                    android:textSize="10sp"
-                    />
+
+                    android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/item_activite_distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:textSize="10sp" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Km"
+                    android:textSize="10sp" />
+                </LinearLayout>
+
             </LinearLayout>
 
         </LinearLayout>

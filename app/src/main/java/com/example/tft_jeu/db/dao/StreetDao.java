@@ -20,8 +20,13 @@ public class StreetDao extends DaoBase<StreetArt> {
     // Méthode du CRUD
     private ContentValues generateContentValues(StreetArt streetArt) {
         ContentValues cv = new ContentValues();
-        cv.put(DbInfo.ArtStreetTable.COLUMN_NAME,streetArt.getNameOfTheWork().toString());
+        cv.put(DbInfo.ArtStreetTable.COLUMN_NAME,streetArt.getNameOfTheWork() == null ? "": streetArt.getNameOfTheWork().toString());
         cv.put(DbInfo.ArtStreetTable.COLUMN_LATITUDE, streetArt.getGeocoordinates().getLat());
+        cv.put(DbInfo.ArtStreetTable.COLUMN_LONGITUDE, streetArt.getGeocoordinates().getLon() );
+        cv.put(DbInfo.ArtStreetTable.COLUMN_ADRESSE,streetArt.getAdresse() == null ? "" : streetArt.getAdresse());
+        cv.put(DbInfo.ArtStreetTable.COLUMN_CATEGORIE, streetArt.getCategorie());
+        //cv.put(DbInfo.ArtStreetTable.COLUMN_CATEGORIE
+
 //        ContentValues contentValues = new ContentValues();
 //        contentValues.put(DbInfo.ArtStreetTable.COLUMN_NAME, (byte[]) streetArt.getNameOfTheWork());
 
@@ -128,7 +133,80 @@ public class StreetDao extends DaoBase<StreetArt> {
         int nbRow = db.delete(DbInfo.ArtStreetTable.TABLE_NAME, whereClause, whereArg);
         return nbRow == 1;
     }
-}
+    public List<String> getAllCategories() {
+        // Création d'un curseur qui permet d'obtenir le resultat d'un select
+        Cursor cursor = db.query(
+                true,
+                DbInfo.ArtStreetTable.TABLE_NAME,
+                new String[] { DbInfo.ArtStreetTable.COLUMN_CATEGORIE },
+                null,
+                null,
+                null,
+                null,
+                null,
+                null);
 
+
+        // Initialise la liste de resultat
+        List<String> results = new ArrayList<>();
+
+        // Verification qu'il y a un resultat
+        if(cursor.getCount() == 0) {
+            return results; // Liste vide
+        }
+
+        // On place le curseur sur le premier resultat
+        cursor.moveToFirst();
+
+        while(! cursor.isAfterLast()) {  // On continue tant qu'on a pas fait toute les resultats
+
+            // On extrait les données du curseur
+            String cat = cursor.getString(cursor.getColumnIndex(DbInfo.ArtStreetTable.COLUMN_CATEGORIE));
+            results.add(cat);
+
+            // On passe à la prochain valeur de resultat
+            cursor.moveToNext();
+        }
+
+        // On cloture le curseur
+        cursor.close();
+
+        // On renvoie les resultats
+        return results;
+    }
+    public List<StreetArt> getWithWhereCategorie(String colonneCategories) {
+        // Création d'un curseur qui permet d'obtenir le resultat d'un select
+        Cursor cursor = db.query(DbInfo.ArtStreetTable.TABLE_NAME, null,
+                DbInfo.ArtStreetTable.COLUMN_CATEGORIE  +" = ?", new String[]{colonneCategories},
+        null, null, null);
+
+        // Initialise la liste de resultat
+        List<StreetArt> results = new ArrayList<>();
+
+        // Verification qu'il y a un resultat
+        if(cursor.getCount() == 0) {
+            return results; // Liste vide
+        }
+
+        // On place le curseur sur le premier resultat
+        cursor.moveToFirst();
+
+        while(! cursor.isAfterLast()) {  // On continue tant qu'on a pas fait toute les resultats
+
+            // On extrait les données du curseur
+            StreetArt cat = cursorToData(cursor);
+            results.add(cat);
+
+            // On passe à la prochain valeur de resultat
+            cursor.moveToNext();
+        }
+
+        // On cloture le curseur
+        cursor.close();
+
+        // On renvoie les resultats
+        return results;
+    }
+}
 
 

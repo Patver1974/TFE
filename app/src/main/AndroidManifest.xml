@@ -28,7 +28,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TFT_Jeu">
-        <activity android:name=".Ajouterlieux.AjouterLieux"></activity>
+        <activity android:name=".PageJeuParametre"></activity>
+        <activity android:name=".Ajouterlieux.AjouterLieux" />
         <activity android:name=".AfficherLocalisation" />
         <activity android:name=".TestActivity" />
         <activity android:name=".MapsActivity" />

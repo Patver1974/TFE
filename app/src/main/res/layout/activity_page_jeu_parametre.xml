@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PageJeuParametre">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <Spinner
+        android:id="@+id/sp_jeu_liste"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dropdown"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Afficher la carte"/>
+
+
+        <RadioButton
+            android:id="@+id/bt_jeu_ouimaps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="oui"
+
+             />
+        <RadioButton
+            android:id="@+id/bt_jeu_nonmaps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="non" />
+
+
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Difficulté"/>
+
+
+            <RadioButton
+                android:id="@+id/bt_jeu_difficule_facile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="facile"
+
+                />
+            <RadioButton
+                android:id="@+id/bt_jeu_difficule_moyen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="moyen" />
+            <RadioButton
+                android:id="@+id/bt_jeu_difficule_difficile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="difficile" />
+
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Bt_jeu_Start"
+            android:text="Go/Next Art"/>
+
+
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

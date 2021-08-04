@@ -38,7 +38,7 @@ public class AjouterLieux extends AppCompatActivity implements AdapterView.OnIte
 
         StreetDao dao = new StreetDao(this);
         dao.openReadable();
-        List<String> categories = dao.getAllCategories();
+        List<String> choiceCategories = dao.getAllCategories();
         dao.close();
         btAjouter = findViewById(R.id.bt_ajouterlieux_ajouteritem);
         btClear = findViewById(R.id.bt_ajouterlieux_effaceedonnee);
@@ -48,22 +48,19 @@ public class AjouterLieux extends AppCompatActivity implements AdapterView.OnIte
         etAdresse =  findViewById(R.id.et_ajouterlieux_adresselieux);
         String categorie="";
 
-        List<String> choixListe = new ArrayList<>();
-        choixListe.add(getString(R.string.choix_liste_StreetArt));
-        choixListe.add(getString(R.string.choix_liste_Bd));
-        choixListe.add(getString(R.string.choix_liste_Resto));
+
 
 //        SpinnerAdapter adapter =
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(
                 getApplicationContext(),
                 android.R.layout.simple_spinner_item,
                 android.R.id.text1,
-                choixListe
+                choiceCategories
         );
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spListeDatabase.setAdapter(spinnerAdapter);
-        spListeDatabase.setSelection();
+//        spListeDatabase.setSelection();
 
 
         btAjouter.setOnClickListener(v -> {
