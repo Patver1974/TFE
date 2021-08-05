@@ -57,7 +57,9 @@ public class StreetArtAdapater extends RecyclerView.Adapter<StreetArtAdapater.St
         l.setLatitude(streetArt.getGeocoordinates().getLat());
         l.setLongitude(streetArt.getGeocoordinates().getLon());
 
-        float dist = lManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).distanceTo(l);
+        Location location = lManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+        float dist = location.distanceTo(l) / 1000;
         Log.d("DISTANCE", streetArt.getNameOfTheWork()+ ": distance= "+ dist);
         holder.getTvDistance().setText(String.valueOf(dist));
 

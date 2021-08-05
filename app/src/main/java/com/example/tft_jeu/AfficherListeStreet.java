@@ -1,19 +1,25 @@
 package com.example.tft_jeu;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,13 +32,16 @@ import com.example.tft_jeu.models.StreetArt;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-public class AfficherListeStreet extends AppCompatActivity implements View.OnClickListener  {
+public class AfficherListeStreet extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener, LocationListener {
 
     private Button btnListe, btGoback;
     private Spinner spAfficherListe;
     private ArrayList<StreetArt> datatache = new ArrayList<>();
     private RecyclerView rvActivite;
+
+    private LocationManager lManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +53,24 @@ public class AfficherListeStreet extends AppCompatActivity implements View.OnCli
         btGoback = findViewById(R.id.bt_afficherliste_exit);
         btnListe = findViewById(R.id.bt_afficherliste_AfficherListe);
 
+        //cherche toutes les categories pour le spinner
         StreetDao dao = new StreetDao(this);
         dao.openReadable();
         List<String> categories = dao.getAllCategories();
-        Log.d("CATEGORIES", categories.size()+ "");
-        dao.close();
 
+        dao.close();
+        lManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        lManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 10, this);
 //spinner
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(
                 getApplicationContext(),
@@ -63,9 +84,9 @@ public class AfficherListeStreet extends AppCompatActivity implements View.OnCli
         spAfficherListe.setAdapter(spinnerAdapter);
         spAfficherListe.setSelection(0);
 
+        spAfficherListe.setOnItemSelectedListener(this);
         try {
             List<StreetArt> streetArts = StreetArtApi.getStreetArts(this.getResources().openRawResource(R.raw.data));
-            LocationManager lManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
             StreetArtAdapater adapater = new StreetArtAdapater(streetArts, this::onStreetArtClickListener,lManager);
             rvActivite.setAdapter(adapater);
             LinearLayoutManager llm = new LinearLayoutManager(this);
@@ -107,12 +128,13 @@ public class AfficherListeStreet extends AppCompatActivity implements View.OnCli
 
         LocationManager lManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         //recupere value spinnner
-        String ListeAAfficher = spAfficherListe.getSelectedItem().toString();
+        String listeAAfficher = spAfficherListe.getSelectedItem().toString();
+        Log.d("SPINNER", listeAAfficher);
         //cree datache avec la liste souhaitée
 
         StreetDao dao = new StreetDao(this);
         dao.openReadable();
-        List<String> categories = dao.getAllCategories();
+        List<StreetArt> categories = dao.getWithWhereCategorie(listeAAfficher);
         Log.d("CATEGORIES", categories.size()+ "");
         dao.close();
 
@@ -120,10 +142,9 @@ public class AfficherListeStreet extends AppCompatActivity implements View.OnCli
 
 
 
-
         ActiviteAdapters activiteAdapters = new ActiviteAdapters(
                 getApplicationContext(),
-                datatache,
+                categories,
                 lManager
         );
         if (datatache.isEmpty()) {
@@ -145,8 +166,8 @@ public class AfficherListeStreet extends AppCompatActivity implements View.OnCli
     private void onStreetArtClickListener(View v) {
         String lat = ((TextView)v.findViewById(R.id.item_activite_coordonnee_lat)).getText().toString();
         String lon = ((TextView)v.findViewById(R.id.item_activite_coordonnee_long)).getText().toString();
-        String name = ((TextView)v.findViewById(R.id.tv_ajouterlieux_nomlieux)).getText().toString();
-        if (name=="Pas de nom"){name="Destination";};
+        String name = ((TextView)v.findViewById(R.id.item_art_name_oeuvre)).getText().toString();
+        if (name.equals("Pas de nom")){name="Destination";};
         Log.d("ITEM_CLICKED", "Lat: "+ lat+ "; Lon: "+ lon);
 
         Intent intent = new Intent(this, MapsActivity.class);
@@ -154,5 +175,20 @@ public class AfficherListeStreet extends AppCompatActivity implements View.OnCli
         intent.putExtra("Long",lon);
         intent.putExtra("Name",lon);
         startActivity(intent);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        Log.d("LISTENNER", spAfficherListe.getSelectedItem().toString());
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        Log.d("LISTENER", "NOTHING");
+    }
+
+    @Override
+    public void onLocationChanged(@NonNull Location location) {
+        Log.d("LOCATION", location.toString());
     }
 }

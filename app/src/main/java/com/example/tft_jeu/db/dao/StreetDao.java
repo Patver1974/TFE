@@ -174,6 +174,7 @@ public class StreetDao extends DaoBase<StreetArt> {
         // On renvoie les resultats
         return results;
     }
+
     public List<StreetArt> getWithWhereCategorie(String colonneCategories) {
         // Création d'un curseur qui permet d'obtenir le resultat d'un select
         Cursor cursor = db.query(DbInfo.ArtStreetTable.TABLE_NAME, null,

@@ -27,7 +27,7 @@
 
 
         <RadioButton
-            android:id="@+id/bt_jeu_ouimaps"
+            android:id="@+id/rb_jeu_ouimaps"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
@@ -35,7 +35,7 @@
 
              />
         <RadioButton
-            android:id="@+id/bt_jeu_nonmaps"
+            android:id="@+id/rb_jeu_nonmaps"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
@@ -54,7 +54,7 @@
 
 
             <RadioButton
-                android:id="@+id/bt_jeu_difficule_facile"
+                android:id="@+id/rb_jeu_difficule_facile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
@@ -62,13 +62,13 @@
 
                 />
             <RadioButton
-                android:id="@+id/bt_jeu_difficule_moyen"
+                android:id="@+id/rb_jeu_difficule_moyen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
                 android:text="moyen" />
             <RadioButton
-                android:id="@+id/bt_jeu_difficule_difficile"
+                android:id="@+id/rb_jeu_difficule_difficile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
@@ -78,9 +78,9 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/bt_jeu_Start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/Bt_jeu_Start"
             android:text="Go/Next Art"/>
 
 
