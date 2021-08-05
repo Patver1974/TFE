@@ -1,13 +1,15 @@
 package com.example.tft_jeu.models;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StreetArt {
+public class StreetArt implements Comparator<StreetArt> {
 
 
     private  long id;
     private Object nameOfTheWork;
+    private float distance;
     private Photo photo;
     private String adres;
     private String naamVanDeKunstenaar;
@@ -32,6 +34,7 @@ public class StreetArt {
         this.adresse = adresse;
         this.geocoordinates = geocoordinates;
         this.categorie = categorie;
+
     }
     public StreetArt( Object nameOfTheWork, String nameOfTheArtist, String adresse, Geocoordinates geocoordinates,String categorie ) {
         this.id = 0;
@@ -40,6 +43,25 @@ public class StreetArt {
         this.adresse = adresse;
         this.geocoordinates = geocoordinates;
         this.categorie = categorie;
+
+    }
+    public StreetArt( Object nameOfTheWork, String nameOfTheArtist, String adresse, Geocoordinates geocoordinates,String categorie, Float distance ) {
+        this.id = 0;
+        this.nameOfTheWork = nameOfTheWork;
+        this.nameOfTheArtist = nameOfTheArtist;
+        this.adresse = adresse;
+        this.geocoordinates = geocoordinates;
+        this.categorie = categorie;
+        this.distance = distance;
+
+    }
+
+    public float getDistance() {
+        return distance;
+    }
+
+    public void setDistance(float distance) {
+        this.distance = distance;
     }
 
     public Object getNameOfTheWork() {
@@ -266,6 +288,11 @@ public class StreetArt {
         result = ((result* 31)+((this.lieu == null)? 0 :this.lieu.hashCode()));
         result = ((result* 31)+((this.nomDeLArtiste == null)? 0 :this.nomDeLArtiste.hashCode()));
         return result;
+    }
+
+    @Override
+    public int compare(StreetArt o1, StreetArt o2) {
+        return o1.distance < o2.distance ? -1 : 1;
     }
 
     @Override
