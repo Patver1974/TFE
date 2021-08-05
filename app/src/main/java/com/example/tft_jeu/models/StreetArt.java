@@ -1,10 +1,13 @@
 package com.example.tft_jeu.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StreetArt implements Comparator<StreetArt> {
+public class StreetArt implements Comparator<StreetArt>, Parcelable {
 
 
     private  long id;
@@ -55,6 +58,32 @@ public class StreetArt implements Comparator<StreetArt> {
         this.distance = distance;
 
     }
+
+    protected StreetArt(Parcel in) {
+        id = in.readLong();
+        distance = in.readFloat();
+        adres = in.readString();
+        naamVanDeKunstenaar = in.readString();
+        nameOfTheArtist = in.readString();
+        adresse = in.readString();
+        location = in.readString();
+        categorie = in.readString();
+        lieu = in.readString();
+        nomDeLArtiste = in.readString();
+        plaats = in.readString();
+    }
+
+    public static final Creator<StreetArt> CREATOR = new Creator<StreetArt>() {
+        @Override
+        public StreetArt createFromParcel(Parcel in) {
+            return new StreetArt(in);
+        }
+
+        @Override
+        public StreetArt[] newArray(int size) {
+            return new StreetArt[size];
+        }
+    };
 
     public float getDistance() {
         return distance;
@@ -313,5 +342,20 @@ public class StreetArt implements Comparator<StreetArt> {
 
     public void setCategorie(String categorie) {
         this.categorie = categorie;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+dest.writeString(nameOfTheArtist);
+dest.writeString(nameOfTheWork.toString());
+dest.writeString(adresse);
+dest.writeFloat(distance);
+dest.writeDouble(geocoordinates.getLat());
+dest.writeDouble(geocoordinates.getLon());
     }
 }
