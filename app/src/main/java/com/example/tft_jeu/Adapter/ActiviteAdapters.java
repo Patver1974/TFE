@@ -90,7 +90,7 @@ public class ActiviteAdapters extends RecyclerView.Adapter<ActiviteAdapters.View
     public void onBindViewHolder(@NonNull ActiviteAdapters.ViewHolder holder, int position) {
         StreetArt streetArt = dataSet.get(position);
         holder.getTvNameOeuvre().setText(streetArt.getNameOfTheWork().toString());
-        holder.getTvNameArtist().setText(streetArt.getNomDeLArtiste());
+        holder.getTvNameArtist().setText(streetArt.getNameOfTheArtist());
         holder.getTvLatitude().setText(streetArt.getGeocoordinates().getLat().toString());
         holder.getTvLongitude().setText(streetArt.getGeocoordinates().getLon().toString());
         holder.getTvAdresse().setText(streetArt.getAdresse());

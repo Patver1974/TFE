@@ -27,6 +27,7 @@ public class DbInfo {
                         + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                         + COLUMN_NAME + " TEXT NOT NULL, "
                         + COLUMN_ADRESSE + " TEXT NOT NULL, "
+                        + COLUMN_NAMEAUTHOR + " TEXT NOT NULL, "
                         + COLUMN_LATITUDE + " TEXT NOT NULL, "
                         + COLUMN_LONGITUDE + " TEXT NOT NULL, "
                         + COLUMN_CATEGORIE + " TEXT NOT NULL "

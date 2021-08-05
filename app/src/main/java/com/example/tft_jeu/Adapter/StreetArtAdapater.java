@@ -61,7 +61,8 @@ public class StreetArtAdapater extends RecyclerView.Adapter<StreetArtAdapater.St
 
         float dist = location.distanceTo(l) / 1000;
         Log.d("DISTANCE", streetArt.getNameOfTheWork()+ ": distance= "+ dist);
-        holder.getTvDistance().setText(String.valueOf(dist));
+        String ligne = "L'oeuvre " +streetArt.getNameOfTheWork()   + " est à " + dist + " km de votre position";
+        holder.getTvDistance().setText(String.valueOf(ligne));
 
 
 
@@ -92,7 +93,7 @@ public class StreetArtAdapater extends RecyclerView.Adapter<StreetArtAdapater.St
         }
 
         public void bindData(StreetArt streetArt) {
-            this.tvNameArtist.setText(streetArt.getNomDeLArtiste());
+            this.tvNameArtist.setText(streetArt.getNameOfTheArtist());
             this.tvNameOeuvre.setText(streetArt.getNameOfTheWork() != null ? streetArt.getNameOfTheWork().toString() : "Pas de nom");
             this.tvLat.setText(streetArt.getGeocoordinates().getLat().toString());
             this.tvLong.setText(streetArt.getGeocoordinates().getLon().toString());

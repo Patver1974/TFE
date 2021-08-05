@@ -30,7 +30,6 @@
         android:theme="@style/Theme.TFT_Jeu">
         <activity android:name=".PageJeuParametre"></activity>
         <activity android:name=".Ajouterlieux.AjouterLieux" />
-        <activity android:name=".TestActivity" />
         <activity android:name=".MapsActivity" />
         <activity android:name=".AfficherListeStreet" />
         <!--

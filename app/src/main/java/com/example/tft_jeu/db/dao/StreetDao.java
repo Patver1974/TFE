@@ -21,11 +21,12 @@ public class StreetDao extends DaoBase<StreetArt> {
     private ContentValues generateContentValues(StreetArt streetArt) {
         ContentValues cv = new ContentValues();
         cv.put(DbInfo.ArtStreetTable.COLUMN_NAME,streetArt.getNameOfTheWork() == null ? "": streetArt.getNameOfTheWork().toString());
+        cv.put(DbInfo.ArtStreetTable.COLUMN_NAMEAUTHOR,streetArt.getNameOfTheArtist() == null ? "": streetArt.getNameOfTheArtist().toString());
         cv.put(DbInfo.ArtStreetTable.COLUMN_LATITUDE, streetArt.getGeocoordinates().getLat());
         cv.put(DbInfo.ArtStreetTable.COLUMN_LONGITUDE, streetArt.getGeocoordinates().getLon() );
         cv.put(DbInfo.ArtStreetTable.COLUMN_ADRESSE,streetArt.getAdresse() == null ? "" : streetArt.getAdresse());
         cv.put(DbInfo.ArtStreetTable.COLUMN_CATEGORIE, streetArt.getCategorie());
-        //cv.put(DbInfo.ArtStreetTable.COLUMN_CATEGORIE
+
 
 //        ContentValues contentValues = new ContentValues();
 //        contentValues.put(DbInfo.ArtStreetTable.COLUMN_NAME, (byte[]) streetArt.getNameOfTheWork());
@@ -157,7 +158,7 @@ public class StreetDao extends DaoBase<StreetArt> {
 
         // On place le curseur sur le premier resultat
         cursor.moveToFirst();
-
+        results.add("Toutes les categories");
         while(! cursor.isAfterLast()) {  // On continue tant qu'on a pas fait toute les resultats
 
             // On extrait les données du curseur

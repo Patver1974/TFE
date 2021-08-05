@@ -30,5 +30,9 @@
     <string name="error_fragment_message">An error occurred</string>
     <string name="dismiss_error">Dismiss</string>
     <string name="initial_category_general">General</string>
+    <string name="afficher_la_carte">Afficher la carte</string>
+    <string name="oui">oui</string>
+    <string name="non">non</string>
+    <string name="difficult">Difficulté</string>
 
 </resources>
