@@ -44,7 +44,7 @@ public class StreetArtAdapater extends RecyclerView.Adapter<StreetArtAdapater.St
     @Override
     public void onBindViewHolder(@NonNull StreetArtAdapater.StreetArtViewHolder holder, int position) {
         StreetArt streetArt = streetArts.get(position);
-
+        String echelle,nameArt;
         holder.bindData(streetArt);
 
        // holder.getTvNameOeuvre().setText(streetArt.getNameOfTheWork().toString());
@@ -60,8 +60,18 @@ public class StreetArtAdapater extends RecyclerView.Adapter<StreetArtAdapater.St
         Location location = lManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
         float dist = location.distanceTo(l) / 1000;
+
+
         Log.d("DISTANCE", streetArt.getNameOfTheWork()+ ": distance= "+ dist);
-        String ligne = "L'oeuvre " +streetArt.getNameOfTheWork()   + " est à " + dist + " km de votre position";
+        //ternaire
+        //echelle = dist>1 ? "Km":"metres";
+
+        //arrondir
+        if (dist<1) {echelle=" metres"; dist = Math.round(dist *1000);}
+        else
+            { echelle=" Km";dist = Math.round(dist*1000)/1000;};
+        nameArt = streetArt.getNameOfTheWork()==null?streetArt.getCategorie():streetArt.getNameOfTheWork().toString();
+        String ligne = "L'oeuvre " +nameArt  + " est à " + dist + echelle +" de votre position";
         holder.getTvDistance().setText(String.valueOf(ligne));
 
 

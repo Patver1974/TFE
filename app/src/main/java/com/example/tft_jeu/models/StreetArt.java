@@ -60,17 +60,28 @@ public class StreetArt implements Comparator<StreetArt>, Parcelable {
     }
 
     protected StreetArt(Parcel in) {
-        id = in.readLong();
-        distance = in.readFloat();
-        adres = in.readString();
-        naamVanDeKunstenaar = in.readString();
-        nameOfTheArtist = in.readString();
-        adresse = in.readString();
-        location = in.readString();
-        categorie = in.readString();
-        lieu = in.readString();
-        nomDeLArtiste = in.readString();
-        plaats = in.readString();
+        this.nameOfTheArtist = in.readString();
+        this.nameOfTheWork = in.readString();
+        this.adresse = in.readString();
+        this.distance = in.readFloat();
+        this.geocoordinates.setLat(in.readDouble());
+        this.geocoordinates.setLon(in.readDouble());
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        //dest.createByteArray() POUR LES IMAGES
+        dest.writeString(nameOfTheArtist);
+        dest.writeString(nameOfTheWork.toString());
+        dest.writeString(adresse);
+        dest.writeFloat(distance);
+        dest.writeDouble(geocoordinates.getLat());
+        dest.writeDouble(geocoordinates.getLon());
     }
 
     public static final Creator<StreetArt> CREATOR = new Creator<StreetArt>() {
@@ -344,18 +355,5 @@ public class StreetArt implements Comparator<StreetArt>, Parcelable {
         this.categorie = categorie;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-dest.writeString(nameOfTheArtist);
-dest.writeString(nameOfTheWork.toString());
-dest.writeString(adresse);
-dest.writeFloat(distance);
-dest.writeDouble(geocoordinates.getLat());
-dest.writeDouble(geocoordinates.getLon());
-    }
 }

@@ -71,7 +71,7 @@ public class ActiviteAdapters extends RecyclerView.Adapter<ActiviteAdapters.View
     private List<StreetArt> dataSet; // Utilisation du type interface (Découplage)
     private Context context;
     private LocationManager lManager;
-
+private String echelle,nameArt;
     public ActiviteAdapters(Context context, List<StreetArt> dataSet, LocationManager locationManager) {
         this.context = context;
         this.dataSet = dataSet;
@@ -102,7 +102,15 @@ public class ActiviteAdapters extends RecyclerView.Adapter<ActiviteAdapters.View
 
         float dist = lManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).distanceTo(l);
         Log.d("DISTANCE", streetArt.getNameOfTheWork()+ ": distance= "+ dist);
-        holder.getTvDistance().setText(String.valueOf(dist));
+        //arrondir
+        if (dist<1) {echelle=" metres"; dist = Math.round(dist *1000);}
+        else
+        { echelle=" Km";dist = Math.round(dist*10000)/10000;};
+        nameArt = streetArt.getNameOfTheWork()==null?streetArt.getCategorie():streetArt.getNameOfTheWork().toString();
+        String ligne = "L'oeuvre " +nameArt   + " est à " + dist + echelle +" de votre position";
+
+
+        holder.getTvDistance().setText(String.valueOf(ligne));
 
     }
 

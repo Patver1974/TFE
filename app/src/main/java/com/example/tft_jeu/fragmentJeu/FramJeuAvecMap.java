@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.tft_jeu.R;
+import com.example.tft_jeu.models.StreetArt;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +26,8 @@ public class FramJeuAvecMap extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private StreetArt streetArt;
 
     public FramJeuAvecMap() {
         // Required empty public constructor
@@ -52,8 +55,8 @@ public class FramJeuAvecMap extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            streetArt = getArguments().getParcelable("STREET_ART");
+           // mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 

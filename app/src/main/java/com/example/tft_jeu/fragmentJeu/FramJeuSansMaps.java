@@ -1,22 +1,32 @@
 package com.example.tft_jeu.fragmentJeu;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.tft_jeu.R;
+import com.example.tft_jeu.models.StreetArt;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link FramJeuSansMaps#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FramJeuSansMaps extends Fragment {
-
+public class FramJeuSansMaps extends Fragment implements LocationListener {
+    TextView tvCoordGps, tvCoordStreetArt;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -25,6 +35,10 @@ public class FramJeuSansMaps extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private StreetArt streetArt;
+    private LocationManager lManager;
+
 
     public FramJeuSansMaps() {
         // Required empty public constructor
@@ -51,16 +65,68 @@ public class FramJeuSansMaps extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        lManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            streetArt = getArguments().getParcelable("STREET_ART");
+//            mParam1 = getArguments().getString(ARG_PARAM1);
+//            mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        if (lManager == null) {
+            return;
+        }
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        lManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 10, this);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fram_jeu_sans_maps, container, false);
+
+
+        View v = inflater.inflate(R.layout.fragment_fram_jeu_sans_maps, container, false);
+
+        tvCoordGps = v.findViewById(R.id.tv_jeusansmap_coordonneeactuelle);
+        tvCoordStreetArt = v.findViewById(R.id.tv_jeusansmap_coordonneeactuelle);
+        Double latStreetARt = streetArt.getGeocoordinates().getLat();
+        Double longStreetARt = streetArt.getGeocoordinates().getLon();
+
+        String affichageCoordStreetARt = "Longitude" + streetArt.getGeocoordinates().getLon().toString() + " Latitude " + streetArt.getGeocoordinates().getLat().toString();
+
+
+        return v;
     }
-}
+
+    @Override
+    public void onLocationChanged(@NonNull Location location) {
+
+      //  LocationManager lManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        Location l = new Location(LocationManager.GPS_PROVIDER);
+        l.setLatitude(streetArt.getGeocoordinates().getLat());
+        l.setLongitude(streetArt.getGeocoordinates().getLon());
+
+        streetArt.setDistance(location.distanceTo(l) / 1000);
+        //if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+
+        //float dist = lManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).distanceTo(l);
+
+    }

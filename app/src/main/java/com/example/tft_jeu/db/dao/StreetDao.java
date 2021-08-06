@@ -3,6 +3,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
+import com.example.tft_jeu.R;
 import com.example.tft_jeu.db.DbInfo;
 import  com.example.tft_jeu.models.Geocoordinates;
 import  com.example.tft_jeu.models.StreetArt;
@@ -158,7 +159,9 @@ public class StreetDao extends DaoBase<StreetArt> {
 
         // On place le curseur sur le premier resultat
         cursor.moveToFirst();
-        results.add("Toutes les categories");
+
+        String toutesLesCategories = getContext().getResources().getString(R.string.ToutesLesCategories);
+        results.add(toutesLesCategories);
         while(! cursor.isAfterLast()) {  // On continue tant qu'on a pas fait toute les resultats
 
             // On extrait les données du curseur

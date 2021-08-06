@@ -10,5 +10,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="sans maps" />
+    <TextView
+        android:id="@+id/tv_jeusansmap_coordonneeactuelle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="coordonnees du gps" />
+    <TextView
+        android:id="@+id/tv_jeusansmap_coordonneestreetart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="coordonee du street art" />
+    <TextView
+        android:id="@+id/tv_jeusansmap_distance"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="distance" />
 
 </FrameLayout>

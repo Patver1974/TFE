@@ -34,5 +34,6 @@
     <string name="oui">oui</string>
     <string name="non">non</string>
     <string name="difficult">Difficulté</string>
+    <string name="ToutesLesCategories">Toutes les categories</string>
 
 </resources>

@@ -34,7 +34,7 @@ public class PageJeuParametre extends AppCompatActivity {
     private RadioGroup rgdifficulte;
     private Button btNextArt;
     private LocationManager lManager;
-private StreetArt streetArtChoisi;
+    private StreetArt streetArtChoisi;
     private List<StreetArt> streetArts;
 
     Random random = new Random();
@@ -49,7 +49,7 @@ private StreetArt streetArtChoisi;
         rbmoyen = findViewById(R.id.rb_jeu_difficule_moyen);
         rbdifficile = findViewById(R.id.rb_jeu_difficule_difficile);
         btNextArt = findViewById(R.id.bt_jeu_Start);
-rgdifficulte= findViewById(R.id.grouprb_jeu_difficulte);
+        rgdifficulte= findViewById(R.id.grouprb_jeu_difficulte);
 
         StreetDao dao = new StreetDao(this);
         dao.openReadable();
@@ -100,19 +100,19 @@ rgdifficulte= findViewById(R.id.grouprb_jeu_difficulte);
 
         dao.close();
 
-btNextArt.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        if (rbouimap.isChecked()) {
-            streetArtChoisi = choixElementArt();
-            ouvertureFragmentAvecMap(streetArtChoisi);
-        } else {
-            streetArtChoisi = choixElementArt();
-            ouvertureFragmentSansMap(streetArtChoisi);
-        }
-    }
+        btNextArt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (rbouimap.isChecked()) {
+                    streetArtChoisi = choixElementArt();
+                    ouvertureFragmentAvecMap(streetArtChoisi);
+                } else {
+                    streetArtChoisi = choixElementArt();
+                    ouvertureFragmentSansMap(streetArtChoisi);
+                }
+            }
 
-});
+        });
 
     }
     @SuppressLint("MissingPermission")
@@ -121,59 +121,61 @@ btNextArt.setOnClickListener(new View.OnClickListener() {
 
         ArrayList<StreetArt> ArtwithDistance = new ArrayList<>();
 
-for(StreetArt str:streetArts){
-    Location l = new Location(LocationManager.GPS_PROVIDER);
-    l.setLatitude(str.getGeocoordinates().getLat());
-    l.setLongitude(str.getGeocoordinates().getLon());
-    float dist = lManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).distanceTo(l);
-    str.setDistance(dist);
-    ArtwithDistance.add(str);}
+        for(StreetArt str:streetArts){
+            Location l = new Location(LocationManager.GPS_PROVIDER);
+            l.setLatitude(str.getGeocoordinates().getLat());
+            l.setLongitude(str.getGeocoordinates().getLon());
+            float dist = lManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).distanceTo(l);
+            str.setDistance(dist);
+            ArtwithDistance.add(str);}
 
         Collections.sort(ArtwithDistance, (o1, o2) -> o1.getDistance() < o2.getDistance() ? -1 : 1);
 
 
 //CHOIX DE L ELEMENT
-         int indiceElement = 0;
-int nbrElement =  ArtwithDistance.size();
+        int indiceElement = 0;
+        int nbrElement =  ArtwithDistance.size();
 //difficulte facile je choisi parmi les 3 distances les plus courtes
-if (rbfacile.isChecked() && (nbrElement>3)){
-     indiceElement =   random.nextInt(3);
-}
+        if (rbfacile.isChecked() && (nbrElement>3)){
+            indiceElement =   random.nextInt(3);
+        }
 //difficulte moyenne j'enleve les 2 plus grand et le plus petit apres hasard
-if (rbmoyen.isChecked() && (nbrElement>3)) {
-   nbrElement= nbrElement-2;
+        if (rbmoyen.isChecked() && (nbrElement>3)) {
+            nbrElement= nbrElement-2;
 
-     indiceElement =  1 + random.nextInt(nbrElement);
+            indiceElement =  1 + random.nextInt(nbrElement);
 
         }
 //difficulte difficile je prend les 50% plus grand et hasard
-if (rbdifficile.isChecked()&& (nbrElement>3)) {
- int nbrElementneg = nbrElement/2;
+        if (rbdifficile.isChecked()&& (nbrElement>3)) {
+            int nbrElementneg = nbrElement/2;
 
-  indiceElement = nbrElement  - random.nextInt(nbrElementneg);
+            indiceElement = nbrElement  - random.nextInt(nbrElementneg);
 
         }
 
 //si moins de 3 elements dans liste
-if (nbrElement<=3){
-     indiceElement =  random.nextInt(nbrElement);
+        if (nbrElement<=3){
+            indiceElement =  random.nextInt(nbrElement);
 
-}
+        }
 
 // element choisi
-return ArtwithDistance.get(indiceElement);
+        return ArtwithDistance.get(indiceElement);
 
 
 
-}
+    }
 
 
 
 
     private void ouvertureFragmentAvecMap(StreetArt streetArtChoisi) {
+        Bundle arg = new Bundle();
+        arg.putParcelable("STREET_ART", streetArtChoisi);
         getSupportFragmentManager().beginTransaction()
 
-                .replace(R.id.container_fragment, FramJeuAvecMap.class, null)
+                .replace(R.id.container_fragment, FramJeuSansMaps.class, arg)
                 .commit();
 
 
@@ -182,7 +184,7 @@ return ArtwithDistance.get(indiceElement);
     private void ouvertureFragmentSansMap(StreetArt streetArtChoisi) {
 
         Bundle arg = new Bundle();
-        arg.putParcelable(streetArtChoisi);
+        arg.putParcelable("STREET_ART", streetArtChoisi);
         getSupportFragmentManager().beginTransaction()
 
                 .replace(R.id.container_fragment, FramJeuSansMaps.class, arg)

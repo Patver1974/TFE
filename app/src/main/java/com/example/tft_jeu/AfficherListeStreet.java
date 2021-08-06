@@ -132,9 +132,22 @@ public class AfficherListeStreet extends AppCompatActivity implements AdapterVie
         Log.d("SPINNER", listeAAfficher);
         //cree datache avec la liste souhaitée
 
+
+
         StreetDao dao = new StreetDao(this);
-        dao.openReadable();
-        List<StreetArt> categories = dao.getWithWhereCategorie(listeAAfficher);
+
+        List<StreetArt> categories;
+        String toutesLesCategories = getResources().getString(R.string.ToutesLesCategories);
+        if (listeAAfficher.equals(toutesLesCategories))
+        {
+            dao.openReadable();
+            categories = dao.getAll();
+
+        } else {
+            dao.openReadable();
+            categories= dao.getWithWhereCategorie(listeAAfficher);
+        }
+
         Log.d("CATEGORIES", categories.size()+ "");
         dao.close();
 

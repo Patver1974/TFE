@@ -14,6 +14,10 @@ public abstract class DaoBase<TData> {
     private DbHelper dbHelper;
     protected SQLiteDatabase db;
 
+    public Context getContext() {
+        return context;
+    }
+
     public DaoBase(Context context) {
         this.context = context;
     }
