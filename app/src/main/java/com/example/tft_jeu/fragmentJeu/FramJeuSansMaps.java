@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,7 @@ import com.example.tft_jeu.models.StreetArt;
  * create an instance of this fragment.
  */
 public class FramJeuSansMaps extends Fragment implements LocationListener {
-    TextView tvCoordGps, tvCoordStreetArt,tvDistance;
+    TextView tvCoordGps, tvCoordStreetArt, tvDistance, tvEstOuest, tvNordSud;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -100,6 +101,9 @@ public class FramJeuSansMaps extends Fragment implements LocationListener {
         tvCoordGps = (TextView) v.findViewById(R.id.tv_jeusansmap_coordonneeactuelle);
         tvCoordStreetArt = (TextView) v.findViewById(R.id.tv_jeusansmap_coordonneestreetart);
         tvDistance = (TextView) v.findViewById(R.id.tv_jeusansmap_distance);
+        tvEstOuest = (TextView) v.findViewById(R.id.tv_jeusansmap_estouest);
+        tvNordSud = (TextView) v.findViewById(R.id.tv_jeusansmap_nordsud);
+
         Double latStreetARt = streetArt.getGeocoordinates().getLat();
         Double longStreetARt = streetArt.getGeocoordinates().getLon();
 
@@ -111,37 +115,77 @@ public class FramJeuSansMaps extends Fragment implements LocationListener {
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
-float dist;
-        String echelle;
-      //  LocationManager lManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        float dist;
+        String echelle= " ";
+        //  LocationManager lManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Location l = new Location(LocationManager.GPS_PROVIDER);
         l.setLatitude(streetArt.getGeocoordinates().getLat());
         l.setLongitude(streetArt.getGeocoordinates().getLon());
+
         tvCoordStreetArt.setText(String.format("Streetart Latitude : %s Longitude : %s", streetArt.getGeocoordinates().getLat(), streetArt.getGeocoordinates().getLon()));
         tvCoordGps.setText(String.format("Ma position Latitude : %s Longitude : %s", location.getLatitude(), location.getLongitude()));
         streetArt.setDistance(location.distanceTo(l) / 1000);
 
 
         dist = streetArt.getDistance();
-        if (dist<1) {echelle=" metres"; dist = Math.round(dist *1000);}
-        else
-        { echelle=" Km";dist = Math.round(dist*1000)/1000;};
-        String nameArt = streetArt.getNameOfTheWork()==null?streetArt.getCategorie():streetArt.getNameOfTheWork().toString();
-        String ligne = "L'oeuvre " +nameArt  + " est à " + dist + echelle +" de votre position";
-
+        if (dist < 1) {
+            echelle = " metres";
+            dist = Math.round(dist * 1000);
+        } else {
+            echelle = " Km";
+            dist = Math.round(dist * 10000) / 10000;
+        }
+        ;
+        String nameArt = streetArt.getNameOfTheWork() == null ? streetArt.getCategorie() : streetArt.getNameOfTheWork().toString();
+        String ligne = "L'oeuvre " + nameArt + " est à " + dist + echelle + " de votre position";
         tvDistance.setText(ligne);
 
-        //if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
+        boolean isNorth = location.getLatitude() > l.getLatitude();
+        Location northLocation = new Location(LocationManager.GPS_PROVIDER);
+        northLocation.setLatitude(location.getLatitude());
+        northLocation.setLongitude(l.getLongitude());
+        double northDistance = location.distanceTo(northLocation)/1000;
+       if (northDistance < 1) {
+            echelle = " metres";
+            northDistance = Math.round(northDistance * 1000);
+        } else {
+            echelle = " Km";
+            Log.d("Echelle",echelle);
+            northDistance = Math.round(northDistance * 10000) / 10000;
         }
 
-        //float dist = lManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).distanceTo(l);
+        boolean isEst = location.getLongitude() > l.getLongitude();
+        Location estLocation = new Location(LocationManager.GPS_PROVIDER);
+        estLocation.setLongitude(location.getLongitude());
+        estLocation.setLatitude(l.getLatitude());
+        double estDistance = location.distanceTo(estLocation)/1000;
 
+
+   if (estDistance < 1) {
+            echelle = " metres";
+            estDistance = Math.round(estDistance * 1000);
+        } else {
+            echelle = " Km";
+            estDistance = Math.round(estDistance * 10000) / 10000;
+        }
+
+
+        String affichageNordSud = !isNorth?String.format("L'oeuvre est au Sud %s %s", northDistance,echelle): String.format("L'oeuvre est au Nord %s %s", northDistance,echelle);
+        String affichageEstOuest = estDistance>0?String.format("L'oeuvre est au Ouest %s %s", estDistance,echelle): String.format("L'oeuvre est au Est %s %s", estDistance,echelle);
+        tvNordSud.setText(affichageNordSud);
+        tvEstOuest.setText(affichageEstOuest);
+
+        //if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        // TODO: Consider calling
+        //    ActivityCompat#requestPermissions
+        // here to request the missing permissions, and then overriding
+        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+        //                                          int[] grantResults)
+        // to handle the case where the user grants the permission. See the documentation
+        // for ActivityCompat#requestPermissions for more details.
+        return;
     }
+
+
+
+}

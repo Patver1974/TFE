@@ -29,6 +29,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="distance" />
+        <TextView
+            android:id="@+id/tv_jeusansmap_estouest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="estouest" />
+        <TextView
+            android:id="@+id/tv_jeusansmap_nordsud"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="nordsud" />
     </LinearLayout>
 
 
