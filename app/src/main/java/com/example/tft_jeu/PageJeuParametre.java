@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.util.Log;
@@ -32,7 +33,7 @@ public class PageJeuParametre extends AppCompatActivity {
     private Spinner spAfficherListe;
     private RadioButton rbouimap, rbnonmap, rbfacile, rbmoyen, rbdifficile;
     private RadioGroup rgdifficulte;
-    private Button btNextArt;
+    private Button btNextArt,btMenuPrincipal;
     private LocationManager lManager;
     private StreetArt streetArtChoisi;
     private List<StreetArt> streetArts;
@@ -50,11 +51,11 @@ public class PageJeuParametre extends AppCompatActivity {
         rbdifficile = findViewById(R.id.rb_jeu_difficule_difficile);
         btNextArt = findViewById(R.id.bt_jeu_Start);
         rgdifficulte= findViewById(R.id.grouprb_jeu_difficulte);
-
+        btMenuPrincipal = findViewById(R.id.bt_jeu_GoBack);
         StreetDao dao = new StreetDao(this);
         dao.openReadable();
         List<String> categories= new ArrayList<>();
-        categories.add("Toutes les categories");
+
         categories = dao.getAllCategories();
         dao.close();
 
@@ -110,6 +111,18 @@ public class PageJeuParametre extends AppCompatActivity {
                     streetArtChoisi = choixElementArt();
                     ouvertureFragmentSansMap(streetArtChoisi);
                 }
+            }
+
+        });
+
+        btMenuPrincipal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
+
             }
 
         });

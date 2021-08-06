@@ -8,89 +8,92 @@
     tools:context=".PageJeuParametre">
 
 
+    <Spinner
+        android:id="@+id/sp_jeu_liste"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dropdown" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        <Spinner
-            android:id="@+id/sp_jeu_liste"
-            android:layout_width="150dp"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:spinnerMode="dropdown" />
+            android:text="@string/afficher_la_carte" />
 
-        <LinearLayout
+        <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
+            <RadioButton
+                android:id="@+id/rb_jeu_ouimaps"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/afficher_la_carte" />
+                android:checked="true"
+                android:text="@string/oui"
 
-            <RadioGroup
-                android:layout_width="match_parent"
+                />
+
+            <RadioButton
+                android:id="@+id/rb_jeu_nonmaps"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/rb_jeu_ouimaps"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="@string/oui"
+                android:text="@string/non" />
 
-                    />
+        </RadioGroup>
+    </LinearLayout>
 
-                <RadioButton
-                    android:id="@+id/rb_jeu_nonmaps"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-                    android:text="@string/non" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/difficult" />
 
-            </RadioGroup>
-        </LinearLayout>
-
-        <LinearLayout
+        <RadioGroup
+            android:id="@+id/grouprb_jeu_difficulte"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
+            <RadioButton
+                android:id="@+id/rb_jeu_difficule_facile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/difficult" />
+                android:checked="true"
+                android:text="facile"
 
-            <RadioGroup
-                android:id="@+id/grouprb_jeu_difficulte"
-                android:layout_width="match_parent"
+                />
+
+            <RadioButton
+                android:id="@+id/rb_jeu_difficule_moyen"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/rb_jeu_difficule_facile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="facile"
+                android:text="moyen" />
 
-                    />
+            <RadioButton
+                android:id="@+id/rb_jeu_difficule_difficile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-                <RadioButton
-                    android:id="@+id/rb_jeu_difficule_moyen"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                android:text="difficile" />
+        </RadioGroup>
 
-                    android:text="moyen" />
+    </LinearLayout>
 
-                <RadioButton
-                    android:id="@+id/rb_jeu_difficule_difficile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:text="difficile" />
-            </RadioGroup>
-
-        </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/bt_jeu_Start"
@@ -98,14 +101,25 @@
             android:layout_height="wrap_content"
             android:text="Go/Next Art" />
 
-        <FrameLayout
-            android:id="@+id/container_fragment"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="20dp"
-            android:layout_weight="1" />
+        <View
+            android:layout_width="20dp"
+            android:layout_height="0dp" />
 
-
+        <Button
+            android:id="@+id/bt_jeu_GoBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Menu" />
     </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/container_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        android:layout_weight="1" />
+
+
+</LinearLayout>
 
 
