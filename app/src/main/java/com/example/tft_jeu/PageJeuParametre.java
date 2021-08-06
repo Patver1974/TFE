@@ -59,6 +59,8 @@ public class PageJeuParametre extends AppCompatActivity {
         categories = dao.getAllCategories();
         dao.close();
 
+        lManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
 //spinner
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(
                 getApplicationContext(),

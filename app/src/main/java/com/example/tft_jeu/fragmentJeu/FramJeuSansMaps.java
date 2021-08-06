@@ -26,7 +26,7 @@ import com.example.tft_jeu.models.StreetArt;
  * create an instance of this fragment.
  */
 public class FramJeuSansMaps extends Fragment implements LocationListener {
-    TextView tvCoordGps, tvCoordStreetArt;
+    TextView tvCoordGps, tvCoordStreetArt,tvDistance;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -86,6 +86,7 @@ public class FramJeuSansMaps extends Fragment implements LocationListener {
             return;
         }
         lManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 10, this);
+
     }
 
     @Override
@@ -96,8 +97,9 @@ public class FramJeuSansMaps extends Fragment implements LocationListener {
 
         View v = inflater.inflate(R.layout.fragment_fram_jeu_sans_maps, container, false);
 
-        tvCoordGps = v.findViewById(R.id.tv_jeusansmap_coordonneeactuelle);
-        tvCoordStreetArt = v.findViewById(R.id.tv_jeusansmap_coordonneeactuelle);
+        tvCoordGps = (TextView) v.findViewById(R.id.tv_jeusansmap_coordonneeactuelle);
+        tvCoordStreetArt = (TextView) v.findViewById(R.id.tv_jeusansmap_coordonneestreetart);
+        tvDistance = (TextView) v.findViewById(R.id.tv_jeusansmap_distance);
         Double latStreetARt = streetArt.getGeocoordinates().getLat();
         Double longStreetARt = streetArt.getGeocoordinates().getLon();
 
@@ -109,13 +111,26 @@ public class FramJeuSansMaps extends Fragment implements LocationListener {
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
-
+float dist;
+        String echelle;
       //  LocationManager lManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Location l = new Location(LocationManager.GPS_PROVIDER);
         l.setLatitude(streetArt.getGeocoordinates().getLat());
         l.setLongitude(streetArt.getGeocoordinates().getLon());
-
+        tvCoordStreetArt.setText(String.format("Streetart Latitude : %s Longitude : %s", streetArt.getGeocoordinates().getLat(), streetArt.getGeocoordinates().getLon()));
+        tvCoordGps.setText(String.format("Ma position Latitude : %s Longitude : %s", location.getLatitude(), location.getLongitude()));
         streetArt.setDistance(location.distanceTo(l) / 1000);
+
+
+        dist = streetArt.getDistance();
+        if (dist<1) {echelle=" metres"; dist = Math.round(dist *1000);}
+        else
+        { echelle=" Km";dist = Math.round(dist*1000)/1000;};
+        String nameArt = streetArt.getNameOfTheWork()==null?streetArt.getCategorie():streetArt.getNameOfTheWork().toString();
+        String ligne = "L'oeuvre " +nameArt  + " est à " + dist + echelle +" de votre position";
+
+        tvDistance.setText(ligne);
+
         //if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions

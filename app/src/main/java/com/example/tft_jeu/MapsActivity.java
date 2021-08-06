@@ -89,6 +89,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .position(PositionObject)
                 .title(name));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(PositionObject));
+        mMap.setMinZoomPreference(20);
+        mMap.setMaxZoomPreference(15);
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
 
     }
 

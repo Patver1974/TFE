@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         StreetDao dao = new StreetDao(this);
 
         dao.openReadable();
-        StreetArt art = dao.get(0);
+        StreetArt art = dao.get(1);
         dao.close();
         if (art != null) { return; }
         try {

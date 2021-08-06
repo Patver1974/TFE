@@ -4,26 +4,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragmentJeu.FramJeuSansMaps">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="sans maps" />
-    <TextView
-        android:id="@+id/tv_jeusansmap_coordonneeactuelle"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="coordonnees du gps" />
-    <TextView
-        android:id="@+id/tv_jeusansmap_coordonneestreetart"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="coordonee du street art" />
-    <TextView
-        android:id="@+id/tv_jeusansmap_distance"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="distance" />
+        <!-- TODO: Update blank fragment layout -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="sans maps" />
+        <TextView
+            android:id="@+id/tv_jeusansmap_coordonneeactuelle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="coordonnees du gps" />
+        <TextView
+            android:id="@+id/tv_jeusansmap_coordonneestreetart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="coordonee du street art" />
+        <TextView
+            android:id="@+id/tv_jeusansmap_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="distance" />
+    </LinearLayout>
+
+
 
 </FrameLayout>
