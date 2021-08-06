@@ -16,10 +16,10 @@
         android:text="avec map" />
 
 
-    <com.google.android.gms.maps.MapView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        ></com.google.android.gms.maps.MapView>
+        <com.google.android.gms.maps.MapView
+android:id="@+id/maps_jeu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 </FrameLayout>

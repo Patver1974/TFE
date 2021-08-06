@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.tft_jeu.R;
 import com.example.tft_jeu.models.StreetArt;
+import com.google.android.gms.maps.SupportMapFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,6 +59,7 @@ public class FramJeuAvecMap extends Fragment {
             streetArt = getArguments().getParcelable("STREET_ART");
            // mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -66,4 +68,7 @@ public class FramJeuAvecMap extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_fram_jeu_avec_map, container, false);
     }
+    //SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+       //     .findFragmentById(R.id.maps_jeu);
+     //   mapFragment.getMapAsync(this);
 }

@@ -32,11 +32,12 @@ public class PageJeuParametre extends AppCompatActivity {
 
     private Spinner spAfficherListe;
     private RadioButton rbouimap, rbnonmap, rbfacile, rbmoyen, rbdifficile;
-    private RadioGroup rgdifficulte;
+    private RadioGroup rgdifficulte, rgMapsOuiNon;
     private Button btNextArt,btMenuPrincipal;
     private LocationManager lManager;
     private StreetArt streetArtChoisi;
     private List<StreetArt> streetArts;
+    private String nomfragment;
 
     Random random = new Random();
     @Override
@@ -51,6 +52,7 @@ public class PageJeuParametre extends AppCompatActivity {
         rbdifficile = findViewById(R.id.rb_jeu_difficule_difficile);
         btNextArt = findViewById(R.id.bt_jeu_Start);
         rgdifficulte= findViewById(R.id.grouprb_jeu_difficulte);
+        rgMapsOuiNon= findViewById(R.id.grouprb_jeu_maps_ouinon);
         btMenuPrincipal = findViewById(R.id.bt_jeu_GoBack);
         StreetDao dao = new StreetDao(this);
         dao.openReadable();
@@ -74,7 +76,7 @@ public class PageJeuParametre extends AppCompatActivity {
         spAfficherListe.setAdapter(spinnerAdapter);
         spAfficherListe.setSelection(0);
 
-
+        nomfragment="fragmentinitial";
         getSupportFragmentManager().beginTransaction()
 
                 .add(R.id.container_fragment, FramJeuPageInitial.class, null)
@@ -129,13 +131,24 @@ public class PageJeuParametre extends AppCompatActivity {
 
         });
 
+        rgMapsOuiNon.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.rb_jeu_ouimaps:
+
+                        if (!nomfragment.equals("fragmentinitial")) {
+                        ouvertureFragmentAvecMap(streetArtChoisi);}
+                    case R.id.rb_jeu_nonmaps:
+                        if (!nomfragment.equals("fragmentinitial")) {
+                        ouvertureFragmentSansMap(streetArtChoisi);}
+                }
+            }
+        });
     }
     @SuppressLint("MissingPermission")
     private StreetArt choixElementArt() {
-
-
         ArrayList<StreetArt> ArtwithDistance = new ArrayList<>();
-
         for(StreetArt str:streetArts){
             Location l = new Location(LocationManager.GPS_PROVIDER);
             l.setLatitude(str.getGeocoordinates().getLat());
@@ -186,18 +199,19 @@ public class PageJeuParametre extends AppCompatActivity {
 
 
     private void ouvertureFragmentAvecMap(StreetArt streetArtChoisi) {
+        nomfragment="fragmentavecmap";
         Bundle arg = new Bundle();
         arg.putParcelable("STREET_ART", streetArtChoisi);
         getSupportFragmentManager().beginTransaction()
 
-                .replace(R.id.container_fragment, FramJeuSansMaps.class, arg)
+                .replace(R.id.container_fragment, FramJeuAvecMap.class, arg)
                 .commit();
 
 
     }
 
     private void ouvertureFragmentSansMap(StreetArt streetArtChoisi) {
-
+        nomfragment="fragmentsansmap";
         Bundle arg = new Bundle();
         arg.putParcelable("STREET_ART", streetArtChoisi);
         getSupportFragmentManager().beginTransaction()

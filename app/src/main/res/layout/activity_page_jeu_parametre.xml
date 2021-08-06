@@ -25,6 +25,7 @@
             android:text="@string/afficher_la_carte" />
 
         <RadioGroup
+            android:id="@+id/grouprb_jeu_maps_ouinon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
