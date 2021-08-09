@@ -24,7 +24,7 @@ public class StreetArtAdapater extends RecyclerView.Adapter<StreetArtAdapater.St
     private final View.OnClickListener onClickListener;
     private LocationManager lManager;
 
-    public StreetArtAdapater(List<StreetArt> streetArts, View.OnClickListener onClickListener,LocationManager locationManager) {
+    public StreetArtAdapater(List<StreetArt> streetArts, View.OnClickListener onClickListener, LocationManager locationManager) {
         this.streetArts = streetArts;
         this.onClickListener = onClickListener;
         this.lManager = locationManager;
@@ -40,18 +40,19 @@ public class StreetArtAdapater extends RecyclerView.Adapter<StreetArtAdapater.St
 
         return new StreetArtViewHolder(view);
     }
+
     @SuppressLint("MissingPermission")
     @Override
     public void onBindViewHolder(@NonNull StreetArtAdapater.StreetArtViewHolder holder, int position) {
         StreetArt streetArt = streetArts.get(position);
-        String echelle,nameArt;
+        String echelle, nameArt;
         holder.bindData(streetArt);
 
-       // holder.getTvNameOeuvre().setText(streetArt.getNameOfTheWork().toString());
+        // holder.getTvNameOeuvre().setText(streetArt.getNameOfTheWork().toString());
         //holder.getTvNameArtist().setText(streetArt.getNomDeLArtiste());
         //holder.getTvLat().setText(streetArt.getGeocoordinates().getLat().toString());
         //holder.getTvLong().setText(streetArt.getGeocoordinates().getLon().toString());
-       // holder.getTvAdresse().setText(streetArt.getAdresse());
+        // holder.getTvAdresse().setText(streetArt.getAdresse());
 
         Location l = new Location(LocationManager.GPS_PROVIDER);
 
@@ -61,20 +62,24 @@ public class StreetArtAdapater extends RecyclerView.Adapter<StreetArtAdapater.St
         Location location = lManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
         float dist = location.distanceTo(l) / 1000;
+        String strDist;
 
-
-        Log.d("DISTANCE", streetArt.getNameOfTheWork()+ ": distance= "+ dist);
+        Log.d("DISTANCE", streetArt.getNameOfTheWork() + ": distance= " + dist);
         //ternaire
         //echelle = dist>1 ? "Km":"metres";
 
         //arrondir
-        if (dist<1) {echelle=" metres"; dist = Math.round(dist *1000);}
-        else
-            { echelle=" Km";dist = Math.round(dist*1000)/1000;};
-        nameArt = streetArt.getNameOfTheWork()==null?streetArt.getCategorie():streetArt.getNameOfTheWork().toString();
-        String ligne = "L'oeuvre " +nameArt  + " est à " + dist + echelle +" de votre position";
-        holder.getTvDistance().setText(ligne);
+        if (dist < 1) {
+            strDist = String.valueOf(Math.round(dist * 1000)) + " metres";
+        } else {
+            strDist = ((Math.round(dist * 10000)) / 10000.0) + " km";
 
+
+        }
+        ;
+        nameArt = streetArt.getNameOfTheWork() == null ? streetArt.getCategorie() : streetArt.getNameOfTheWork().toString();
+        String ligne = "L'oeuvre " + nameArt + " est à " + strDist + " de votre position";
+        holder.getTvDistance().setText(ligne);
 
 
     }
@@ -100,14 +105,19 @@ public class StreetArtAdapater extends RecyclerView.Adapter<StreetArtAdapater.St
             tvLat = itemView.findViewById(R.id.item_activite_coordonnee_lat);
             tvLong = itemView.findViewById(R.id.item_activite_coordonnee_long);
             tvAdresse = itemView.findViewById(R.id.item_activite_adresse);
-            tvDistance= itemView.findViewById(R.id.item_activite_distance);
+            tvDistance = itemView.findViewById(R.id.item_activite_distance);
         }
 
         public void bindData(StreetArt streetArt) {
             this.tvNameArtist.setText(streetArt.getNameOfTheArtist());
             this.tvNameOeuvre.setText(streetArt.getNameOfTheWork() != null ? streetArt.getNameOfTheWork().toString() : "Pas de nom");
-            this.tvLat.setText(streetArt.getGeocoordinates().getLat().toString());
-            this.tvLong.setText(streetArt.getGeocoordinates().getLon().toString());
+
+            String streetArtlatitudestring = String.valueOf((Math.round(streetArt.getGeocoordinates().getLat() * 10000)) / 10000.0);
+            String streetArtLongitudestring = String.valueOf((Math.round(streetArt.getGeocoordinates().getLon() * 10000)) / 10000.0);
+
+
+            this.tvLat.setText(streetArtlatitudestring);
+            this.tvLong.setText(streetArtLongitudestring);
             this.tvAdresse.setText(streetArt.getAdresse());
         }
 
@@ -151,7 +161,9 @@ public class StreetArtAdapater extends RecyclerView.Adapter<StreetArtAdapater.St
             this.tvAdresse = tvAdresse;
         }
 
-        public TextView getTvDistance() { return tvDistance; }
+        public TextView getTvDistance() {
+            return tvDistance;
+        }
 
         public void setTvDistance(TextView tvDistance) {
             this.tvDistance = tvDistance;

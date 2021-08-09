@@ -68,7 +68,5 @@ public class FramJeuAvecMap extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_fram_jeu_avec_map, container, false);
     }
-    //SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-       //     .findFragmentById(R.id.maps_jeu);
-     //   mapFragment.getMapAsync(this);
+
 }

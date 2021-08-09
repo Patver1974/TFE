@@ -35,5 +35,10 @@
     <string name="non">non</string>
     <string name="difficult">Difficulté</string>
     <string name="ToutesLesCategories">Toutes les categories</string>
+    <string name="go_next_art">Go/Next Art</string>
+    <string name="difficile">difficile</string>
+    <string name="moyen">moyen</string>
+    <string name="facile">facile</string>
+    <string name="ma_position_actuelle">Ma position actuelle :</string>
 
 </resources>

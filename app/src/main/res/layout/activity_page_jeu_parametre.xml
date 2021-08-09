@@ -26,7 +26,7 @@
 
         <RadioGroup
             android:id="@+id/grouprb_jeu_maps_ouinon"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
@@ -47,6 +47,15 @@
                 android:text="@string/non" />
 
         </RadioGroup>
+        <View
+            android:layout_width="10dp"
+            android:layout_height="0dp"/>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/maps" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -61,7 +70,7 @@
 
         <RadioGroup
             android:id="@+id/grouprb_jeu_difficulte"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
@@ -70,25 +79,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="facile"
-
-                />
+                android:text="@string/facile" />
 
             <RadioButton
                 android:id="@+id/rb_jeu_difficule_moyen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:text="moyen" />
+                android:text="@string/moyen" />
 
             <RadioButton
                 android:id="@+id/rb_jeu_difficule_difficile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:text="difficile" />
+                android:text="@string/difficile" />
         </RadioGroup>
+        <View
+            android:layout_width="10dp"
+            android:layout_height="0dp"/>
 
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/boussole" />
     </LinearLayout>
 
     <LinearLayout
@@ -100,7 +114,7 @@
             android:id="@+id/bt_jeu_Start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Go/Next Art" />
+            android:text="@string/go_next_art" />
 
         <View
             android:layout_width="20dp"

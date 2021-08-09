@@ -1,5 +1,6 @@
 package com.example.tft_jeu.Ajouterlieux;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tft_jeu.R;
@@ -8,6 +9,9 @@ import com.example.tft_jeu.models.Geocoordinates;
 import com.example.tft_jeu.models.StreetArt;
 
 import android.database.DataSetObserver;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +36,8 @@ public class AjouterLieux extends AppCompatActivity implements AdapterView.OnIte
         Spinner spListeDatabase;
 
         EditText etNomLieux, etLatitude, etLongitude, etAdresse;
-        Button btClear, btAjouter;
+         Button btClear, btAjouter,btafficherLatLongGps;
+
 
         spListeDatabase = (Spinner) findViewById(R.id.sp_test);
 
@@ -46,6 +51,7 @@ public class AjouterLieux extends AppCompatActivity implements AdapterView.OnIte
         etLatitude = findViewById(R.id.et_ajouterlieux_coordLatitude);
         etLongitude =  findViewById(R.id.et_ajouterlieux_coordLongitude);
         etAdresse =  findViewById(R.id.et_ajouterlieux_adresselieux);
+        btafficherLatLongGps =  findViewById(R.id.bt_ajouterlieux_affichageLatLongGps);
         String categorie="";
 
 
@@ -89,4 +95,6 @@ public class AjouterLieux extends AppCompatActivity implements AdapterView.OnIte
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+
 }

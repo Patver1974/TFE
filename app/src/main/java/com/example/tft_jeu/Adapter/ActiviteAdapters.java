@@ -88,26 +88,40 @@ private String echelle,nameArt;
     @SuppressLint("MissingPermission")
     @Override
     public void onBindViewHolder(@NonNull ActiviteAdapters.ViewHolder holder, int position) {
+        String strDist;
         StreetArt streetArt = dataSet.get(position);
         holder.getTvNameOeuvre().setText(streetArt.getNameOfTheWork().toString());
         holder.getTvNameArtist().setText(streetArt.getNameOfTheArtist());
-        holder.getTvLatitude().setText(streetArt.getGeocoordinates().getLat().toString());
-        holder.getTvLongitude().setText(streetArt.getGeocoordinates().getLon().toString());
+
+        String streetArtlatitudestring = String.valueOf((Math.round(streetArt.getGeocoordinates().getLat()*10000))/10000.0);
+        String streetArtLongitudestring = String.valueOf((Math.round(streetArt.getGeocoordinates().getLon()*10000))/10000.0);
+
+
+        holder.getTvLatitude().setText(streetArtlatitudestring);
+        holder.getTvLongitude().setText(streetArtLongitudestring);
         holder.getTvAdresse().setText(streetArt.getAdresse());
-
-
         Location l = new Location(LocationManager.GPS_PROVIDER);
+
+
+
+
         l.setLatitude(streetArt.getGeocoordinates().getLat());
         l.setLongitude(streetArt.getGeocoordinates().getLon());
 
         float dist = lManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).distanceTo(l);
         Log.d("DISTANCE", streetArt.getNameOfTheWork()+ ": distance= "+ dist);
         //arrondir
-        if (dist<1) {echelle=" metres"; dist = Math.round(dist *1000);}
-        else
-        { echelle=" Km";dist = Math.round(dist*10000)/10000;};
+        if (dist<1) {
+
+        strDist = String.valueOf(Math.round(dist *1000))+ " metres";
+    }
+        else {
+            strDist = ((Math.round(dist * 10000)) / 10000.0) + " km";
+        }
+
+
         nameArt = streetArt.getNameOfTheWork()==null?streetArt.getCategorie():streetArt.getNameOfTheWork().toString();
-        String ligne = "L'oeuvre " +nameArt   + " est à " + dist + echelle +" de votre position";
+        String ligne = "L'oeuvre " +nameArt   + " est à " + strDist +" de votre position";
 
 
         holder.getTvDistance().setText(String.valueOf(ligne));

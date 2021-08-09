@@ -121,6 +121,15 @@
                 android:layout_height="wrap_content"
                 android:hint="Long" />
 
+            <View
+                android:layout_width="05dp"
+                android:layout_height="0dp" />
+            <Button
+                android:id="@+id/bt_ajouterlieux_affichageLatLongGps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Coord gps">
+            </Button>
         </LinearLayout>
 
         <View

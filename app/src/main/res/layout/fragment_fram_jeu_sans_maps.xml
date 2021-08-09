@@ -15,10 +15,16 @@
             android:layout_height="wrap_content"
             android:text="sans maps" />
         <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ma_position_actuelle"
+             />
+        <TextView
             android:id="@+id/tv_jeusansmap_coordonneeactuelle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="coordonnees du gps" />
+             />
         <TextView
             android:id="@+id/tv_jeusansmap_coordonneestreetart"
             android:layout_width="wrap_content"
@@ -30,6 +36,11 @@
             android:layout_height="wrap_content"
             android:text="distance" />
         <TextView
+            android:id="@+id/tv_jeusansmap_rapprochement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="rapprochement" />
+        <TextView
             android:id="@+id/tv_jeusansmap_estouest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,6 +50,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="nordsud" />
+        <ImageView
+            android:id="@+id/img_jeusansmap_img"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:src="@drawable/boussole2"/>
     </LinearLayout>
 
 
