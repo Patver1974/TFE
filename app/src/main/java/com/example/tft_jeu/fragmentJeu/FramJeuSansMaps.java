@@ -159,7 +159,7 @@ String streetArtlatitudestring = String.valueOf((Math.round(streetArt.getGeocoor
                 imgArrivee.setImageResource(R.drawable.arriveecourse);
             }
         } else {
-            //TODO Probleme de virgule
+
             echelle = " Km";
             strDist =  ((Math.round(dist*10000)) /10000.0) + echelle;
         }

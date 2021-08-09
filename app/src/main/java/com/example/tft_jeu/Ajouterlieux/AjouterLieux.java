@@ -51,6 +51,7 @@ public class AjouterLieux extends AppCompatActivity implements AdapterView.OnIte
         etLatitude = findViewById(R.id.et_ajouterlieux_coordLatitude);
         etLongitude =  findViewById(R.id.et_ajouterlieux_coordLongitude);
         etAdresse =  findViewById(R.id.et_ajouterlieux_adresselieux);
+        //TODO afficher la localisation du gps avec le bouton btafficherlatlnggps
         btafficherLatLongGps =  findViewById(R.id.bt_ajouterlieux_affichageLatLongGps);
         String categorie="";
 
