@@ -102,8 +102,19 @@ public class FramJeuAvecMap extends Fragment implements OnMapReadyCallback, Goog
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+
+        // Récupère le fragment représentant la map. Fragment dans un fragment
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
+                .findFragmentById(R.id.map);
+        // récupère la carte et fait une synchronisation
+        mapFragment.getMapAsync(this);
+    }
+
+    @Override
     public void onMapReady(GoogleMap googleMap) {
-        Log.d("MARIE", "Ok !!!");
+        Log.d("JEUMAP", "Ok !!!");
         map = googleMap; // Le pointeur vers notre map
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // Consider calling
@@ -117,8 +128,13 @@ public class FramJeuAvecMap extends Fragment implements OnMapReadyCallback, Goog
         }
         map.setMyLocationEnabled(true);
         // map.setInfoWindowAdapter(this);
-        LatLng sydne = new LatLng(-34, 151);
-        map.addMarker(new MarkerOptions().position(sydne).title("Marker in Sydney"));
-        map.moveCamera(CameraUpdateFactory.newLatLng(sydne));
+
+
+        LatLng Art = new LatLng(streetArt.getGeocoordinates().getLat(), streetArt.getGeocoordinates().getLon());
+        map.addMarker(new MarkerOptions().position(Art).title("Street art " + streetArt.getNameOfTheWork().toString()));
+        map.moveCamera(CameraUpdateFactory.newLatLng(Art));
+        map.setMinZoomPreference(20);
+        map.setMaxZoomPreference(10);
+        map.animateCamera(CameraUpdateFactory.zoomTo(10));
     }
 }

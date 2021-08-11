@@ -90,7 +90,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .title(name));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(PositionObject));
         mMap.setMinZoomPreference(20);
-        mMap.setMaxZoomPreference(15);
+        mMap.setMaxZoomPreference(10);
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
 
     }
