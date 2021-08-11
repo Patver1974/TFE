@@ -2,6 +2,7 @@ package com.example.tft_jeu.db.dao;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 
 import com.example.tft_jeu.R;
 import com.example.tft_jeu.db.DbInfo;
@@ -135,7 +136,7 @@ public class StreetDao extends DaoBase<StreetArt> {
         int nbRow = db.delete(DbInfo.ArtStreetTable.TABLE_NAME, whereClause, whereArg);
         return nbRow == 1;
     }
-    public List<String> getAllCategories() {
+    public List<String> getAllCategories() { // affiche toutes les differentes categories
         // Création d'un curseur qui permet d'obtenir le resultat d'un select
         Cursor cursor = db.query(
                 true,
@@ -200,6 +201,7 @@ public class StreetDao extends DaoBase<StreetArt> {
 
             // On extrait les données du curseur
             StreetArt cat = cursorToData(cursor);
+            Log.d("adresse", cat.getAdresse()+"adresse");
             results.add(cat);
 
             // On passe à la prochain valeur de resultat

@@ -119,6 +119,7 @@ public class StreetArtAdapater extends RecyclerView.Adapter<StreetArtAdapater.St
             this.tvLat.setText(streetArtlatitudestring);
             this.tvLong.setText(streetArtLongitudestring);
             this.tvAdresse.setText(streetArt.getAdresse());
+            Log.d("adresstreetartada", "adresses streetartadapter"+streetArt.getAdresse());
         }
 
         public TextView getTvNameOeuvre() {

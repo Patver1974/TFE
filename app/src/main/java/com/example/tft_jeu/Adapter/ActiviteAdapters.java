@@ -95,20 +95,16 @@ private String echelle,nameArt;
 
         String streetArtlatitudestring = String.valueOf((Math.round(streetArt.getGeocoordinates().getLat()*10000))/10000.0);
         String streetArtLongitudestring = String.valueOf((Math.round(streetArt.getGeocoordinates().getLon()*10000))/10000.0);
-
-
         holder.getTvLatitude().setText(streetArtlatitudestring);
         holder.getTvLongitude().setText(streetArtLongitudestring);
+        Log.d("long activadpt", "long activiteadapter "+streetArt.getGeocoordinates().getLon());
         holder.getTvAdresse().setText(streetArt.getAdresse());
+        Log.d("adress activadpt", "adresses activiteadapter "+streetArt.getAdresse());
         Location l = new Location(LocationManager.GPS_PROVIDER);
-
-
-
-
         l.setLatitude(streetArt.getGeocoordinates().getLat());
         l.setLongitude(streetArt.getGeocoordinates().getLon());
 
-        float dist = lManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).distanceTo(l);
+        float dist = lManager.getLastKnownLocation(LocationManager.GPS_PROVIDER).distanceTo(l)/1000;
         Log.d("DISTANCE", streetArt.getNameOfTheWork()+ ": distance= "+ dist);
         //arrondir
         if (dist<1) {

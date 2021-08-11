@@ -136,12 +136,15 @@ public class PageJeuParametre extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId){
                     case R.id.rb_jeu_ouimaps:
-
-                        if (!nomfragment.equals("fragmentinitial")) {
-                        ouvertureFragmentAvecMap(streetArtChoisi);}
+                        Log.d("pagejeu", "page jeu nom frag actif "+ nomfragment.toString());
+                        if (nomfragment.equals("fragmentsansmap")) {
+                        ouvertureFragmentAvecMap(streetArtChoisi);
+                        break;}
                     case R.id.rb_jeu_nonmaps:
-                        if (!nomfragment.equals("fragmentinitial")) {
-                        ouvertureFragmentSansMap(streetArtChoisi);}
+                        Log.d("pagejeu", "page jeu nom frag actif "+ nomfragment.toString());
+                        if (nomfragment.equals("fragmentavecmap")) {
+                        ouvertureFragmentSansMap(streetArtChoisi);
+                        break;}
                 }
             }
         });
