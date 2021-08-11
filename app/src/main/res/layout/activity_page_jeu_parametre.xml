@@ -126,7 +126,14 @@
             android:layout_height="wrap_content"
             android:text="Menu" />
     </LinearLayout>
-
+    <TextView
+        android:id="@+id/tv_jeu_streetnom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tv_jeu_streetadress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <FrameLayout
         android:id="@+id/container_fragment"
         android:layout_width="match_parent"

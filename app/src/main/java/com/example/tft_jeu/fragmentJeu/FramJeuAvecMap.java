@@ -114,7 +114,7 @@ public class FramJeuAvecMap extends Fragment implements OnMapReadyCallback, Goog
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        Log.d("JEUMAP", "Ok !!!");
+
         map = googleMap; // Le pointeur vers notre map
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // Consider calling
@@ -133,8 +133,8 @@ public class FramJeuAvecMap extends Fragment implements OnMapReadyCallback, Goog
         LatLng Art = new LatLng(streetArt.getGeocoordinates().getLat(), streetArt.getGeocoordinates().getLon());
         map.addMarker(new MarkerOptions().position(Art).title("Street art " + streetArt.getNameOfTheWork().toString()));
         map.moveCamera(CameraUpdateFactory.newLatLng(Art));
-        map.setMinZoomPreference(20);
-        map.setMaxZoomPreference(10);
-        map.animateCamera(CameraUpdateFactory.zoomTo(10));
+        map.setMinZoomPreference(25);
+        map.setMaxZoomPreference(20);
+        map.animateCamera(CameraUpdateFactory.zoomTo(25));
     }
 }

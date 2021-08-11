@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.tft_jeu.db.dao.StreetDao;
 import com.example.tft_jeu.fragmentJeu.FramJeuAvecMap;
@@ -34,6 +35,7 @@ public class PageJeuParametre extends AppCompatActivity {
     private RadioButton rbouimap, rbnonmap, rbfacile, rbmoyen, rbdifficile;
     private RadioGroup rgdifficulte, rgMapsOuiNon;
     private Button btNextArt,btMenuPrincipal;
+    private TextView tvnom,tvadresse;
     private LocationManager lManager;
     private StreetArt streetArtChoisi;
     private List<StreetArt> streetArts;
@@ -54,6 +56,8 @@ public class PageJeuParametre extends AppCompatActivity {
         rgdifficulte= findViewById(R.id.grouprb_jeu_difficulte);
         rgMapsOuiNon= findViewById(R.id.grouprb_jeu_maps_ouinon);
         btMenuPrincipal = findViewById(R.id.bt_jeu_GoBack);
+        tvnom = findViewById(R.id.tv_jeu_streetnom);
+        tvadresse =findViewById(R.id.tv_jeu_streetadress);
         StreetDao dao = new StreetDao(this);
         dao.openReadable();
         List<String> categories= new ArrayList<>();
@@ -83,7 +87,7 @@ public class PageJeuParametre extends AppCompatActivity {
                 .commit();
 
         String listeAAfficher = spAfficherListe.getSelectedItem().toString();
-        Log.d("SPINNER", listeAAfficher);
+
 
 
 
@@ -202,6 +206,8 @@ public class PageJeuParametre extends AppCompatActivity {
 
 
     private void ouvertureFragmentAvecMap(StreetArt streetArtChoisi) {
+        this.tvnom.setText(streetArtChoisi.getNameOfTheWork().toString());
+        this.tvadresse.setText(streetArtChoisi.getAdresse());
         nomfragment="fragmentavecmap";
         Bundle arg = new Bundle();
         arg.putParcelable("STREET_ART", streetArtChoisi);
@@ -214,6 +220,9 @@ public class PageJeuParametre extends AppCompatActivity {
     }
 
     private void ouvertureFragmentSansMap(StreetArt streetArtChoisi) {
+        this.tvnom.setText(streetArtChoisi.getNameOfTheWork().toString());
+        this.tvadresse.setText(streetArtChoisi.getAdresse());
+
         nomfragment="fragmentsansmap";
         Bundle arg = new Bundle();
         arg.putParcelable("STREET_ART", streetArtChoisi);
