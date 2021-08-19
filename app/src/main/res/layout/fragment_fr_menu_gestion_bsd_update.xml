@@ -5,10 +5,200 @@
     android:layout_height="match_parent"
     tools:context=".menugestionbsd.FrMenuGestionBsdUpdate">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/bt_menuBsdUpdate_precedentitem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/itemprecedent"/>
+        <TextView
+            android:id="@+id/tv_menuBsdUpdate_idbsd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1" />
+        <Button
+            android:id="@+id/bt_menuBsdUpdate_suivantitem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/itemsuivant"/>
+    </LinearLayout>
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_menuBsdUpdate_nomlieux"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="nom du lieux :" />
+
+        <View
+            android:layout_width="15dp"
+            android:layout_height="0dp" />
+
+        <EditText
+            android:id="@+id/et_menuBsdUpdate_nomlieux"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:hint="Lieux" />
+    </LinearLayout>
+    <View
+        android:layout_width="15dp"
+        android:layout_height="10dp" />
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_menuBsdUpdate_categorie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/categorie" />
+
+            <View
+                android:layout_width="15dp"
+                android:layout_height="0dp" />
+
+            <EditText
+                android:id="@+id/et_menuBsdUpdate_categorie"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:hint="Categories" />
+            <View
+                android:layout_width="15dp"
+                android:layout_height="0dp" />
+            <Spinner
+                android:id="@+id/sp_menuBsdUpdate_listecategories"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="15dp"
+            android:layout_height="10dp" />
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_menuBsdUpdate_adresselieux"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="adresse :" />
+
+        <View
+            android:layout_width="15dp"
+            android:layout_height="0dp" />
+
+        <EditText
+            android:id="@+id/et_menuBsdUpdate_adresselieux"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="adresse" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="15dp"
+        android:layout_height="10dp" />
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_menuBsdUpdate_latitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Latitude : " />
+
+        <View
+            android:layout_width="15dp"
+            android:layout_height="0dp" />
+
+        <EditText
+            android:id="@+id/et_menuBsdUpdate_coordLatitude"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:hint="Lat" />
+
+        <View
+            android:layout_width="05dp"
+            android:layout_height="0dp" />
+
+        <TextView
+            android:id="@+id/tv_menuBsdUpdate_longitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Longitude : " />
+
+        <View
+            android:layout_width="05dp"
+            android:layout_height="0dp" />
+
+        <EditText
+            android:id="@+id/et_menuBsdUpdate_coordLongitude"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:hint="Long" />
+
+        <View
+            android:layout_width="05dp"
+            android:layout_height="0dp" />
+
+        <Button
+            android:id="@+id/bt_menuBsdUpdate_affichageLatLongGps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Coord gps">
+        </Button>
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+    <Button
+        android:id="@+id/bt_menuBsdUpdate_modifierbsd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="modifier"/>
+        <View
+            android:layout_width="20dp"
+            android:layout_height="0dp" />
+
+        <Button
+            android:id="@+id/bt_menuBsdUpdate_del_bsd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:backgroundTint="#FF0000"
+            android:text="Supprimer"/>
+        </LinearLayout>
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map_upbdate"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        tools:context=".MapsActivity" />
+    </LinearLayout>
 
 </FrameLayout>

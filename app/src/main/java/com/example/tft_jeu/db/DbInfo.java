@@ -4,7 +4,7 @@ public class DbInfo {
 
     public static final String DB_NAME = "DbLieuxBxl";
 
-    public static final int DB_VERSION = 1;
+    public static final int DB_VERSION = 2;
 
     public static class ArtStreetTable {
         // Le nom de la table
@@ -18,6 +18,7 @@ public class DbInfo {
         public static final String COLUMN_LATITUDE = "latitude";
         public static final String COLUMN_LONGITUDE = "longitude";
         public static final String COLUMN_CATEGORIE = "categorie";
+        public static final String COLUMN_PHOTOFILENAME = "filenamephoto";
 
 
 
@@ -30,7 +31,8 @@ public class DbInfo {
                         + COLUMN_NAMEAUTHOR + " TEXT NOT NULL, "
                         + COLUMN_LATITUDE + " TEXT NOT NULL, "
                         + COLUMN_LONGITUDE + " TEXT NOT NULL, "
-                        + COLUMN_CATEGORIE + " TEXT NOT NULL "
+                        + COLUMN_CATEGORIE + " TEXT NOT NULL, "
+                        + COLUMN_PHOTOFILENAME + " TEXT  "
                         + ");" ;
 
         public static final String REQUEST_DROP =

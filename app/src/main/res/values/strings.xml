@@ -40,5 +40,8 @@
     <string name="moyen">moyen</string>
     <string name="facile">facile</string>
     <string name="ma_position_actuelle">Ma position actuelle :</string>
+    <string name="itemprecedent"><![CDATA[<<]]></string>
+    <string name="itemsuivant"><![CDATA[>>]]></string>
+    <string name="categorie">categorie :</string>
 
 </resources>

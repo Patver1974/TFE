@@ -1,10 +1,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/menu_listeart"
+        android:id="@+id/menu_Ajouter"
         android:enabled="true"
-        android:title="Infor"/>
+        android:title="Add"/>
     <item
-        android:id="@+id/menu_jeu"
+        android:id="@+id/menu_Update"
         android:enabled="true"
-        android:title="Jeu"/>
+        android:title="Update"/>
+    <item
+        android:id="@+id/menu_menuGeneral"
+        android:enabled="true"
+        android:title="Menu general"/>
 </menu>

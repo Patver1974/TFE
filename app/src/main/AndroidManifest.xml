@@ -4,6 +4,8 @@
     package="com.example.tft_jeu">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <uses-feature
         android:name="android.hardware.touchscreen"
@@ -28,7 +30,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TFT_Jeu">
-        <activity android:name=".PageJeuParametre"></activity>
+        <activity android:name=".menugestionbsd.MenugestionBsd"></activity>
+        <activity android:name=".Ajouterlieux.ModifierLieux" />
+        <activity android:name=".PageJeuParametre" />
         <activity android:name=".Ajouterlieux.AjouterLieux" />
         <activity android:name=".MapsActivity" />
         <activity android:name=".AfficherListeStreet" />

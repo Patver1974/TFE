@@ -7,7 +7,8 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StreetArt implements Comparator<StreetArt>, Parcelable {
+public class
+StreetArt implements Comparator<StreetArt>, Parcelable {
 
 
     private  long id;
@@ -30,25 +31,38 @@ public class StreetArt implements Comparator<StreetArt>, Parcelable {
     private String plaats;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    public StreetArt(long id, Object nameOfTheWork, String nameOfTheArtist, String adresse, Geocoordinates geocoordinates,String categorie) {
+    public StreetArt(long id, Object nameOfTheWork, String nameOfTheArtist, String adresse, Geocoordinates geocoordinates,String categorie, Photo photo) {
         this.id = id;
         this.nameOfTheWork = nameOfTheWork;
         this.nameOfTheArtist = nameOfTheArtist;
         this.adresse = adresse;
         this.geocoordinates = geocoordinates;
         this.categorie = categorie;
+        this.photo = photo;
+
+
 
     }
-    public StreetArt( Object nameOfTheWork, String nameOfTheArtist, String adresse, Geocoordinates geocoordinates,String categorie ) {
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public StreetArt(Object nameOfTheWork, String nameOfTheArtist, String adresse, Geocoordinates geocoordinates, String categorie, Photo photo) {
         this.id = 0;
         this.nameOfTheWork = nameOfTheWork;
         this.nameOfTheArtist = nameOfTheArtist;
         this.adresse = adresse;
         this.geocoordinates = geocoordinates;
         this.categorie = categorie;
+        this.photo= photo;
 
     }
-    public StreetArt( Object nameOfTheWork, String nameOfTheArtist, String adresse, Geocoordinates geocoordinates,String categorie, Float distance ) {
+    public StreetArt( Object nameOfTheWork, String nameOfTheArtist, String adresse, Geocoordinates geocoordinates,String categorie, Float distance,Photo photo ) {
         this.id = 0;
         this.nameOfTheWork = nameOfTheWork;
         this.nameOfTheArtist = nameOfTheArtist;
@@ -56,6 +70,7 @@ public class StreetArt implements Comparator<StreetArt>, Parcelable {
         this.geocoordinates = geocoordinates;
         this.categorie = categorie;
         this.distance = distance;
+        this.photo= photo;
 
     }
 

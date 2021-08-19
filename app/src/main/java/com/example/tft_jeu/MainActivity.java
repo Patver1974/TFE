@@ -12,6 +12,7 @@ import com.example.tft_jeu.Ajouterlieux.AjouterLieux;
 import com.example.tft_jeu.db.dao.StreetDao;
 import com.example.tft_jeu.jsonStreetArt.StreetArtApi;
 import com.example.tft_jeu.models.StreetArt;
+import com.example.tft_jeu.menugestionbsd.MenugestionBsd;
 
 import java.io.IOException;
 import java.util.List;
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         finish();
     }
     private void RunAjouterItem() {
-        Intent intentList = new Intent(getApplicationContext(), AjouterLieux.class);
+        Intent intentList = new Intent(getApplicationContext(), MenugestionBsd.class);
         startActivity(intentList);
         finish();
     }

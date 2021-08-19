@@ -97,9 +97,11 @@ private String echelle,nameArt;
         String streetArtLongitudestring = String.valueOf((Math.round(streetArt.getGeocoordinates().getLon()*10000))/10000.0);
         holder.getTvLatitude().setText(streetArtlatitudestring);
         holder.getTvLongitude().setText(streetArtLongitudestring);
-        Log.d("long activadpt", "long activiteadapter "+streetArt.getGeocoordinates().getLon());
+
         holder.getTvAdresse().setText(streetArt.getAdresse());
         Log.d("adress activadpt", "adresses activiteadapter "+streetArt.getAdresse());
+
+
         Location l = new Location(LocationManager.GPS_PROVIDER);
         l.setLatitude(streetArt.getGeocoordinates().getLat());
         l.setLongitude(streetArt.getGeocoordinates().getLon());

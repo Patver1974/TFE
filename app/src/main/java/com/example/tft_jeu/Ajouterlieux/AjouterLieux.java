@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.tft_jeu.R;
 import com.example.tft_jeu.db.dao.StreetDao;
 import com.example.tft_jeu.models.Geocoordinates;
+import com.example.tft_jeu.models.Photo;
 import com.example.tft_jeu.models.StreetArt;
-
+import android.location.Location;
+import android.location.LocationListener;
 import android.database.DataSetObserver;
 import android.location.Location;
 import android.location.LocationListener;
@@ -27,20 +29,19 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AjouterLieux extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-
+public class AjouterLieux extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+//Todo pour patrick edit un artstreet
+    Photo photo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ajouter_lieux);
         Spinner spListeDatabase;
-
         EditText etNomLieux, etLatitude, etLongitude, etAdresse;
          Button btClear, btAjouter,btafficherLatLongGps;
 
 
         spListeDatabase = (Spinner) findViewById(R.id.sp_test);
-
         StreetDao dao = new StreetDao(this);
         dao.openReadable();
         List<String> choiceCategories = dao.getAllCategories();
@@ -77,7 +78,7 @@ public class AjouterLieux extends AppCompatActivity implements AdapterView.OnIte
             Double longitude = Double.parseDouble(etLongitude.getText().toString());
             Geocoordinates coodonnee = new Geocoordinates(latitude,longitude);
 
-            StreetArt streetart= new StreetArt(nom,"",adresse,coodonnee, categorie);
+            StreetArt streetart= new StreetArt(nom,"",adresse,coodonnee, categorie,photo);
             StreetDao streetDao = new StreetDao(getApplicationContext());
             streetDao.openWritable();
             streetDao.insert(streetart);
@@ -85,6 +86,9 @@ public class AjouterLieux extends AppCompatActivity implements AdapterView.OnIte
         });
 
     }
+
+
+
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -96,6 +100,19 @@ public class AjouterLieux extends AppCompatActivity implements AdapterView.OnIte
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+  //  @Override
+  //  protected void onResume() {
+  //      super.onResume();
+   //     if (requestingLocationUpdates) {
+   //         s
+  //      tartLocationUpdates();
+ //       }
+  //  }
 
+  //  private void startLocationUpdates() {
+  //      fusedLocationClient.requestLocationUpdates(locationRequest,
+  //              locationCallback,
+  //              Looper.getMainLooper());
+  //  }
 
 }

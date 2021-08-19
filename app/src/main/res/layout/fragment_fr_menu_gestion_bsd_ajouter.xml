@@ -6,9 +6,197 @@
     tools:context=".menugestionbsd.FrMenuGestionBsdAjouter">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <LinearLayout
 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_menubsdAdd_nomlieux"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="nom du lieux :" />
+
+            <View
+                android:layout_width="15dp"
+                android:layout_height="0dp" />
+
+            <EditText
+                android:id="@+id/et_menubsdAdd_nomlieux"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:hint="Lieux" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="15dp"
+            android:layout_height="10dp" />
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_menubsdAdd_categorie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/categorie" />
+
+            <View
+                android:layout_width="15dp"
+                android:layout_height="0dp" />
+
+            <EditText
+                android:id="@+id/et_menubsdAdd_categorie"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:hint="Categories" />
+            <View
+                android:layout_width="15dp"
+                android:layout_height="0dp" />
+            <Spinner
+                android:id="@+id/sp_menubsdAdd_listecategories"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="15dp"
+            android:layout_height="10dp" />
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_menubsdAdd_adresselieux"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="adresse :" />
+
+            <View
+                android:layout_width="15dp"
+                android:layout_height="0dp" />
+
+            <EditText
+                android:id="@+id/et_menubsdAdd_adresselieux"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:hint="adresse" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="15dp"
+            android:layout_height="10dp" />
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_menubsdAdd_latitude"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Latitude : " />
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="0dp" />
+
+            <EditText
+                android:id="@+id/et_menubsdAdd_coordLatitude"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:hint="Lat" />
+
+            <View
+                android:layout_width="05dp"
+                android:layout_height="0dp" />
+
+            <TextView
+                android:id="@+id/tv_menubsdAdd_longitude"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Longitude : " />
+
+            <View
+                android:layout_width="05dp"
+                android:layout_height="0dp" />
+
+            <EditText
+                android:id="@+id/et_menubsdAdd_coordLongitude"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:hint="Long" />
+
+            <View
+                android:layout_width="05dp"
+                android:layout_height="0dp" />
+            <Button
+                android:id="@+id/bt_menubsdAdd_affichageLatLongGps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Coord gps">
+            </Button>
+        </LinearLayout>
+
+        <View
+            android:layout_width="05dp"
+            android:layout_height="0dp" />
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="05dp"
+                android:layout_height="0dp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bt_menubsdAdd_ajouteritem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ajouter" />
+
+            <View
+                android:layout_width="05dp"
+                android:layout_height="0dp" />
+
+            <Button
+                android:id="@+id/bt_menubsdAdd_effaceedonnee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Annuler" />
+        </LinearLayout>
+
+
+    </LinearLayout>
 </FrameLayout>

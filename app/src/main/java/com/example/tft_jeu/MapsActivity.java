@@ -16,6 +16,7 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -25,15 +26,21 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener {
-
+    //todo dans le layout afficher un boutton pour l'instant google map prend la place math parent
     private GoogleMap mMap;
     private LocationManager locationManager;
+    private Button buttonBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        buttonBack = findViewById(R.id.bt_map_back);
 
+        buttonBack.setOnClickListener(v -> {
+            finish();
+        });
         Intent fromList = getIntent();
         if (fromList != null) {
             Log.d("LON_LAT", "Test");
@@ -47,7 +54,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Double lat = Double.parseDouble(latStr);
                 Double lon = Double.parseDouble(lonStr);
 
-                Log.d("LON-LAT", lonStr+ "-"+ latStr);
+                Log.d("LON-LAT", lonStr + "-" + latStr);
             }
         }
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -79,7 +86,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
         // Add a marker in Sydney and move the camera
-        Intent intent =getIntent();
+        Intent intent = getIntent();
         String latitude = intent.getStringExtra("Lat");
         String longitude = intent.getStringExtra("Long");
         String name = intent.getStringExtra("Name");
@@ -97,14 +104,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
-        Log.d("LAT", location.getLatitude()+ "");
-        Log.d("LON", location.getLongitude()+ "");
+        Log.d("LAT", location.getLatitude() + "");
+        Log.d("LON", location.getLongitude() + "");
 
         LatLng sydney = new LatLng(-34, 151);
         float[] result = new float[4];
         Location.distanceBetween(sydney.latitude, sydney.longitude, location.getLatitude(), location.getLongitude(), result);
 
-        Log.d("RESULT", result[0]+ "");
+        Log.d("RESULT", result[0] + "");
         mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude())));
         mMap.addMarker(new MarkerOptions().position(new LatLng(location.getLatitude(), location.getLongitude())));
     }

@@ -1,9 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Ajouterlieux.ModifierLieux">
+    android:orientation="vertical"
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+tools:context=".Ajouterlieux.ModifierLieux">
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+<Button
+    android:id="@+id/bt_modiferLieux_precedentitem"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/itemprecedent"/>
+    <TextView
+        android:id="@+id/tv_modifierlieux_idbsd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1" />
+    <Button
+        android:id="@+id/bt_modiferLieux_suivantitem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/itemsuivant"/>
+</LinearLayout>
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_modifierLieux_nomlieux"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="nom du lieux :" />
+
+        <View
+            android:layout_width="15dp"
+            android:layout_height="0dp" />
+
+        <EditText
+            android:id="@+id/et_modifierLieux_nomlieux"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:hint="Lieux" />
+    </LinearLayout>
+    <View
+        android:layout_width="15dp"
+        android:layout_height="10dp" />
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_modifierlieux_adresselieux"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="adresse :" />
+
+        <View
+            android:layout_width="15dp"
+            android:layout_height="0dp" />
+
+        <EditText
+            android:id="@+id/et_modifierlieux_adresselieux"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:hint="adresse" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="15dp"
+        android:layout_height="10dp" />
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_modifierlieux_latitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Latitude : " />
+
+        <View
+            android:layout_width="15dp"
+            android:layout_height="0dp" />
+
+        <EditText
+            android:id="@+id/et_modifierlieux_coordLatitude"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:hint="Lat" />
+
+        <View
+            android:layout_width="05dp"
+            android:layout_height="0dp" />
+
+        <TextView
+            android:id="@+id/tv_modifierlieux_longitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Longitude : " />
+
+        <View
+            android:layout_width="05dp"
+            android:layout_height="0dp" />
+
+        <EditText
+            android:id="@+id/et_modifierlieux_coordLongitude"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:hint="Long" />
+
+        <View
+            android:layout_width="05dp"
+            android:layout_height="0dp" />
+        <Button
+            android:id="@+id/bt_modifierlieux_affichageLatLongGps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Coord gps">
+        </Button>
+    </LinearLayout>
+    <Button
+        android:id="@+id/bt_modierlieux_modifierbsd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="modifiez"/>
+</LinearLayout>

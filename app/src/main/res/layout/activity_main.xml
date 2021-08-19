@@ -14,9 +14,9 @@
 
 
         <Button
+            android:id="@+id/Bt_Main_ListeAvecMap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/Bt_Main_ListeAvecMap"
             android:text="choix des listes"/>
         <View
             android:layout_width="0dp"
@@ -33,10 +33,19 @@
             android:layout_height="10dp"
             />
         <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Bt_Main_Ajouter_item"
+        android:text="ajouter un lieux"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="10dp"
+            />
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/Bt_Main_Ajouter_item"
-            android:text="ajouter un lieux"/>
+            android:id="@+id/Bt_Main_bddext"
+            android:text="enreigsgtrer base de donnee ext"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

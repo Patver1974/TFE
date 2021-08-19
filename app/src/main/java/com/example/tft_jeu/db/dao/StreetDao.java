@@ -1,4 +1,5 @@
 package com.example.tft_jeu.db.dao;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -6,8 +7,9 @@ import android.util.Log;
 
 import com.example.tft_jeu.R;
 import com.example.tft_jeu.db.DbInfo;
-import  com.example.tft_jeu.models.Geocoordinates;
-import  com.example.tft_jeu.models.StreetArt;
+import com.example.tft_jeu.models.Geocoordinates;
+import com.example.tft_jeu.models.Photo;
+import com.example.tft_jeu.models.StreetArt;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,17 +20,16 @@ public class StreetDao extends DaoBase<StreetArt> {
     }
 
 
-
     // Méthode du CRUD
     private ContentValues generateContentValues(StreetArt streetArt) {
         ContentValues cv = new ContentValues();
-        cv.put(DbInfo.ArtStreetTable.COLUMN_NAME,streetArt.getNameOfTheWork() == null ? "": streetArt.getNameOfTheWork().toString());
-        cv.put(DbInfo.ArtStreetTable.COLUMN_NAMEAUTHOR,streetArt.getNameOfTheArtist() == null ? "": streetArt.getNameOfTheArtist().toString());
+        cv.put(DbInfo.ArtStreetTable.COLUMN_NAME, streetArt.getNameOfTheWork() == null ? "" : streetArt.getNameOfTheWork().toString());
+        cv.put(DbInfo.ArtStreetTable.COLUMN_NAMEAUTHOR, streetArt.getNameOfTheArtist() == null ? "" : streetArt.getNameOfTheArtist().toString());
         cv.put(DbInfo.ArtStreetTable.COLUMN_LATITUDE, streetArt.getGeocoordinates().getLat());
-        cv.put(DbInfo.ArtStreetTable.COLUMN_LONGITUDE, streetArt.getGeocoordinates().getLon() );
-        cv.put(DbInfo.ArtStreetTable.COLUMN_ADRESSE,streetArt.getAdresse() == null ? "" : streetArt.getAdresse());
+        cv.put(DbInfo.ArtStreetTable.COLUMN_LONGITUDE, streetArt.getGeocoordinates().getLon());
+        cv.put(DbInfo.ArtStreetTable.COLUMN_ADRESSE, streetArt.getAdresse() == null ? "" : streetArt.getAdresse());
         cv.put(DbInfo.ArtStreetTable.COLUMN_CATEGORIE, streetArt.getCategorie());
-
+        cv.put(DbInfo.ArtStreetTable.COLUMN_PHOTOFILENAME, streetArt.getCategorie());
 
 //        ContentValues contentValues = new ContentValues();
 //        contentValues.put(DbInfo.ArtStreetTable.COLUMN_NAME, (byte[]) streetArt.getNameOfTheWork());
@@ -37,15 +38,19 @@ public class StreetDao extends DaoBase<StreetArt> {
     }
 
     private StreetArt cursorToData(Cursor cursor) {
-
+        String filenamephoto = cursor.getString(cursor.getColumnIndex(DbInfo.ArtStreetTable.COLUMN_PHOTOFILENAME));
+        Photo photo = new Photo();
+        photo.setFilename(filenamephoto);
         long id = cursor.getLong(cursor.getColumnIndex(DbInfo.ArtStreetTable.COLUMN_ID));
+        String adresse = cursor.getString(cursor.getColumnIndex(DbInfo.ArtStreetTable.COLUMN_ADRESSE));
         String name = cursor.getString(cursor.getColumnIndex(DbInfo.ArtStreetTable.COLUMN_NAME));
         String nameauthor = cursor.getString(cursor.getColumnIndex(DbInfo.ArtStreetTable.COLUMN_NAMEAUTHOR));
-        Geocoordinates coodonnee = new Geocoordinates(cursor.getDouble(cursor.getColumnIndex(DbInfo.ArtStreetTable.COLUMN_LATITUDE)),cursor.getDouble(cursor.getColumnIndex(DbInfo.ArtStreetTable.COLUMN_LONGITUDE)));
+        Geocoordinates coodonnee = new Geocoordinates(cursor.getDouble(cursor.getColumnIndex(DbInfo.ArtStreetTable.COLUMN_LATITUDE)), cursor.getDouble(cursor.getColumnIndex(DbInfo.ArtStreetTable.COLUMN_LONGITUDE)));
         String categorie = cursor.getString(cursor.getColumnIndex(DbInfo.ArtStreetTable.COLUMN_CATEGORIE));
-        return new StreetArt(id, name,nameauthor,coodonnee, categorie);
+        return new StreetArt(id, name, nameauthor, adresse, coodonnee, categorie,photo);
 
-    }
+
+            }
 
     // - Create
     public long insert(StreetArt streetArt) {
@@ -57,7 +62,7 @@ public class StreetDao extends DaoBase<StreetArt> {
     // - Read
     public StreetArt get(long id) {
         String whereClause = DbInfo.ArtStreetTable.COLUMN_ID + " = ?";
-        String[] whereArg = new String[] {
+        String[] whereArg = new String[]{
                 String.valueOf(id)
         };
 
@@ -65,7 +70,7 @@ public class StreetDao extends DaoBase<StreetArt> {
         Cursor cursor = db.query(DbInfo.ArtStreetTable.TABLE_NAME, null, whereClause, whereArg, null, null, null);
 
         // Tester si on a un resultat
-        if(cursor.getCount() == 0) {
+        if (cursor.getCount() == 0) {
             return null;
         }
 
@@ -89,14 +94,14 @@ public class StreetDao extends DaoBase<StreetArt> {
         List<StreetArt> results = new ArrayList<>();
 
         // Verification qu'il y a un resultat
-        if(cursor.getCount() == 0) {
+        if (cursor.getCount() == 0) {
             return results; // Liste vide
         }
 
         // On place le curseur sur le premier resultat
         cursor.moveToFirst();
 
-        while(! cursor.isAfterLast()) {  // On continue tant qu'on a pas fait toute les resultats
+        while (!cursor.isAfterLast()) {  // On continue tant qu'on a pas fait toute les resultats
 
             // On extrait les données du curseur
             StreetArt cat = cursorToData(cursor);
@@ -118,7 +123,7 @@ public class StreetDao extends DaoBase<StreetArt> {
         ContentValues cv = generateContentValues(data);
 
         String whereClause = DbInfo.ArtStreetTable.COLUMN_ID + " = ?";
-        String[] whereArg = new String[] {
+        String[] whereArg = new String[]{
                 String.valueOf(id)
         };
 
@@ -129,19 +134,20 @@ public class StreetDao extends DaoBase<StreetArt> {
     // - Delete
     public boolean delete(long id) {
         String whereClause = DbInfo.ArtStreetTable.COLUMN_ID + " = ?";
-        String[] whereArg = new String[] {
+        String[] whereArg = new String[]{
                 String.valueOf(id)
         };
 
         int nbRow = db.delete(DbInfo.ArtStreetTable.TABLE_NAME, whereClause, whereArg);
         return nbRow == 1;
     }
+
     public List<String> getAllCategories() { // affiche toutes les differentes categories
         // Création d'un curseur qui permet d'obtenir le resultat d'un select
         Cursor cursor = db.query(
                 true,
                 DbInfo.ArtStreetTable.TABLE_NAME,
-                new String[] { DbInfo.ArtStreetTable.COLUMN_CATEGORIE },
+                new String[]{DbInfo.ArtStreetTable.COLUMN_CATEGORIE},
                 null,
                 null,
                 null,
@@ -154,7 +160,7 @@ public class StreetDao extends DaoBase<StreetArt> {
         List<String> results = new ArrayList<>();
 
         // Verification qu'il y a un resultat
-        if(cursor.getCount() == 0) {
+        if (cursor.getCount() == 0) {
             return results; // Liste vide
         }
 
@@ -163,7 +169,7 @@ public class StreetDao extends DaoBase<StreetArt> {
 
         String toutesLesCategories = getContext().getResources().getString(R.string.ToutesLesCategories);
         results.add(toutesLesCategories);
-        while(! cursor.isAfterLast()) {  // On continue tant qu'on a pas fait toute les resultats
+        while (!cursor.isAfterLast()) {  // On continue tant qu'on a pas fait toute les resultats
 
             // On extrait les données du curseur
             String cat = cursor.getString(cursor.getColumnIndex(DbInfo.ArtStreetTable.COLUMN_CATEGORIE));
@@ -183,25 +189,25 @@ public class StreetDao extends DaoBase<StreetArt> {
     public List<StreetArt> getWithWhereCategorie(String colonneCategories) {
         // Création d'un curseur qui permet d'obtenir le resultat d'un select
         Cursor cursor = db.query(DbInfo.ArtStreetTable.TABLE_NAME, null,
-                DbInfo.ArtStreetTable.COLUMN_CATEGORIE  +" = ?", new String[]{colonneCategories},
-        null, null, null);
+                DbInfo.ArtStreetTable.COLUMN_CATEGORIE + " = ?", new String[]{colonneCategories},
+                null, null, null);
 
         // Initialise la liste de resultat
         List<StreetArt> results = new ArrayList<>();
 
         // Verification qu'il y a un resultat
-        if(cursor.getCount() == 0) {
+        if (cursor.getCount() == 0) {
             return results; // Liste vide
         }
 
         // On place le curseur sur le premier resultat
         cursor.moveToFirst();
 
-        while(! cursor.isAfterLast()) {  // On continue tant qu'on a pas fait toute les resultats
+        while (!cursor.isAfterLast()) {  // On continue tant qu'on a pas fait toute les resultats
 
             // On extrait les données du curseur
             StreetArt cat = cursorToData(cursor);
-            Log.d("adresse", cat.getAdresse()+"adresse");
+            Log.d("adresse", cat.getAdresse() + "adresse");
             results.add(cat);
 
             // On passe à la prochain valeur de resultat

@@ -2,6 +2,7 @@ package com.example.tft_jeu.fragmentJeu;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.LocationManager;
 import android.os.Bundle;
 
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.tft_jeu.R;
 import com.example.tft_jeu.models.StreetArt;
@@ -21,9 +23,11 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,7 +35,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
  * create an instance of this fragment.
  */
 public class FramJeuAvecMap extends Fragment implements OnMapReadyCallback, GoogleMap.InfoWindowAdapter {
-
+//todo traject dans google map du point de localitaion gps a la destination suppose que marie en aura aussi besoin
     private final static int LOCATION_REQ_CODE = 456;
     private GoogleMap map;
     private LocationManager locationMgr = null;
@@ -117,13 +121,7 @@ public class FramJeuAvecMap extends Fragment implements OnMapReadyCallback, Goog
 
         map = googleMap; // Le pointeur vers notre map
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+
             return;
         }
         map.setMyLocationEnabled(true);
@@ -137,4 +135,40 @@ public class FramJeuAvecMap extends Fragment implements OnMapReadyCallback, Goog
         map.setMaxZoomPreference(20);
         map.animateCamera(CameraUpdateFactory.zoomTo(25));
     }
+   // @Override
+    protected void onPostExecute(final Boolean result) {
+        //if(!result) {
+            //Toast.makeText(context, TOAST_ERR_MAJ, Toast.LENGTH_SHORT).show();
+        //}
+        //else {
+            //On déclare le polyline, c'est-à-dire le trait (ici bleu) que l'on ajoute sur la carte pour tracer l'itinéraire
+           // final PolylineOptions polylines = new PolylineOptions();
+            //polylines.color(Color.BLUE);
+
+            //On construit le polyline
+            //LatLng Art = new LatLng(streetArt.getGeocoordinates().getLat(), streetArt.getGeocoordinates().getLon());
+            //for(final LatLng latLng : lstLatLng) {
+             //   polylines.add(latLng);
+            //}
+//https://blog.rolandl.fr/1357-android-des-itineraires-dans-vos-applications-grace-a-lapi-google-direction
+            //On déclare un marker vert que l'on placera sur le départ
+            //final MarkerOptions markerA = new MarkerOptions();
+            //markerA.position(lstLatLng.get(0));
+            //markerA.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+
+            //On déclare un marker rouge que l'on mettra sur l'arrivée
+            //final MarkerOptions markerB = new MarkerOptions();
+            ///markerB.position(lstLatLng.get(lstLatLng.size()-1));
+            //markerB.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+
+            //On met à jour la carte
+            //gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lstLatLng.get(0), 10));
+            //gMap.addMarker(markerA);
+            //gMap.addPolyline(polylines);
+            //gMap.addMarker(markerB);
+        //}
+    }
+
+
+
 }

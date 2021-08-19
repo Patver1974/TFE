@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "344052436598",
+    "project_id": "newtfe-45527",
+    "storage_bucket": "newtfe-45527.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:344052436598:android:fc08fb4df6e8f7e24e5957",
+        "android_client_info": {
+          "package_name": "com.example.tft_jeu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "344052436598-23jqg4h2c2oo7c941cos2s5o712ofla9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBppBvpY6CKWampWgWoaHvG3NO7OSLjFhg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "344052436598-23jqg4h2c2oo7c941cos2s5o712ofla9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
