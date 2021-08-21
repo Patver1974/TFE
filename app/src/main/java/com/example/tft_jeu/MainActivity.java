@@ -13,15 +13,15 @@ import com.example.tft_jeu.db.dao.StreetDao;
 import com.example.tft_jeu.jsonStreetArt.StreetArtApi;
 import com.example.tft_jeu.models.StreetArt;
 import com.example.tft_jeu.menugestionbsd.MenugestionBsd;
-
+import com.example.tft_jeu.helpfirebase.SaveFirebase;
 import java.io.IOException;
 import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    private Button BtAffichageListe,BtJeu,BtAjouterItem;
+    private Button BtAffichageListe,BtJeu,BtAjouterItem,BtFirebase;
 
-
+//net maui new techno
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,10 +30,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         BtAffichageListe = findViewById(R.id.Bt_Main_ListeAvecMap);
         BtJeu = findViewById(R.id.Bt_Main_Jeu);
         BtAjouterItem = findViewById(R.id.Bt_Main_Ajouter_item);
+        BtFirebase = findViewById(R.id.Bt_Main_firebase);
 
         BtAffichageListe.setOnClickListener(this);
         BtJeu.setOnClickListener(this);
         BtAjouterItem.setOnClickListener(this);
+        BtFirebase.setOnClickListener(this);
+
 
         StreetDao dao = new StreetDao(this);
 
@@ -68,8 +71,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.Bt_Main_Ajouter_item:
                 RunAjouterItem();
                 break;
+            case R.id.Bt_Main_firebase:
+                RunFireBase();
+                break;
         }
     }
+
+    private void RunFireBase() {
+        Intent intentList = new Intent(getApplicationContext(), SaveFirebase.class);
+        startActivity(intentList);
+        finish();
+    }
+
     private void RunPageListeAvecMap() {
         Intent intentList = new Intent(getApplicationContext(), AfficherListeStreet.class);
         startActivity(intentList);

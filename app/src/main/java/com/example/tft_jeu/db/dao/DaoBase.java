@@ -9,7 +9,7 @@ import com.example.tft_jeu.db.DbHelper;
 import com.example.tft_jeu.models.StreetArt;
 
 public abstract class DaoBase<TData> {
-
+//: https://meet.google.com/xec-wvye-gnr.
     private Context context;
     private DbHelper dbHelper;
     protected SQLiteDatabase db;

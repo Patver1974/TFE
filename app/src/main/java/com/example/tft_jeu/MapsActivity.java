@@ -79,6 +79,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        //FIXME Ceci est une note pour Mister Pat =)
+    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {

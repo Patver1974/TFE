@@ -18,7 +18,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.tft_jeu.R;
+import com.example.tft_jeu.helpergps.AppConstants;
 import com.example.tft_jeu.models.StreetArt;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -47,9 +52,14 @@ public class FramJeuAvecMap extends Fragment implements OnMapReadyCallback, Goog
     // Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private FusedLocationProviderClient mFusedLocationClient;
+    private boolean isContinue = false;
+    private boolean isGPS = false;
+    private double wayLatitude = 0.0, wayLongitude = 0.0;
+    private LocationRequest locationRequest;
+    private LocationCallback locationCallback;
     private StreetArt streetArt;
-
+private LatLng LatLngpositon;
     public FramJeuAvecMap() {
         // Required empty public constructor
     }
@@ -108,7 +118,7 @@ public class FramJeuAvecMap extends Fragment implements OnMapReadyCallback, Goog
     @Override
     public void onStart() {
         super.onStart();
-
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
         // Récupère le fragment représentant la map. Fragment dans un fragment
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map);
@@ -126,15 +136,62 @@ public class FramJeuAvecMap extends Fragment implements OnMapReadyCallback, Goog
         }
         map.setMyLocationEnabled(true);
         // map.setInfoWindowAdapter(this);
-
+//        // Test de création d'un tracé
+        final PolylineOptions polylines = new PolylineOptions();
+        polylines.color(Color.BLUE);
+        //On construit le polyline
 
         LatLng Art = new LatLng(streetArt.getGeocoordinates().getLat(), streetArt.getGeocoordinates().getLon());
+
+        final MarkerOptions markerA = new MarkerOptions();
+
+        markerA.position(getLocation());
+        markerA.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+        //On déclare un marker rouge que l'on mettra sur l'arrivée
+        final MarkerOptions markerB = new MarkerOptions();
+        markerB.position(Art);
+        markerB.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+
+
         map.addMarker(new MarkerOptions().position(Art).title("Street art " + streetArt.getNameOfTheWork().toString()));
-        map.moveCamera(CameraUpdateFactory.newLatLng(Art));
-        map.setMinZoomPreference(25);
-        map.setMaxZoomPreference(20);
-        map.animateCamera(CameraUpdateFactory.zoomTo(25));
+
+
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(Art, 17));
+        map.addMarker(markerA);
+        map.addPolyline(polylines);
+        map.addMarker(markerB);
+
+
+
     }
+    private LatLng getLocation() {
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                    AppConstants.LOCATION_REQUEST);
+
+        } else {
+            if (isContinue) {
+                mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
+            } else {
+                mFusedLocationClient.getLastLocation().addOnSuccessListener(getActivity(), location -> {
+                    if (location != null) {
+                        wayLatitude = location.getLatitude();
+                        wayLongitude = location.getLongitude();
+
+
+                    } else {
+                        mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
+                    }
+                });
+            }
+        }
+        return  new LatLng(wayLatitude,wayLongitude);
+    }
+
+
+
+
    // @Override
     protected void onPostExecute(final Boolean result) {
         //if(!result) {

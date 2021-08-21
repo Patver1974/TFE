@@ -30,7 +30,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TFT_Jeu">
-        <activity android:name=".menugestionbsd.MenugestionBsd"></activity>
+        <activity android:name=".helpfirebase.SaveFirebase"></activity>
+        <activity android:name=".menugestionbsd.MenugestionBsd" />
         <activity android:name=".Ajouterlieux.ModifierLieux" />
         <activity android:name=".PageJeuParametre" />
         <activity android:name=".Ajouterlieux.AjouterLieux" />

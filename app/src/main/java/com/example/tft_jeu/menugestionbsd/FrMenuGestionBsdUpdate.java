@@ -10,6 +10,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
@@ -44,6 +45,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.firebase.database.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,12 +111,27 @@ public class FrMenuGestionBsdUpdate extends Fragment implements View.OnClickList
     @Override
     public void onStart() {
         super.onStart();
+affichepositonMap();
 
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         // Récupère le fragment représentant la map. Fragment dans un fragment
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map_upbdate);
         // récupère la carte et fait une synchronisation
+
         mapFragment.getMapAsync(this);
+    }
+
+    private void affichepositonMap() {
+        if(map != null) {
+            map.clear();
+
+            addMarkerOnMap();
+        }
     }
 
 
@@ -213,6 +230,7 @@ public class FrMenuGestionBsdUpdate extends Fragment implements View.OnClickList
                     postionliste = postionliste - 1;
 
                     Afficherdonnee();
+                    affichepositonMap();
                 } else {
                     Toast.makeText(getContext(), "Debut du fichier", Toast.LENGTH_LONG).show();
                 }
@@ -224,6 +242,8 @@ public class FrMenuGestionBsdUpdate extends Fragment implements View.OnClickList
 
                     postionliste = postionliste + 1;
                     Afficherdonnee();
+                    affichepositonMap();
+
                 } else {
                     Toast.makeText(getContext(), "Fin du fichier", Toast.LENGTH_LONG).show();
                 }
@@ -318,16 +338,9 @@ public class FrMenuGestionBsdUpdate extends Fragment implements View.OnClickList
 
     }
 
+    private void addMarkerOnMap() {
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-
-        map = googleMap; // Le pointeur vers notre map
-        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        map.setMyLocationEnabled(true);
-        // map.setInfoWindowAdapter(this);
+        //TODO Please clean up this. Bisoux =)
         LatLng Art = new LatLng(listeStreetArt.get(postionliste).getGeocoordinates().getLat(), listeStreetArt.get(postionliste).getGeocoordinates().getLon());
         map.addMarker(new MarkerOptions().position(Art).title("Street art " + listeStreetArt.get(postionliste).getNameOfTheWork().toString()));
         map.moveCamera(CameraUpdateFactory.newLatLng(Art));
@@ -335,35 +348,67 @@ public class FrMenuGestionBsdUpdate extends Fragment implements View.OnClickList
         map.setMaxZoomPreference(15);
         map.animateCamera(CameraUpdateFactory.zoomTo(15));
 
-
-        // Test de création d'un tracé
-        final PolylineOptions polylines = new PolylineOptions();
-        polylines.color(Color.BLUE);
-        //On construit le polyline
-
         LatLng latlong = new LatLng(listeStreetArt.get(postionliste).getGeocoordinates().getLat(), listeStreetArt.get(postionliste).getGeocoordinates().getLon());
         lstLatLng.add(latlong);
         latlong = new LatLng(listeStreetArt.get(0).getGeocoordinates().getLat(), listeStreetArt.get(0).getGeocoordinates().getLon());
 
         lstLatLng.add(latlong);
 
-        for (final LatLng latLng : lstLatLng) {
-            polylines.add(latLng);
+
+
+
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+        map =  googleMap; // Le pointeur vers notre map
+
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
         }
 
-        final MarkerOptions markerA = new MarkerOptions();
-        markerA.position(lstLatLng.get(0));
-        markerA.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-        //On déclare un marker rouge que l'on mettra sur l'arrivée
-        final MarkerOptions markerB = new MarkerOptions();
-        markerB.position(lstLatLng.get(lstLatLng.size() - 1));
-        markerB.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-        //On met à jour la carte
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(lstLatLng.get(0), 10));
-        map.addMarker(markerA);
-        map.addPolyline(polylines);
-        map.addMarker(markerB);
+        map.setMyLocationEnabled(true);
+        // map.setInfoWindowAdapter(this);
+//        LatLng Art = new LatLng(listeStreetArt.get(postionliste).getGeocoordinates().getLat(), listeStreetArt.get(postionliste).getGeocoordinates().getLon());
+//        map.addMarker(new MarkerOptions().position(Art).title("Street art " + listeStreetArt.get(postionliste).getNameOfTheWork().toString()));
+//        map.moveCamera(CameraUpdateFactory.newLatLng(Art));
+//        map.setMinZoomPreference(25);
+//        map.setMaxZoomPreference(15);
+//        map.animateCamera(CameraUpdateFactory.zoomTo(15));
+//
+//
+//        // Test de création d'un tracé
+//        final PolylineOptions polylines = new PolylineOptions();
+//        polylines.color(Color.BLUE);
+//        //On construit le polyline
+//
+//        LatLng latlong = new LatLng(listeStreetArt.get(postionliste).getGeocoordinates().getLat(), listeStreetArt.get(postionliste).getGeocoordinates().getLon());
+//        lstLatLng.add(latlong);
+//        latlong = new LatLng(listeStreetArt.get(0).getGeocoordinates().getLat(), listeStreetArt.get(0).getGeocoordinates().getLon());
+//
+//        lstLatLng.add(latlong);
+//
+//        for (final LatLng latLng : lstLatLng) {
+//            polylines.add(latLng);
+//        }
+//
+//        final MarkerOptions markerA = new MarkerOptions();
+//        markerA.position(lstLatLng.get(0));
+//        markerA.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+//        //On déclare un marker rouge que l'on mettra sur l'arrivée
+//        final MarkerOptions markerB = new MarkerOptions();
+//        markerB.position(lstLatLng.get(lstLatLng.size() - 1));
+//        markerB.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+//        //On met à jour la carte
+//        map.moveCamera(CameraUpdateFactory.newLatLngZoom(lstLatLng.get(0), 17));
+//        map.addMarker(markerA);
+//        map.addPolyline(polylines);
+//        map.addMarker(markerB);
+        affichepositonMap();
     }
+
+    //onpressback on back press
 
     @SuppressLint("MissingPermission")
     @Override

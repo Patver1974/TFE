@@ -44,8 +44,8 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/Bt_Main_bddext"
-            android:text="enreigsgtrer base de donnee ext"/>
+            android:id="@+id/Bt_Main_firebase"
+            android:text="Firebase"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
