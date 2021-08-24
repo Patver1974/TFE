@@ -30,7 +30,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private GoogleMap mMap;
     private LocationManager locationManager;
     private Button buttonBack;
-
+    private static final String KEY_CAMERA_POSITION = "camera_position";
+    private static final String KEY_LOCATION = "location";
+    private static final int DEFAULT_ZOOM = 19;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -107,9 +109,19 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.setMinZoomPreference(20);
         mMap.setMaxZoomPreference(10);
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+        // Position the map's camera at the location of the marker.
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(PositionObject,
+                DEFAULT_ZOOM));
 
     }
-
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        if (mMap != null) {
+            outState.putParcelable(KEY_CAMERA_POSITION, mMap.getCameraPosition());
+      //      outState.putParcelable(KEY_LOCATION, lastKnownLocation);
+        }
+        super.onSaveInstanceState(outState);
+    }
     @Override
     public void onLocationChanged(@NonNull Location location) {
         Log.d("LAT", location.getLatitude() + "");

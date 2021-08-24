@@ -3,6 +3,7 @@ package com.example.tft_jeu.helpfirebase;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tft_jeu.AfficherListeStreet;
+import com.example.tft_jeu.MainActivity;
 import com.example.tft_jeu.R;
 import com.example.tft_jeu.db.dao.StreetDao;
 import com.example.tft_jeu.models.Geocoordinates;
@@ -111,7 +114,13 @@ tvcommentread = findViewById(R.id.tv_firebase_commentread);
 
     }
 
-
+    public void onBackPressed() {
+        super.onBackPressed();
+        //FIXME Ceci est une note pour Mister Pat =)
+        Intent intentList = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intentList);
+        finish();
+    }
     public void Writefirebase() {
         // Write a message to the database
         //FirebaseDatabase database = FirebaseDatabase.getInstance();
