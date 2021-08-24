@@ -153,13 +153,15 @@ private LatLng LatLngpositon;
         markerB.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
 
 
-        map.addMarker(new MarkerOptions().position(Art).title("Street art " + streetArt.getNameOfTheWork().toString()));
 
 
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(Art, 17));
+        map.setMinZoomPreference(10.0f);
+        map.setMaxZoomPreference(20.0f);
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(Art, 17.0f));
         map.addMarker(markerA);
         map.addPolyline(polylines);
         map.addMarker(markerB);
+        map.addMarker(new MarkerOptions().position(Art).title("Street art " + streetArt.getNameOfTheWork().toString()));
 
 
 
