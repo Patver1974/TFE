@@ -83,6 +83,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onBackPressed() {
         super.onBackPressed();
         //FIXME Ceci est une note pour Mister Pat =)
+        Intent intentList = new Intent(getApplicationContext(), AfficherListeStreet.class);
+        startActivity(intentList);
+        finish();
     }
 
     @Override

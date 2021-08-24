@@ -93,7 +93,7 @@ public class PageJeuParametre extends AppCompatActivity {
 
         StreetDao dao2 = new StreetDao(this);
 
-        if (listeAAfficher.equals("Toutes les categories")){
+        if (listeAAfficher.equals(getString(R.string.ToutesLesCategories))){
             dao2.openReadable();
             streetArts = dao2.getAll();
             dao2.close();

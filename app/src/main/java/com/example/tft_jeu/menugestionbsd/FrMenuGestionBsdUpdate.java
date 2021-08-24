@@ -58,7 +58,7 @@ import java.util.List;
 public class FrMenuGestionBsdUpdate extends Fragment implements View.OnClickListener, OnMapReadyCallback {
     private LocationManager locationManager;
     private Spinner spListeDatabase;
-    private Button btprecedent, btsuivant, btlieuxgps, btmodifier, btdelete;
+    private Button btprecedent, btsuivant, btlieuxgps, btmodifier, btdelete,btPremierItem, btDernierItem;
     private TextView tvidbsd;
     private EditText etnomlieux, etadresse, etlongitude, etlatitude, etCategories;
     private List<StreetArt> listeStreetArt = new ArrayList<>();
@@ -151,6 +151,8 @@ affichepositonMap();
         spListeDatabase = v.findViewById(R.id.sp_menuBsdUpdate_listecategories);
         btprecedent = v.findViewById(R.id.bt_menuBsdUpdate_precedentitem);
         btsuivant = v.findViewById(R.id.bt_menuBsdUpdate_suivantitem);
+        btDernierItem = v.findViewById(R.id.bt_menuBsdUpdate_dernieritem);
+        btPremierItem = v.findViewById(R.id.bt_menuBsdUpdate_premieritem);
         tvidbsd = v.findViewById(R.id.tv_menuBsdUpdate_idbsd);
         etnomlieux = v.findViewById(R.id.et_menuBsdUpdate_nomlieux);
         etadresse = v.findViewById(R.id.et_menuBsdUpdate_adresselieux);
@@ -166,6 +168,8 @@ affichepositonMap();
         btsuivant.setOnClickListener(this);
         btlieuxgps.setOnClickListener(this);
         btdelete.setOnClickListener(this);
+        btPremierItem.setOnClickListener(this);
+        btDernierItem.setOnClickListener(this);
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
         updatespinner();
@@ -225,6 +229,23 @@ affichepositonMap();
         Log.d("menuupdate", "onClick");
 
         switch (v.getId()) {
+            case R.id.bt_menuBsdUpdate_premieritem:
+                postionliste = 0;
+
+
+                    Afficherdonnee();
+                    affichepositonMap();
+
+                break;
+            case R.id.bt_menuBsdUpdate_dernieritem:
+                postionliste = maxIdListeSteetArt-1;
+
+
+
+                Afficherdonnee();
+                affichepositonMap();
+
+                break;
             case R.id.bt_menuBsdUpdate_precedentitem:
                 if (postionliste != 0) {
                     postionliste = postionliste - 1;

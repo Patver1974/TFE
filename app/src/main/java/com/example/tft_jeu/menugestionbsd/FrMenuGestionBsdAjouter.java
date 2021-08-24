@@ -121,34 +121,62 @@ public class FrMenuGestionBsdAjouter extends Fragment {
         btAjouter.setOnClickListener(view -> {
             Object nom = etNomLieux.getText().toString();
             String adresse = etAdresse.getText().toString();
-            Double latitude = Double.parseDouble(etLatitude.getText().toString());
-            Double longitude = Double.parseDouble(etLongitude.getText().toString());
+            double latitude = 0.0;
+            if (!etLatitude.getText().toString().equals("")){
+                 latitude = Double.parseDouble(etLatitude.getText().toString());
+            }
+
+            double longitude = 0.0;
+            if (!etLongitude.getText().toString().equals("")){
+                 longitude = Double.parseDouble(etLongitude.getText().toString());
+            }
+
             Geocoordinates coodonnee = new Geocoordinates(latitude, longitude);
             Photo photo = new Photo();
             photo.setFilename("name");
-if (!nom.equals("") && !coodonnee.getLat().toString().equals("")  && !coodonnee.getLon().toString().equals("") && etCategories.getText().toString().equals("")) {
-            StreetArt streetart = new StreetArt(nom, "", adresse, coodonnee, etCategories.getText().toString(), photo);
-            StreetDao streetDao = new StreetDao(v.getContext());
-            streetDao.openWritable();
-            streetDao.insert(streetart);
-            streetDao.close();
-            cleardonnees();}
-else {
-    StringBuilder sbMsgControle=new StringBuilder("CONTROLE : \n");
-    sbMsgControle.append( "Le nom ") ;
-    if (etNomLieux.getText().toString().equals("")){sbMsgControle.append("n");}
-    sbMsgControle.append("a été fourni. \n");
-    sbMsgControle.append( "La categorie ") ;
-    if (etCategories.getText().toString().equals("")){sbMsgControle.append("n");}
-    sbMsgControle.append("a été fournie. \n");
-    sbMsgControle.append( "La latitude ") ;
-     if (coodonnee.getLat().toString().equals("")){sbMsgControle.append("n");}
-    sbMsgControle.append("a été fournie. \n");
-    sbMsgControle.append( "La longitude  ") ;
-    if (coodonnee.getLon().toString().equals("")){sbMsgControle.append("n");}
-    sbMsgControle.append("a été fournie. \n");
-    Toast.makeText(getContext(),sbMsgControle,Toast.LENGTH_LONG);
-}
+
+             if ((!nom.equals("")) && (!adresse.equals(""))  && (!etLatitude.getText().toString().equals("")) && (!etLongitude.getText().toString().equals("")) ) {
+
+
+                StreetArt streetart = new StreetArt(nom, "", adresse, coodonnee, etCategories.getText().toString(), photo);
+                StreetDao streetDao = new StreetDao(v.getContext());
+                streetDao.openWritable();
+                streetDao.insert(streetart);
+                streetDao.close();
+                cleardonnees();
+            } else {
+                StringBuilder sbMsgControle = new StringBuilder("CONTROLE : \n");
+                sbMsgControle.append("Le nom ");
+                if (etNomLieux.getText().toString().equals("")) {
+                    sbMsgControle.append("n'a pas été fourni. \n");
+                } else {
+                    sbMsgControle.append("a été fourni. \n");
+                }
+
+                sbMsgControle.append("La categorie ");
+                if (etCategories.getText().toString().equals("")) {
+                    sbMsgControle.append("n'a pas été fournie. \n");
+                } else {
+                    sbMsgControle.append("a été fournie. \n");
+                }
+
+                sbMsgControle.append("La latitude ");
+                if (etLatitude.getText().toString().equals("")) {
+                    sbMsgControle.append("n'a pas été fournie. \n");
+                } else {
+                    sbMsgControle.append("a été fournie. \n");
+                }
+
+                sbMsgControle.append("La longitude  ");
+                if (etLongitude.getText().toString().equals("")) {
+                    sbMsgControle.append("n'a pas été fournie. \n");
+                } else {
+                    sbMsgControle.append("a été fournie. \n");
+                }
+
+
+                Toast.makeText(getContext(), sbMsgControle.toString(), Toast.LENGTH_LONG).show();
+            }
         });
         btafficherLatLongGps.setOnClickListener(view -> {
                     if (!isGPS) {

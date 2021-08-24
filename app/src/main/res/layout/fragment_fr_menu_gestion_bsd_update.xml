@@ -15,20 +15,42 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
+            android:id="@+id/bt_menuBsdUpdate_premieritem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/premieritem"/>
+        <View
+            android:layout_width="5sp"
+            android:layout_height="0dp"/>
+        <Button
             android:id="@+id/bt_menuBsdUpdate_precedentitem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/itemprecedent"/>
+        <View
+            android:layout_width="5sp"
+            android:layout_height="0dp"/>
         <TextView
             android:id="@+id/tv_menuBsdUpdate_idbsd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1" />
+        <View
+            android:layout_width="5sp"
+            android:layout_height="0dp"/>
         <Button
             android:id="@+id/bt_menuBsdUpdate_suivantitem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/itemsuivant"/>
+        <View
+            android:layout_width="5sp"
+            android:layout_height="0dp"/>
+        <Button
+            android:id="@+id/bt_menuBsdUpdate_dernieritem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/textlastitem"/>
     </LinearLayout>
     <LinearLayout
 

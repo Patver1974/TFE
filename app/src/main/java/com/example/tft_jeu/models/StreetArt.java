@@ -44,6 +44,14 @@ StreetArt implements Comparator<StreetArt>, Parcelable {
 
     }
 
+    public StreetArt(long id, Object nameOfTheWork, String adresse, String categorie, Geocoordinates geocoordinates) {
+        this.id = id;
+        this.nameOfTheWork = nameOfTheWork;
+        this.adresse = adresse;
+        this.categorie = categorie;
+        this.geocoordinates = geocoordinates;
+    }
+
     public long getId() {
         return id;
     }

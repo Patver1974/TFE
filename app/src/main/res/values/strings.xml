@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TFT_Jeu</string>
+    <string name="app_name" translatable="false">TFT_Jeu</string>
     <!--  Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="nom_de_l_artiste">nom_de_l_artiste</string>
@@ -34,7 +34,7 @@
     <string name="oui">oui</string>
     <string name="non">non</string>
     <string name="difficult">Difficulté</string>
-    <string name="ToutesLesCategories">Toutes les categories</string>
+    <string name="ToutesLesCategories" translatable="false">Toutes les categories</string>
     <string name="go_next_art">Go/Next Art</string>
     <string name="difficile">difficile</string>
     <string name="moyen">moyen</string>
@@ -43,5 +43,20 @@
     <string name="itemprecedent"><![CDATA[<<]]></string>
     <string name="itemsuivant"><![CDATA[>>]]></string>
     <string name="categorie">categorie :</string>
+    <string name="titrefirebase" translatable="false">Firebase</string>
+    <string name="titreajouter_un_lieux">ajouter un lieux</string>
+    <string name="titrejeu">jeu</string>
+    <string name="titrechoix_des_listes">choix des listes</string>
+    <string name="choisir_langue">Choisir langue</string>
+    <string name="distanceactuelle" />
+    <string name="choisi_ta_langue">Choisi ta langue</string>
+    <string name="anglais">anglais</string>
+    <string name="francais">Francais</string>
+    <string name="confirme">Confirme</string>
+    <string name="langueregion" />
+    <string name="premieritem"><![CDATA[|<<]]></string>
+    <string name="dernieritem">dernieritem</string>
+    <string name="textlastitem"><![CDATA[>>|]]></string>
+
 
 </resources>

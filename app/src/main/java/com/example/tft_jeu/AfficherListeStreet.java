@@ -204,4 +204,12 @@ public class AfficherListeStreet extends AppCompatActivity implements AdapterVie
     public void onLocationChanged(@NonNull Location location) {
         Log.d("LOCATION", location.toString());
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent intentList = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(intentList);
+        finish();
+    }
 }

@@ -30,11 +30,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TFT_Jeu">
-        <activity android:name=".helpfirebase.SaveFirebase"></activity>
+        <activity android:name=".swipStack.ActivitySwipStackImg"></activity>
+        <activity android:name=".helperlangage.Langage" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".helpfirebase.SaveFirebase" />
         <activity android:name=".menugestionbsd.MenugestionBsd" />
-        <activity android:name=".Ajouterlieux.ModifierLieux" />
         <activity android:name=".PageJeuParametre" />
-        <activity android:name=".Ajouterlieux.AjouterLieux" />
         <activity android:name=".MapsActivity" />
         <activity android:name=".AfficherListeStreet" />
         <!--
@@ -49,7 +50,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivityLogo">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

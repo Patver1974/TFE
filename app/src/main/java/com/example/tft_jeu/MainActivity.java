@@ -8,7 +8,6 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.tft_jeu.Ajouterlieux.AjouterLieux;
 import com.example.tft_jeu.db.dao.StreetDao;
 import com.example.tft_jeu.jsonStreetArt.StreetArtApi;
 import com.example.tft_jeu.models.StreetArt;
@@ -16,26 +15,40 @@ import com.example.tft_jeu.menugestionbsd.MenugestionBsd;
 import com.example.tft_jeu.helpfirebase.SaveFirebase;
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 
-
+import com.example.tft_jeu.helperlangage.Langage;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    private Button BtAffichageListe,BtJeu,BtAjouterItem,BtFirebase;
-
+    private Button BtAffichageListe,BtJeu,BtAjouterItem,BtFirebase,BtLangue,BtSwipStack;
+    private Locale mCurrentLocale;
 //net maui new techno
+@Override
+protected void onStart() {
+    super.onStart();
+
+    mCurrentLocale = getResources().getConfiguration().locale;
+}
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+BtSwipStack = findViewById(R.id.Bt_Main_swipStack);
         BtAffichageListe = findViewById(R.id.Bt_Main_ListeAvecMap);
         BtJeu = findViewById(R.id.Bt_Main_Jeu);
         BtAjouterItem = findViewById(R.id.Bt_Main_Ajouter_item);
         BtFirebase = findViewById(R.id.Bt_Main_firebase);
+        BtLangue = findViewById(R.id.Bt_Main_langue);
 
         BtAffichageListe.setOnClickListener(this);
         BtJeu.setOnClickListener(this);
         BtAjouterItem.setOnClickListener(this);
         BtFirebase.setOnClickListener(this);
+        BtLangue.setOnClickListener(this);
+        BtSwipStack.setOnClickListener(this);
 
 
         StreetDao dao = new StreetDao(this);
@@ -74,7 +87,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.Bt_Main_firebase:
                 RunFireBase();
                 break;
+            case R.id.Bt_Main_langue:
+                ChoisirLangue();
+                break;
+            case R.id.Bt_Main_swipStack:
+                SwipStackimg();
+                break;
         }
+    }
+
+    private void SwipStackimg() {
+        Intent intentList = new Intent(getApplicationContext(), Langage.class);
+        startActivity(intentList);
+        finish();
+    }
+
+    private void ChoisirLangue() {
+        Intent intentList = new Intent(getApplicationContext(), Langage.class);
+        startActivity(intentList);
+        finish();
     }
 
     private void RunFireBase() {

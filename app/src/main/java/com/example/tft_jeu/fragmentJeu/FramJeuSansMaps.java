@@ -126,9 +126,7 @@ public class FramJeuSansMaps extends Fragment implements LocationListener {
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
-        // TODO: persistance ancienne distance
-       // SharedPreferences rememberAncienneDistan = PreferenceManager.getDefaultSharedPreferences(getContext());
-        //SharedPreferences.Editor editor = rememberAncienneDistan.edit();
+
 
         float dist;
         String echelle = " ";
@@ -149,6 +147,7 @@ String streetArtlatitudestring = String.valueOf((Math.round(streetArt.getGeocoor
 
         String strDist = "";
         dist = streetArt.getDistance();
+        float nouvelledistance = dist;
         if (dist < 1) {
             echelle = " metres";
             dist = Math.round(dist * 1000);
@@ -163,18 +162,26 @@ String streetArtlatitudestring = String.valueOf((Math.round(streetArt.getGeocoor
             echelle = " Km";
             strDist =  ((Math.round(dist*10000)) /10000.0) + echelle;
         }
-        ;
+
         String nameArt = streetArt.getNameOfTheWork() == null ? streetArt.getCategorie() : streetArt.getNameOfTheWork().toString();
         String ligne = "L'oeuvre " + nameArt + " est à " + strDist + " de votre position";
         tvDistance.setText(ligne);
 
+        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        float defaultValue = getResources().getInteger(R.integer.distanceactuelle);
+        float anciennedistance = sharedPref.getFloat(getString(R.string.distanceactuelle), defaultValue);
 
-        // Insérer ma String (StringParDefaut, nomInput)
-// TODO: persistance ancienne distance
-       // editor.putString("ancienneDistance", String.valueOf(dist));
 
-        // sauvegarder
-        //editor.apply();
+         sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putFloat(getString(R.string.distanceactuelle), dist); //enregistre la distance dans sharedpreference
+        editor.commit();
+
+
+        float ecart = ecart(anciennedistance,nouvelledistance);
+        tvrapprochement.setText(affichagedistancemetreoukm(ecart));
+
+
 
 
         boolean isNorth = location.getLatitude() > l.getLatitude();
@@ -222,6 +229,21 @@ String streetArtlatitudestring = String.valueOf((Math.round(streetArt.getGeocoor
         // for ActivityCompat#requestPermissions for more details.
         return;
     }
+public  float ecart(float anciendist,float nouvelledist) {
+        return (anciendist-nouvelledist);
+    }
+public String affichagedistancemetreoukm (float estDistance){
+    String echelle, estDistanceStr;
 
+    estDistanceStr = estDistance>0 ?  "On se rapproche de " : "on s'eloigne de ";
+        if (estDistance < 1) {
+        echelle = " metres";
+        estDistanceStr = estDistanceStr + Math.round(estDistance * 1000) + echelle;
+    } else {
+        echelle = " Km";
+        estDistanceStr = estDistanceStr + (Math.round(estDistance * 10000)) / 10000.0 + echelle;
+    }
+        return  estDistanceStr;
 
+}
 }

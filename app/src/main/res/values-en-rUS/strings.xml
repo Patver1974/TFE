@@ -1,3 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="nom_de_l_artiste">name of artist</string>
+    <string name="nom_de_l_oeuvre">name of art</string>
+    <string name="adresse_oeuvre">adresse of art</string>
+    <string name="coordonnee_de_l_oeuvre">coordinate</string>
+    <string name="latitude">"Latitude : "</string>
+    <string name="longitude">"longitude : "</string>
+    <string name="afficher_la_carte">show on the map</string>
+    <string name="oui">yes</string>
+    <string name="non">no</string>
+    <string name="difficult">difficulty</string>
+    <string name="go_next_art">Go/Next Art</string>
+    <string name="moyen">way</string>
+    <string name="difficile">" hard"</string>
+    <string name="facile">easi</string>
+    <string name="ma_position_actuelle">My current position:</string>
+    <string name="titreajouter_un_lieux">"add a place "</string>
+    <string name="titrejeu">play</string>
+    <string name="titrechoix_des_listes">choice of lists</string>
+    <string name="categorie">category:</string>
 </resources>

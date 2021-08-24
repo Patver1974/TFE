@@ -5,8 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
+
     tools:ignore="ExtraText">
+
     <LinearLayout
+        android:background="#B58B1C"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -15,37 +18,65 @@
 
         <Button
             android:id="@+id/Bt_Main_ListeAvecMap"
-            android:layout_width="wrap_content"
+
+
             android:layout_height="wrap_content"
-            android:text="choix des listes"/>
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_width="@dimen/largeurBoutton"
+            android:text="@string/titrechoix_des_listes"/>
         <View
             android:layout_width="0dp"
             android:layout_height="10dp"
             />
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/largeurBoutton"
             android:layout_height="wrap_content"
             android:id="@+id/Bt_Main_Jeu"
-            android:text="jeu"/>
+            android:layout_gravity="center_vertical|center_horizontal"
+
+            android:text="@string/titrejeu"/>
 
         <View
             android:layout_width="0dp"
             android:layout_height="10dp"
             />
         <Button
-        android:layout_width="wrap_content"
+            android:layout_width="@dimen/largeurBoutton"
+
         android:layout_height="wrap_content"
         android:id="@+id/Bt_Main_Ajouter_item"
-        android:text="ajouter un lieux"/>
+            android:layout_gravity="center_vertical|center_horizontal"
+        android:text="@string/titreajouter_un_lieux"/>
         <View
             android:layout_width="0dp"
             android:layout_height="10dp"
             />
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/largeurBoutton"
             android:layout_height="wrap_content"
             android:id="@+id/Bt_Main_firebase"
-            android:text="Firebase"/>
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:text="@string/titrefirebase"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="10dp"
+            />
+        <Button
+            android:layout_width="@dimen/largeurBoutton"
+            android:layout_height="wrap_content"
+            android:id="@+id/Bt_Main_langue"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:text="@string/choisir_langue"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="10dp"
+            />
+        <Button
+            android:layout_width="@dimen/largeurBoutton"
+            android:layout_height="wrap_content"
+            android:id="@+id/Bt_Main_swipStack"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:text="swipStackimg"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
