@@ -9,7 +9,7 @@
     tools:ignore="ExtraText">
 
     <LinearLayout
-        android:background="#FFDA10E1"
+        android:background="#DAFFF6"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -18,8 +18,7 @@
 
         <Button
             android:id="@+id/Bt_Main_ListeAvecMap"
-
-
+android:backgroundTint="@color/ButtonBackground"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
             android:layout_width="@dimen/largeurBoutton"
@@ -30,6 +29,7 @@
             />
         <Button
             android:layout_width="@dimen/largeurBoutton"
+            android:backgroundTint="@color/ButtonBackground"
             android:layout_height="wrap_content"
             android:id="@+id/Bt_Main_Jeu"
             android:layout_gravity="center_vertical|center_horizontal"
@@ -42,7 +42,7 @@
             />
         <Button
             android:layout_width="@dimen/largeurBoutton"
-
+            android:backgroundTint="@color/ButtonBackground"
         android:layout_height="wrap_content"
         android:id="@+id/Bt_Main_Ajouter_item"
             android:layout_gravity="center_vertical|center_horizontal"
@@ -53,6 +53,7 @@
             />
         <Button
             android:layout_width="@dimen/largeurBoutton"
+            android:backgroundTint="@color/ButtonBackground"
             android:layout_height="wrap_content"
             android:id="@+id/Bt_Main_firebase"
             android:layout_gravity="center_vertical|center_horizontal"
@@ -64,6 +65,7 @@
         <Button
             android:layout_width="@dimen/largeurBoutton"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/ButtonBackground"
             android:id="@+id/Bt_Main_langue"
             android:layout_gravity="center_vertical|center_horizontal"
             android:text="@string/choisir_langue"/>
@@ -74,6 +76,7 @@
         <Button
             android:layout_width="@dimen/largeurBoutton"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/ButtonBackground"
             android:id="@+id/Bt_Main_swipStack"
             android:layout_gravity="center_vertical|center_horizontal"
             android:text="swipStackimg"/>
