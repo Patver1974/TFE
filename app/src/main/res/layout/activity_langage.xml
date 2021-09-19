@@ -34,10 +34,33 @@
             android:text="@string/anglais" />
 
     </RadioGroup>
-<Button
-    android:id="@+id/bt_langue_confirmer"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/confirme"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <android.widget.Button
+            android:id="@+id/bt_langue_confirmer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_button"
+            android:text="@string/confirme" />
+
+        <View
+            android:layout_width="20dp"
+            android:layout_height="0dp" />
+
+        <android.widget.Button
+
+            android:id="@+id/bt_langue_quitter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_button"
+            android:text="@string/quitter" />
+
+²
+    </LinearLayout>
 
 </LinearLayout>

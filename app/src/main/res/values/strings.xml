@@ -31,12 +31,12 @@
     <string name="distanceactuelle" />
     <string name="anglais">anglais</string>
     <string name="francais">Francais</string>
-    <string name="confirme">Confirmer D</string>
+    <string name="confirme">Confirmer</string>
     <string name="langueregion" />
     <string name="premieritem" translatable="false"><![CDATA[|<<]]></string>
     <string name="dernieritem">dernieritem</string>
     <string name="textlastitem" translatable="false"><![CDATA[>>|]]></string>
-
+    <string name="quitter">Quitter</string>
 
 
 </resources>

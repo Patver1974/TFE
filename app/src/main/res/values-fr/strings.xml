@@ -23,7 +23,8 @@
     <string name="choisir_langue">Choisir ta langue</string>
     <string name="anglais">anglais</string>
     <string name="francais">Francais</string>
-    <string name="confirme">Confirmer fr</string>
-    <string name="titrelangue">Choisir votre langue fr</string>
+    <string name="confirme">Confirmer</string>
+    <string name="titrelangue">Choisir votre langue</string>
     <string name="titreswipswating">fr</string>
+    <string name="quitter">Quitter</string>
 </resources>

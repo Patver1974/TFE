@@ -12,7 +12,7 @@
     <string name="difficult">difficulty</string>
     <string name="go_next_art">Go/Next Art</string>
     <string name="moyen">way</string>
-    <string name="difficile">" hard"</string>
+    <string name="difficile">hard</string>
     <string name="facile">easi</string>
     <string name="ma_position_actuelle">My current position:</string>
     <string name="titreajouter_un_lieux">"add a place "</string>
@@ -22,8 +22,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="anglais">English</string>
     <string name="francais">French</string>
-    <string name="confirme">To confirm en</string>
+    <string name="confirme">To confirm</string>
     <string name="choisir_langue">" choose your language"</string>
-    <string name="titrelangue">To choose you language en</string>
+    <string name="titrelangue">To choose you language</string>
     <string name="titreswipswating">en</string>
+    <string name="quitter">To quit</string>
 </resources>

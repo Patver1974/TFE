@@ -26,7 +26,7 @@ public class Langage extends AppCompatActivity {
     //https://www.youtube.com/watch?v=RjswexkneB0
     RadioButton rbfrancais, rbanglais;
     RadioGroup radioGrouplangue;
-    Button btconfirmer;
+    Button btconfirmer, btQuitter;
     String langueStr;
     Context context;
     TextView tvMsgAccueil;
@@ -41,9 +41,16 @@ public class Langage extends AppCompatActivity {
         radioGrouplangue = findViewById(R.id.rggroup_langue);
         btconfirmer = findViewById(R.id.bt_langue_confirmer);
         tvMsgAccueil = findViewById(R.id.tv_langue_msgaccueil);
+        btQuitter = findViewById(R.id.bt_langue_quitter);
         initLangue();
 
+        btQuitter.setOnClickListener(v -> {
 
+            Intent intentList = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intentList);
+            finish();
+                }
+        );
         btconfirmer.setOnClickListener(v -> {
 
             if (rbfrancais.isChecked()) {
@@ -85,11 +92,11 @@ public class Langage extends AppCompatActivity {
 
     private void initLangue() {
 
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-            langueStr = prefs.getString("langue", "fr");
+        langueStr = prefs.getString("langue", "fr");
         context = LocaleHelper.setLocale(getApplicationContext(), langueStr);
-            miseAJour();
+        miseAJour();
 
     }
 
@@ -120,6 +127,7 @@ public class Langage extends AppCompatActivity {
         rbfrancais.setText(resources.getString((R.string.francais)));
         rbanglais.setText(resources.getString((R.string.anglais)));
         btconfirmer.setText(resources.getString((R.string.confirme)));
+        btQuitter.setText(resources.getString((R.string.quitter)));
         tvMsgAccueil.setText(resources.getString((R.string.choisir_langue)));
 
 
