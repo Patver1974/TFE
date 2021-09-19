@@ -8,9 +8,10 @@
     tools:context=".helperlangage.Langage">
 
     <TextView
+        android:id="@+id/tv_langue_msgaccueil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/choisi_ta_langue" />
+        android:text="@string/choisir_langue" />
 
     <RadioGroup
         android:id="@+id/rggroup_langue"

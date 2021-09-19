@@ -7,7 +7,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,14 +17,21 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.example.tft_jeu.helperlangage.LocaleHelper;
 import com.example.tft_jeu.AfficherListeStreet;
 import com.example.tft_jeu.MainActivity;
 import com.example.tft_jeu.R;
+
 public class Langage extends AppCompatActivity {
-RadioButton rbfrancais,rbanglais;
-RadioGroup radioGrouplangue;
-Button Btconfirmer;
-String langueStr;
+    //https://www.youtube.com/watch?v=RjswexkneB0
+    RadioButton rbfrancais, rbanglais;
+    RadioGroup radioGrouplangue;
+    Button btconfirmer;
+    String langueStr;
+    Context context;
+    TextView tvMsgAccueil;
+    Resources resources;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,47 +39,89 @@ String langueStr;
         rbfrancais = findViewById(R.id.rb_langue_francais);
         rbanglais = findViewById(R.id.rb_langue_anglais);
         radioGrouplangue = findViewById(R.id.rggroup_langue);
-Btconfirmer = findViewById(R.id.bt_langue_confirmer);
+        btconfirmer = findViewById(R.id.bt_langue_confirmer);
+        tvMsgAccueil = findViewById(R.id.tv_langue_msgaccueil);
+        initLangue();
 
 
-Btconfirmer.setOnClickListener(v -> {
-    if (rbanglais.isChecked()){langueStr = "anglais";} else { langueStr = "anglais";}
+        btconfirmer.setOnClickListener(v -> {
 
-    //TODO  getactivity
+            if (rbfrancais.isChecked()) {
+                context = LocaleHelper.setLocale(getApplicationContext(), "fr");
+                langueStr = "fr";
+                miseAJour();
+                quitter();
 
-    SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
-    SharedPreferences.Editor editor = sharedPref.edit();
-    editor.putString(getString(R.string.langueregion), langueStr); //enregistre la distance dans sharedpreference
-    editor.commit();
-});
+            }
+            if (rbanglais.isChecked()) {
+                context = LocaleHelper.setLocale(getApplicationContext(), "en");
+                langueStr = "en";
+                miseAJour();
+                quitter();
+            }
+
+
+        });
         radioGrouplangue.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId){
+                switch (checkedId) {
                     case R.id.rb_langue_francais:
-                        LocaleHelper.setLocale(getApplicationContext(), "fr-fr");
-
-                            break;
+                        context = LocaleHelper.setLocale(getApplicationContext(), "fr");
+                        langueStr = "fr";
+                        miseAJour();
+                        break;
                     case R.id.rb_langue_anglais:
-
-                        LocaleHelper.setLocale(getApplicationContext(), "eng");
-                            break;
+                        context = LocaleHelper.setLocale(getApplicationContext(), "en");
+                        langueStr = "en";
+                        miseAJour();
+                        break;
                 }
             }
         });
 
 
-        LocaleHelper.setLocale(this, "fr-fr");
+    }
+
+    private void initLangue() {
+
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+            langueStr = prefs.getString("langue", "fr");
+        context = LocaleHelper.setLocale(getApplicationContext(), langueStr);
+            miseAJour();
 
     }
+
     @Override
     public void onBackPressed() {
+
         super.onBackPressed();
+        quitter();
+    }
+
+    private void quitter() {
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("langue", langueStr);
+        editor.apply();
+
 
         Intent intentList = new Intent(getApplicationContext(), MainActivity.class);
+
         startActivity(intentList);
         finish();
     }
 
+    public void miseAJour() {
+        Log.d("langue", langueStr);
+        resources = context.getResources();
+        rbfrancais.setText(resources.getString((R.string.francais)));
+        rbanglais.setText(resources.getString((R.string.anglais)));
+        btconfirmer.setText(resources.getString((R.string.confirme)));
+        tvMsgAccueil.setText(resources.getString((R.string.choisir_langue)));
 
+
+    }
 }

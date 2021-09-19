@@ -1,62 +1,42 @@
 <resources>
     <string name="app_name" translatable="false">TFT_Jeu</string>
     <!--  Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment">Fragment vide</string>
     <string name="nom_de_l_artiste">nom_de_l_artiste</string>
     <string name="nom_de_l_oeuvre">nom de l\'oeuvre</string>
     <string name="adresse_oeuvre">adresse_oeuvre</string>
     <string name="coordonnee_de_l_oeuvre">coordonnee de l\'oeuvre</string>
     <string name="latitude">Latitude : </string>
     <string name="longitude">longitude : </string>
-    <string name="title_activity_afficher_position_gps">Leanback Title</string>
-    <string name="browse_title">Videos by Your Company</string>
-    <string name="related_movies">Related Videos</string>
-    <string name="grid_view">Grid View</string>
-    <string name="error_fragment">Error Fragment</string>
-    <string name="personal_settings">Personal Settings</string>
-    <string name="watch_trailer_1">Watch trailer</string>
-    <string name="watch_trailer_2">FREE</string>
-    <string name="rent_1">Rent By Day</string>
-    <string name="rent_2">From $1.99</string>
-    <string name="buy_1">Buy and Own</string>
-    <string name="buy_2">AT $9.99</string>
-    <string name="movie">Movie</string>
-    <string name="choix_liste_StreetArt">StreetValue</string>
-    <string name="choix_liste_Bd">Bd</string>
-    <string name="choix_liste_Resto">Resto</string>
-
-
-    <!-- Error messages -->
-    <string name="error_fragment_message">An error occurred</string>
-    <string name="dismiss_error">Dismiss</string>
-    <string name="initial_category_general">General</string>
     <string name="afficher_la_carte">Afficher la carte</string>
     <string name="oui">oui</string>
     <string name="non">non</string>
     <string name="difficult">Difficulté</string>
     <string name="ToutesLesCategories" translatable="false">Toutes les categories</string>
-    <string name="go_next_art">Go/Next Art</string>
+    <string name="go_next_art">Start/Suivant</string>
     <string name="difficile">difficile</string>
     <string name="moyen">moyen</string>
     <string name="facile">facile</string>
     <string name="ma_position_actuelle">Ma position actuelle :</string>
-    <string name="itemprecedent"><![CDATA[<<]]></string>
-    <string name="itemsuivant"><![CDATA[>>]]></string>
+    <string name="itemprecedent" translatable="false"><![CDATA[<<]]></string>
+    <string name="itemsuivant" translatable="false"><![CDATA[>>]]></string>
     <string name="categorie">categorie :</string>
     <string name="titrefirebase" translatable="false">Firebase</string>
     <string name="titreajouter_un_lieux">ajouter un lieux</string>
     <string name="titrejeu">jeu</string>
     <string name="titrechoix_des_listes">choix des listes</string>
-    <string name="choisir_langue">Choisir langue</string>
+    <string name="titrelangue">choisir_langue</string>
+    <string name="titreswipswating">defaut</string>
+    <string name="choisir_langue">Choisir ta langue</string>
     <string name="distanceactuelle" />
-    <string name="choisi_ta_langue">Choisi ta langue</string>
     <string name="anglais">anglais</string>
     <string name="francais">Francais</string>
-    <string name="confirme">Confirme</string>
+    <string name="confirme">Confirmer D</string>
     <string name="langueregion" />
-    <string name="premieritem"><![CDATA[|<<]]></string>
+    <string name="premieritem" translatable="false"><![CDATA[|<<]]></string>
     <string name="dernieritem">dernieritem</string>
-    <string name="textlastitem"><![CDATA[>>|]]></string>
+    <string name="textlastitem" translatable="false"><![CDATA[>>|]]></string>
+
 
 
 </resources>

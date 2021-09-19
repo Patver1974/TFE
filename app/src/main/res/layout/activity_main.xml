@@ -9,77 +9,92 @@
     tools:ignore="ExtraText">
 
     <LinearLayout
-        android:background="#DAFFF6"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_centerVertical="true">
+        android:layout_centerVertical="true"
+        android:background="#DAFFF6"
+        android:orientation="vertical">
 
 
         <Button
             android:id="@+id/Bt_Main_ListeAvecMap"
-android:backgroundTint="@color/ButtonBackground"
+            android:layout_width="@dimen/largeurBoutton"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
-            android:layout_width="@dimen/largeurBoutton"
-            android:text="@string/titrechoix_des_listes"/>
+            android:backgroundTint="@color/ButtonBackground"
+            android:text="@string/titrechoix_des_listes"
+
+            android:textColor="@color/background_gradient_end" />
+
         <View
             android:layout_width="0dp"
-            android:layout_height="10dp"
-            />
+            android:layout_height="10dp" />
+
         <Button
-            android:layout_width="@dimen/largeurBoutton"
-            android:backgroundTint="@color/ButtonBackground"
-            android:layout_height="wrap_content"
             android:id="@+id/Bt_Main_Jeu"
-            android:layout_gravity="center_vertical|center_horizontal"
-
-            android:text="@string/titrejeu"/>
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="10dp"
-            />
-        <Button
             android:layout_width="@dimen/largeurBoutton"
-            android:backgroundTint="@color/ButtonBackground"
-        android:layout_height="wrap_content"
-        android:id="@+id/Bt_Main_Ajouter_item"
-            android:layout_gravity="center_vertical|center_horizontal"
-        android:text="@string/titreajouter_un_lieux"/>
-        <View
-            android:layout_width="0dp"
-            android:layout_height="10dp"
-            />
-        <Button
-            android:layout_width="@dimen/largeurBoutton"
-            android:backgroundTint="@color/ButtonBackground"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:backgroundTint="@color/ButtonBackground"
+
+            android:text="@string/titrejeu"
+
+            android:textColor="@color/background_gradient_end" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="10dp" />
+
+        <Button
+            android:id="@+id/Bt_Main_Ajouter_item"
+            android:layout_width="@dimen/largeurBoutton"
+
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:backgroundTint="@color/ButtonBackground"
+            android:text="@string/titreajouter_un_lieux"
+            android:textColor="@color/background_gradient_end" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="10dp" />
+
+        <Button
             android:id="@+id/Bt_Main_firebase"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:text="@string/titrefirebase"/>
-        <View
-            android:layout_width="0dp"
-            android:layout_height="10dp"
-            />
-        <Button
             android:layout_width="@dimen/largeurBoutton"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|center_horizontal"
             android:backgroundTint="@color/ButtonBackground"
+            android:text="@string/titrefirebase"
+            android:textColor="@color/background_gradient_end" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="10dp" />
+
+        <Button
             android:id="@+id/Bt_Main_langue"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:text="@string/choisir_langue"/>
-        <View
-            android:layout_width="0dp"
-            android:layout_height="10dp"
-            />
-        <Button
             android:layout_width="@dimen/largeurBoutton"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/ButtonBackground"
-            android:id="@+id/Bt_Main_swipStack"
             android:layout_gravity="center_vertical|center_horizontal"
-            android:text="swipStackimg"/>
+            android:backgroundTint="@color/ButtonBackground"
+
+            android:text="@string/titrelangue"
+            android:textColor="@color/background_gradient_end" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="10dp" />
+
+        <Button
+            android:id="@+id/Bt_Main_swipStack"
+            android:layout_width="@dimen/largeurBoutton"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:backgroundTint="@color/ButtonBackground"
+            android:text="swipStackimg"
+            android:textColor="@color/background_gradient_end" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
