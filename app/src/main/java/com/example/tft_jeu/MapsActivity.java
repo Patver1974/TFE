@@ -40,9 +40,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         setContentView(R.layout.activity_maps);
         buttonBack = findViewById(R.id.bt_map_back);
 
-        buttonBack.setOnClickListener(v -> {
-            finish();
-        });
+        buttonBack.setOnClickListener(v -> finish());
+
         Intent fromList = getIntent();
         if (fromList != null) {
             Log.d("LON_LAT", "Test");
@@ -105,15 +104,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.addMarker(new MarkerOptions()
                 .position(PositionObject)
                 .title(name));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(PositionObject));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(PositionObject));
 
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(18));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(10.0f));
         // Position the map's camera at the location of the marker.
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(PositionObject,
-                DEFAULT_ZOOM));
-        mMap.setMinZoomPreference(20);
-        mMap.setMaxZoomPreference(10);
 
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(PositionObject, 17.0f));
+        mMap.setMinZoomPreference(10.0f);
+        mMap.setMaxZoomPreference(20.0f);
     }
     @Override
     protected void onSaveInstanceState(Bundle outState) {
